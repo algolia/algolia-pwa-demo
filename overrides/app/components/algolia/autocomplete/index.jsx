@@ -73,8 +73,8 @@ export function Autocomplete({navigate, currency}) {
 
     useEffect(() => {
         if (!containerRef.current) {
-            console.error("Algolia Autocomplete Container reference is not available.");
-            return undefined;
+            console.error('Algolia Autocomplete Container reference is not available.')
+            return undefined
         }
 
         let rootRef
@@ -129,14 +129,14 @@ export function Autocomplete({navigate, currency}) {
             render(state, root) {
                 try {
                     if (!rootRef) {
-                        rootRef = createRoot(root);
+                        rootRef = createRoot(root)
                     }
 
-                    var autocompleteElement = AutocompletePanel(state);
+                    var autocompleteElement = AutocompletePanel(state)
 
-                    rootRef.render(autocompleteElement);
+                    rootRef.render(autocompleteElement)
                 } catch (renderError) {
-                    console.error("Error during autocomplete rendering:", renderError);
+                    console.error('Error during autocomplete rendering:', renderError)
                 }
             }
         })
