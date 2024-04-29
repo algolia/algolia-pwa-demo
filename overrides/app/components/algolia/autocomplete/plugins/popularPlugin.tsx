@@ -56,9 +56,6 @@ export const popularPlugin = createQuerySuggestionsPlugin({
     return {
       ...source,
       sourceId: 'popularPlugin',
-      getItemInputValue({ item }) {
-        return item.query;
-      },
       onSelect({ setIsOpen }) {
         setIsOpen(true);
       },

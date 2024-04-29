@@ -40,9 +40,6 @@ export const faqPlugin: AutocompletePlugin<FaqHit, {}> = {
             queries: [{ indexName: ALGOLIA_FAQ_INDEX_NAME, query, params: { hitsPerPage: 1 } }],
           });
         },
-        getItemInputValue({ item }) {
-          return item.title;
-        },
         renderer: { createElement, Fragment, render: () => {} },
         templates: {
           item({ item, components }) {

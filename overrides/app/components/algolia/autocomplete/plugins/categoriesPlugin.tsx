@@ -60,13 +60,6 @@ export const categoriesPlugin: AutocompletePlugin<CategoryHit, {}> = {
                 ],
               });
             },
-            getItemInputValue({ item }) {
-              if (item && item.categories && item.categories.length > 0) {
-                return item.categories[item.categories.length - 1];
-              }
-
-              return '';
-            },
             renderer: { createElement, Fragment, render: () => {} },
             templates: {
               header({ Fragment }) {

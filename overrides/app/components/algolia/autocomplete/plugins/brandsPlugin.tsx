@@ -35,9 +35,6 @@ export const brandsPlugin: AutocompletePlugin<BrandHit, {}> = {
             ],
           });
         },
-        getItemInputValue({ item }) {
-          return item.label;
-        },
         renderer: { createElement, Fragment, render: () => {} },
         templates: {
           item({ item, components }) {

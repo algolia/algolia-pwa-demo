@@ -50,9 +50,6 @@ export const popularCategoriesPlugin: AutocompletePlugin<PopularCategoryHit, {}>
             ],
           });
         },
-        getItemInputValue({ item }) {
-          return item.label;
-        },
         onSelect({ setIsOpen }) {
           setIsOpen(true);
         },
