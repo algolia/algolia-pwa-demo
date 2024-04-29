@@ -34,9 +34,7 @@ function CategoryItem({ hit, components }: CategoryItemProps) {
 }
 
 /**
- * Transforms an item by adding a categories property. If the item has a __primary_category property and is not empty,
- * the categories property is set to the last key of the __primary_category property. If not, categories is set to an empty array.
- *
+ * __primary_category is an array of categories. This function transforms the item to include a new categories property to be used in the autocomplete.
  * @param {Object} item - The item to be transformed.
  * @returns {Object} The transformed item with a new categories property.
  */
