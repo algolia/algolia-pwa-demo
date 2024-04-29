@@ -2,7 +2,7 @@
 /** @jsx React.createElement */
 
 import { AutocompletePlugin, getAlgoliaFacets } from '@algolia/autocomplete-js';
-import React, { createElement, Fragment, useState } from 'react';
+import React, { createElement, Fragment } from 'react';
 import { ALGOLIA_PRODUCTS_INDEX_NAME } from '../constants';
 import { searchClient } from '../searchClient';
 import { PopularCategoryHit } from '../types';
@@ -19,11 +19,12 @@ const baseUrl = 'https://res.cloudinary.com/hilnmyskv/image/upload/v1646067858';
  */
 const images = {
   Womens: `${baseUrl}/women_category_vwzkln.jpg`,
-  Bags: `${baseUrl}/bags_category_qd7ssj.jpg`,
-  Clothing: `${baseUrl}/clothing_category_xhiz1s.jpg`,
+  'Womens > Jewelry': `${baseUrl}/bags_category_qd7ssj.jpg`,
+  'Mens > Clothing': `${baseUrl}/clothing_category_xhiz1s.jpg`,
   Mens: `${baseUrl}/men_category_wfcley.jpg`,
-  'T-shirts': `${baseUrl}/t-shirts_category_gzqcvd.jpg`,
-  Shoes: `${baseUrl}/shoes_category_u4fi0q.jpg`,
+  'Womens > Clothing': `${baseUrl}/t-shirts_category_gzqcvd.jpg`,
+  'Womens > Accessories': `${baseUrl}/shoes_category_u4fi0q.jpg`,
+  '2 button pocket': `${baseUrl}/men_category_wfcley.jpg`,
 };
 
 /**
@@ -41,10 +42,10 @@ export const popularCategoriesPlugin: AutocompletePlugin<PopularCategoryHit, {}>
             queries: [
               {
                 indexName: ALGOLIA_PRODUCTS_INDEX_NAME,
-                facet: '__primary_category.0',
+                facet: '__primary_category.1',
                 params: {
                   facetQuery: '',
-                  maxFacetHits: 6,
+                  maxFacetHits: 4,
                 },
               },
             ],
@@ -64,10 +65,7 @@ export const popularCategoriesPlugin: AutocompletePlugin<PopularCategoryHit, {}>
             );
           },
           item({ item, components }) {
-            if (!item || !components) {
-              return null;
-            }
-
+            console.log('POP', item);
             return <PopularCategoryItem hit={item} components={components} />;
           },
         },
