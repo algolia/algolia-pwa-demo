@@ -1,5 +1,4 @@
 /**
- * Represents an art/**
  * Represents an content record with name, image, and description.
  *
  * @typedef {Object} ALGOLIA_CONTENT_INDEX_NAMERecord
