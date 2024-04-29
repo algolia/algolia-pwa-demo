@@ -71,10 +71,6 @@ export const categoriesPlugin: AutocompletePlugin<CategoryHit, {}> = {
                 );
               },
               item({ item, components }) {
-                if (!item || !components) {
-                  return null;
-                }
-
                 return <CategoryItem hit={item} components={components} />;
               },
             },

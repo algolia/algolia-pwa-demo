@@ -91,7 +91,6 @@ type PopularCategoryItemProps = {
  * @returns {React.ReactElement} The rendered component.
  */
 function PopularCategoryItem({ hit }: PopularCategoryItemProps) {
-    console.log(hit);
     return (
       <div key={hit.objectID} className="aa-ItemWrapper aa-PopularCategoryItem">
         <div className="aa-ItemContent">
