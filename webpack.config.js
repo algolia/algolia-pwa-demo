@@ -1,4 +1,4 @@
-const config = require('@salesforce/pwa-kit-dev/configs/webpack/config')
+const config = require('@salesforce/pwa-kit-dev/configs/webpack/config') // eslint-disable-line
 
 // Add or update the rule for CSS processing
 config.forEach((cnf) => {

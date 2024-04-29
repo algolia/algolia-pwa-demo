@@ -4,7 +4,40 @@ import { createQuerySuggestionsPlugin } from '@algolia/autocomplete-plugin-query
 import React, { createElement, Fragment, useEffect, useRef, useState } from 'react';
 import { ALGOLIA_PRODUCTS_QUERY_SUGGESTIONS_INDEX_NAME } from '../constants';
 import { searchClient } from '../searchClient';
-import PopularItem from './components/PopularItem';
+import { PopularHit } from '../types';
+import { SearchIcon } from '../components';
+
+/**
+ * Represents the props for the PopularItem component.
+ *
+ * @typedef {Object} PopularItemProps
+ * @property {PopularHit} hit - The popular hit object.
+ */
+type PopularItemProps = {
+  hit: PopularHit;
+};
+
+/**
+ * PopularItem component. It renders a popular item with a search icon and the query.
+ *
+ * @param {PopularItemProps} props - The props for the PopularItem component.
+ * @param {PopularHit} props.hit - The popular hit object.
+ * @returns {JSX.Element} The PopularItem component.
+ */
+function PopularItem({ hit }: PopularItemProps) {
+  return (
+    <div key={hit.objectID} className="aa-ItemWrapper">
+      <div className="aa-ItemIcon aa-ItemIcon--noBorder">
+        <SearchIcon />
+      </div>
+      <div className="aa-ItemContent">
+        <div className="aa-ItemContentBody">
+          <div className="aa-ItemContentTitle">{hit.query}</div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 /**
  * Autocomplete plugin for popular search queries. It fetches popular queries from Algolia based on the user's query.
