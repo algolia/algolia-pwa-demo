@@ -54,11 +54,11 @@
     "last 4 ChromeAndroid versions"
   ],
   "dependencies": {
-    "@algolia/autocomplete-js": "^1.17.0",
-    "@algolia/autocomplete-plugin-query-suggestions": "^1.17.0",
-    "@algolia/autocomplete-plugin-recent-searches": "^1.17.0",
-    "@algolia/autocomplete-theme-classic": "^1.17.0",
-    "algoliasearch": "^4.23.3",
-    "ramda": "^0.29.1"
+    "@algolia/autocomplete-js": "1.17.0",
+    "@algolia/autocomplete-plugin-query-suggestions": "1.17.0",
+    "@algolia/autocomplete-plugin-recent-searches": "1.17.0",
+    "@algolia/autocomplete-theme-classic": "1.17.0",
+    "algoliasearch": "4.23.3",
+    "ramda": "0.29.1"
   }
 }
