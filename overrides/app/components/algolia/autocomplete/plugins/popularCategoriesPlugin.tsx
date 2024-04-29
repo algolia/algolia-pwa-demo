@@ -65,7 +65,6 @@ export const popularCategoriesPlugin: AutocompletePlugin<PopularCategoryHit, {}>
             );
           },
           item({ item, components }) {
-            console.log('POP', item);
             return <PopularCategoryItem hit={item} components={components} />;
           },
         },

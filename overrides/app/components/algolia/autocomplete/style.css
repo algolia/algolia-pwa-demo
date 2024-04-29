@@ -356,8 +356,8 @@ body {
   margin-bottom: var(--aa-spacing-half);
 }
 
-/* Articles */
-.aa-PanelSection--articles .aa-List {
+/* Content */
+.aa-PanelSection--content .aa-List {
   display: flex;
   column-gap: calc(var(--aa-spacing) / 10);
   margin-bottom: calc((var(--aa-spacing-half) / 2) * -1);
@@ -365,13 +365,13 @@ body {
   margin-right: calc((var(--aa-spacing-half) / 2) * -1);
 }
 
-.aa-PanelSection--articles .aa-Item {
+.aa-PanelSection--content .aa-Item {
   width: 50%;
   padding: 0;
   margin: calc(var(--aa-spacing-half) / 2);
 }
 
-.aa-ArticleItem {
+.aa-ContentItem {
   box-shadow: inset 0 0 0 1px
     rgba(var(--aa-panel-border-color-rgb), var(--aa-panel-border-color-alpha));
   border-radius: calc(var(--aa-spacing-half) / 2);
@@ -379,26 +379,26 @@ body {
   height: 100%;
 }
 
-.aa-ArticleItem .aa-ItemContent {
+.aa-ContentItem .aa-ItemContent {
   height: 100%;
 }
 
-.aa-ArticleItem .aa-ItemPicture {
+.aa-ContentItem .aa-ItemPicture {
   width: 60px;
   height: 60px;
 }
 
-.aa-ArticleItem .aa-ItemPicture img {
+.aa-ContentItem .aa-ItemPicture img {
   height: 100%;
 }
 
-.aa-ArticleItem .aa-ItemContentTitle {
+.aa-ContentItem .aa-ItemContentTitle {
   font-size: 0.9em;
   font-weight: bold;
   white-space: normal;
 }
 
-.aa-ArticleItem .aa-ItemContentDate {
+.aa-ContentItem .aa-ItemContentDate {
   color: rgb(var(--aa-muted-color-rgb));
   font-size: 0.8em;
 }
@@ -651,6 +651,7 @@ body {
   /* See all */
   .aa-SeeAllBtn:hover {
     background-color: rgba(var(--aa-primary-color-rgb), 1);
+    cursor: pointer;
   }
 
   .aa-SeeAllLink:hover {
@@ -699,11 +700,11 @@ body {
 }
 
 @media screen and (max-width: 960px) {
-  .aa-PanelSection--articles .aa-List {
+  .aa-PanelSection--content .aa-List {
     flex-wrap: wrap;
   }
 
-  .aa-PanelSection--articles .aa-Item {
+  .aa-PanelSection--content .aa-Item {
     width: 100%;
   }
 }
@@ -757,13 +758,13 @@ body {
     opacity: 1;
   }
 
-  /* Articles */
-  .aa-PanelSection--articles .aa-List {
+  /* Content */
+  .aa-PanelSection--content .aa-List {
     flex-wrap: wrap;
     gap: var(--aa-spacing-half);
   }
 
-  .aa-PanelSection--articles .aa-Item {
+  .aa-PanelSection--content .aa-Item {
     width: 100%;
   }
 

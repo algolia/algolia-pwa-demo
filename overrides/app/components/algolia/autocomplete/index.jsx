@@ -19,7 +19,7 @@ import {productsPluginFactory} from './plugins/productsPlugin'
 import {querySuggestionsPlugin} from './plugins/querySuggestionsPlugin'
 import {quickAccessPluginFactory} from './plugins/quickAccessPlugin'
 import {recentSearchesPlugin} from './plugins/recentSearchesPlugin'
-import {articlesPlugin} from './plugins/articlesPlugin'
+import {contentPlugin} from './plugins/contentPlugin'
 import {brandsPlugin} from './plugins/brandsPlugin'
 import {cx, hasSourceActiveItem, isDetached} from './utils'
 
@@ -91,7 +91,7 @@ export function Autocomplete({navigate, currency}) {
                 brandsPlugin,
                 faqPlugin,
                 productsPluginFactory(navigate, currency),
-                articlesPlugin,
+                contentPlugin,
                 popularPlugin,
                 quickAccessPluginFactory(navigate),
                 popularCategoriesPlugin
@@ -161,7 +161,7 @@ function AutocompletePanel(props) {
         brandsPlugin: brands,
         faqPlugin: faq,
         productsPlugin: products,
-        articlesPlugin: articles,
+        contentPlugin: content,
         popularPlugin: popular,
         quickAccessPlugin: quickAccess,
         popularCategoriesPlugin: popularCategories
@@ -228,9 +228,9 @@ function AutocompletePanel(props) {
                             <div className="aa-PanelSectionSource">{products}</div>
                         </div>
                     )}
-                    {articles && (
-                        <div className="aa-PanelSection--articles">
-                            <div className="aa-PanelSectionSource">{articles}</div>
+                    {content && (
+                        <div className="aa-PanelSection--content">
+                            <div className="aa-PanelSectionSource">{content}</div>
                         </div>
                     )}
 
@@ -271,7 +271,7 @@ AutocompletePanel.propTypes = {
         brandsPlugin: PropTypes.any,
         faqPlugin: PropTypes.any,
         productsPlugin: PropTypes.any,
-        articlesPlugin: PropTypes.any,
+        contentPlugin: PropTypes.any,
         popularPlugin: PropTypes.any,
         quickAccessPlugin: PropTypes.any,
         popularCategoriesPlugin: PropTypes.any

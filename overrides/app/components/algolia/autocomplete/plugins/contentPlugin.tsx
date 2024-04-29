@@ -4,15 +4,15 @@ import {
 } from '@algolia/autocomplete-js';
 import { SearchResponse } from '@algolia/client-search';
 import React, { createElement, Fragment } from 'react';
-import { ALGOLIA_ARTICLES_INDEX_NAME } from '../constants';
+import { ALGOLIA_CONTENT_INDEX_NAME } from '../constants';
 import { searchClient } from '../searchClient';
-import { ArticleHit } from '../types';
+import { ContentHit } from '../types';
 
 /**
- * An Autocomplete Plugin that provides article suggestions from Algolia.
+ * An Autocomplete Plugin that provides content suggestions from Algolia.
  * Check the [Algolia documentation](https://www.algolia.com/doc/ui-libraries/autocomplete/core-concepts/plugins/#building-your-own-plugin) for more information.
  */
-export const articlesPlugin: AutocompletePlugin<ArticleHit, {}> = {
+export const contentPlugin: AutocompletePlugin<ContentHit, {}> = {
   getSources({ query }) {
     if (!query) {
       return [];
@@ -20,13 +20,13 @@ export const articlesPlugin: AutocompletePlugin<ArticleHit, {}> = {
 
     return [
       {
-        sourceId: 'articlesPlugin',
+        sourceId: 'contentPlugin',
         getItems({ setContext }) {
           return getAlgoliaResults({
             searchClient,
             queries: [
               {
-                indexName: ALGOLIA_ARTICLES_INDEX_NAME,
+                indexName: ALGOLIA_CONTENT_INDEX_NAME,
                 query,
                 params: {
                   hitsPerPage: 2,
@@ -35,7 +35,7 @@ export const articlesPlugin: AutocompletePlugin<ArticleHit, {}> = {
             ],
             transformResponse({ hits, results }) {
               setContext({
-                nbArticles: (results[0] as SearchResponse<ArticleHit>).nbHits,
+                nbContent: (results[0] as SearchResponse<ContentHit>).nbHits,
               });
 
               return hits;
@@ -50,18 +50,18 @@ export const articlesPlugin: AutocompletePlugin<ArticleHit, {}> = {
           header() {
             return (
               <div>
-                <span className="aa-SourceHeaderTitle">Articles</span>
+                <span className="aa-SourceHeaderTitle">Content</span>
                 <div className="aa-SourceHeaderLine" />
               </div>
             );
           },
           item({ item }) {
-            return <ArticleItem hit={item} />;
+            return <ContentItem hit={item} />;
           },
           footer({ state }) {
             return (
-              // @TODO: Add a link to the articles page when instantsearch is ready
-              state.context.nbArticles > 2 && (
+              // @TODO: Add a link to the content page when instantsearch is ready
+              state.context.nbContent > 2 && (
                 <div style={{ textAlign: 'center' }}>
                   <a
                     href="https://example.org/"
@@ -69,7 +69,7 @@ export const articlesPlugin: AutocompletePlugin<ArticleHit, {}> = {
                     rel="noreferrer noopener"
                     className="aa-SeeAllLink"
                   >
-                    See All Articles ({state.context.nbArticles})
+                    See All Content ({state.context.nbContent})
                   </a>
                 </div>
               )
@@ -82,26 +82,26 @@ export const articlesPlugin: AutocompletePlugin<ArticleHit, {}> = {
 };
 
 /**
- * Props for the `ArticleItem` component.
- * @typedef {Object} ArticleItemProps
- * @property {ArticleHit} hit - The article data to be displayed.
+ * Props for the `ContentItem` component.
+ * @typedef {Object} ContentItemProps
+ * @property {ContentHit} hit - The content data to be displayed.
  */
-type ArticleItemProps = {
-  hit: ArticleHit;
+type ContentItemProps = {
+  hit: ContentHit;
 };
 
 /**
- * Component to render an individual article item.
- * This component displays a clickable article link, which includes an image,
- * the article's title, and a brief description truncated to 25 characters. 
+ * Component to render an individual content item.
+ * This component displays a clickable content link, which includes an image,
+ * the content's title, and a brief description truncated to 25 characters. 
  * It is designed to be used within the autocomplete suggestions list.
  *
- * @param {ArticleItemProps} props - The props for the article item component.
- * @returns {React.ReactElement} The JSX element representing the article item.
+ * @param {ContentItemProps} props - The props for the content item component.
+ * @returns {React.ReactElement} The JSX element representing the content item.
  */
-function ArticleItem({ hit }: ArticleItemProps) {
+function ContentItem({ hit }: ContentItemProps) {
   return (
-    <a key={hit.objectID} href="#" className="aa-ItemLink aa-ArticleItem">
+    <a key={hit.objectID} href="#" className="aa-ItemLink aa-ContentItem">
       <div className="aa-ItemContent">
         <div className="aa-ItemPicture">
           <img src={hit.image} alt={hit.name} />
