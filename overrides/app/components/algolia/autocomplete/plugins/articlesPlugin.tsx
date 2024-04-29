@@ -10,12 +10,7 @@ import { ArticleHit } from '../types';
 
 /**
  * An Autocomplete Plugin that provides article suggestions from Algolia.
- * This plugin fetches articles based on the user's query. If the query is empty, it returns no suggestions.
- * The search results include a maximum of 2 hits per page. It also provides a custom renderer for the article
- * items and includes a header and footer for the suggestion list.
- *
- * @module articlesPlugin
- * @type {AutocompletePlugin<ArticleHit, {}>}
+ * Check the [Algolia documentation](https://www.algolia.com/doc/ui-libraries/autocomplete/core-concepts/plugins/#building-your-own-plugin) for more information.
  */
 export const articlesPlugin: AutocompletePlugin<ArticleHit, {}> = {
   getSources({ query }) {

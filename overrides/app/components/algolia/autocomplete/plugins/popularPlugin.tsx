@@ -40,14 +40,8 @@ function PopularItem({ hit }: PopularItemProps) {
 }
 
 /**
- * Autocomplete plugin for popular search queries. It fetches popular queries from Algolia based on the user's query.
- * It also provides custom rendering for the popular queries.
- *
- * @type {AutocompletePlugin<PopularHit, {}>}
- * @property {Function} getSearchParams - Function to get search parameters.
- * @property {Function} transformSource - Function to transform the source.
- * @property {Object} renderer - Object with createElement, Fragment, and render functions.
- * @property {Object} templates - Object with header and item templates.
+ * An Autocomplete Plugin that provides popular products results from search queries
+ * Check the [Algolia documentation](https://www.algolia.com/doc/ui-libraries/autocomplete/core-concepts/plugins/#building-your-own-plugin) for more information.
  */
 export const popularPlugin = createQuerySuggestionsPlugin({
   searchClient,

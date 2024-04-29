@@ -3,12 +3,9 @@ import { createQuerySuggestionsPlugin } from '@algolia/autocomplete-plugin-query
 import { ALGOLIA_PRODUCTS_QUERY_SUGGESTIONS_INDEX_NAME } from '../constants';
 import { searchClient } from '../searchClient';
 
-
 /**
- * Creates a query suggestions plugin for Algolia Autocomplete.
- * This plugin provides query suggestions based on the user's input.
- * @param {QuerySuggestionsPluginOptions} options - The options for the plugin.
- * @returns {import('@algolia/autocomplete-core').AutocompletePlugin} The query suggestions plugin.
+ * An Autocomplete Plugin that provides query suggestion results from Algolia by using the official Algolia Query Suggestions plugin.
+ * Check the [Algolia documentation](https://www.algolia.com/doc/ui-libraries/autocomplete/core-concepts/plugins/#building-your-own-plugin) for more information.
  */
 export const querySuggestionsPlugin = createQuerySuggestionsPlugin({
   searchClient,

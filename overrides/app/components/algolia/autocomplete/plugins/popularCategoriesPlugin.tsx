@@ -27,8 +27,8 @@ const images = {
 };
 
 /**
- * An Autocomplete plugin for displaying popular categories.
- * @type {AutocompletePlugin<PopularCategoryHit, {}>}
+ * An Autocomplete Plugin that provides popular categories results from Algolia.
+ * Check the [Algolia documentation](https://www.algolia.com/doc/ui-libraries/autocomplete/core-concepts/plugins/#building-your-own-plugin) for more information.
  */
 export const popularCategoriesPlugin: AutocompletePlugin<PopularCategoryHit, {}> = {
   getSources() {

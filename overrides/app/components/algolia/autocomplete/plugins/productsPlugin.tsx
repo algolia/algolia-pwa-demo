@@ -11,11 +11,10 @@ import { searchClient } from '../searchClient';
 import { ProductHit } from '../types';
 import { StarIcon } from '../components';
 import { cx } from '../utils';
+
 /**
- * Creates a products plugin factory function.
- * @param {function} navigate - The navigation function.
- * @param {Object} currency - The currency object.
- * @returns {Object} The products plugin factory object.
+ * An Autocomplete Plugin that provides product results from Algolia.
+ * Check the [Algolia documentation](https://www.algolia.com/doc/ui-libraries/autocomplete/core-concepts/plugins/#building-your-own-plugin) for more information.
  */
 export const productsPluginFactory = (navigate, currency) => ({
   getSources({ query }) {

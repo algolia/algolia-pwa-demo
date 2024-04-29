@@ -9,9 +9,70 @@ import { cx, hash } from '../utils';
 import { QuickAccessHit } from '../types';
 
 /**
- * Factory function to create a quick access plugin for Algolia Autocomplete.
- * @param {Function} navigate - A function to navigate to a specific item.
- * @returns {Object} An object containing the plugin definition.
+ * An Autocomplete Plugin that provides quick access results from Algolia. It is defined a rule in the Algolia dashboard to display same results for all empty queries.
+ * Example Configuration is here:
+ * {
+    "conditions": [
+      {
+        "anchoring": "is",
+        "pattern": "",
+        "alternatives": false,
+        "context": "quickAccess"
+      }
+    ],
+    "consequence": {
+      "userData": {
+        "items": [
+          {
+            "href": "/category/womens-outfits",
+            "image": "https://res.cloudinary.com/hilnmyskv/image/upload/v1645453369/sales_banner_y1hsr8.jpg",
+            "subtitle": "Women",
+            "template": "sales-banner",
+            "title": "Outfits"
+          },
+          {
+            "date": "Till March 25th",
+            "href": "/category/womens",
+            "image": "https://res.cloudinary.com/hilnmyskv/image/upload/v1645453422/sales_code_vuatep.jpg",
+            "subtitle": "with the code\nCODE_ALGOLIA",
+            "template": "sales-code",
+            "title": "Sale on\nWomen Top"
+          },
+          {
+            "href": "/category/top-seller",
+            "image": "https://res.cloudinary.com/hilnmyskv/image/upload/v1645453466/new_collection_nloeb6.jpg",
+            "subtitle": "spring / summer\n2024",
+            "template": "new-collection",
+            "title": "Top\nsellers"
+          },
+          {
+            "href": "/category/womens-jewelry",
+            "links": [
+              {
+                "href": "/category/womens-jewelry",
+                "text": "Track my order"
+              },
+              {
+                "href": "/category/womens-jewelry",
+                "text": "Delivery & Returns"
+              },
+              {
+                "href": "/category/womens-jewelry",
+                "text": "FAQ"
+              }
+            ],
+            "template": "help",
+            "title": "how can\nwe help?"
+          }
+        ]
+      },
+      "filterPromotes": true
+    },
+    "enabled": true,
+    "description": "Autocomplete quick access on empty query state",
+    "objectID": "qr-1645439637066"
+    }
+ * Check the [Algolia documentation](https://www.algolia.com/doc/ui-libraries/autocomplete/core-concepts/plugins/#building-your-own-plugin) for more information.
  */
 export const quickAccessPluginFactory = (navigate) => ({
   getSources({ query }) {

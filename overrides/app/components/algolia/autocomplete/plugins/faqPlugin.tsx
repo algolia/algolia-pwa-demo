@@ -13,11 +13,8 @@ import { FaqHit } from '../types';
 import { InfoIcon, Breadcrumb } from './../components';
 
 /**
- * Represents an autocomplete plugin for searching FAQs.
- * This plugin configures the data source for FAQ queries
- * and provides custom rendering for the search results.
- * 
- * @type {AutocompletePlugin<FaqHit, {}>}
+ * An Autocomplete Plugin that provides faq results from Algolia.
+ * Check the [Algolia documentation](https://www.algolia.com/doc/ui-libraries/autocomplete/core-concepts/plugins/#building-your-own-plugin) for more information.
  */
 export const faqPlugin: AutocompletePlugin<FaqHit, {}> = {
   getSources({ query }) {

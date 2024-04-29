@@ -9,15 +9,8 @@ import { TagIcon } from '../components';
 import { AutocompleteComponents } from '@algolia/autocomplete-js';
 
 /**
- * Autocomplete plugin for brand search. It fetches brands from Algolia based on the user's query.
- * It also provides custom rendering for the brands.
- *
- * @type {AutocompletePlugin<BrandHit, {}>}
- * @property {Function} getSources - Function to get sources based on the user's query.
- * @property {Function} getItems - Function to get Algolia facets.
- * @property {Function} getItemInputValue - Function to get the input value for an item.
- * @property {Object} renderer - Object with createElement, Fragment, and render functions.
- * @property {Object} templates - Object with item template.
+ * An Autocomplete Plugin that provides brand results from Algolia.
+ * Check the [Algolia documentation](https://www.algolia.com/doc/ui-libraries/autocomplete/core-concepts/plugins/#building-your-own-plugin) for more information.
  */
 export const brandsPlugin: AutocompletePlugin<BrandHit, {}> = {
   getSources({ query }) {

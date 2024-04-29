@@ -34,15 +34,8 @@ function CategoryItem({ hit, components }: CategoryItemProps) {
 }
 
 /**
- * Autocomplete plugin for category search. It fetches categories from Algolia based on the user's query.
- * It also provides custom rendering for the categories.
- *
- * @type {AutocompletePlugin<CategoryHit, {}>}
- * @property {Function} getSources - Function to get sources based on the user's query.
- * @property {Function} getItems - Function to get Algolia results.
- * @property {Function} getItemInputValue - Function to get the input value for an item.
- * @property {Object} renderer - Object with createElement, Fragment, and render functions.
- * @property {Object} templates - Object with header and item templates.
+ * An Autocomplete Plugin that provides category results from Algolia.
+ * Check the [Algolia documentation](https://www.algolia.com/doc/ui-libraries/autocomplete/core-concepts/plugins/#building-your-own-plugin) for more information.
  */
 export const categoriesPlugin: AutocompletePlugin<CategoryHit, {}> = {
     getSources({ query }) {
