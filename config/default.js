@@ -25,7 +25,7 @@ module.exports = {
         // },
         // The sites for your app, which is imported from sites.js
         sites,
-        // Algolua search config
+        // Algolia search config
         algolia: {
             appId: '4ISNL568WT',
             apiKey: 'f493f30ee56ca33cf59bac5d3a8fd791',
