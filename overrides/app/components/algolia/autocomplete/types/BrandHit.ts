@@ -1,7 +1,7 @@
 import { AutocompleteHit } from './AutocompleteHit';
 
 /**
- * Represents a brand record with label and count.
+ * Represents matching brands with label and count from product index.
  *
  * @typedef {Object} BrandRecord
  * @property {string} label - The label of the brand.
