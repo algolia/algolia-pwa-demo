@@ -34,22 +34,6 @@ function CategoryItem({ hit, components }: CategoryItemProps) {
 }
 
 /**
- * __primary_category is an array of categories. This function transforms the item to include a new categories property to be used in the autocomplete.
- * @param {Object} item - The item to be transformed.
- * @returns {Object} The transformed item with a new categories property.
- */
-function transformItem(item) {
-    if (item.__primary_category && Object.keys(item).length > 0) {
-      var categories = item.__primary_category[Object.keys(item).length - 1]
-      item.categories = categories
-    } else {
-      item.categories = []
-    }
-
-    return item
-}
-
-/**
  * Autocomplete plugin for category search. It fetches categories from Algolia based on the user's query.
  * It also provides custom rendering for the categories.
  *
@@ -101,7 +85,6 @@ export const categoriesPlugin: AutocompletePlugin<CategoryHit, {}> = {
                 );
               },
               item({ item, components }) {
-                item = transformItem(item)
                 if (!item || !components) {
                   return null;
                 }
