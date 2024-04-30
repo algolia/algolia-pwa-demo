@@ -34,16 +34,16 @@ import { QuickAccessHit } from '../types';
             "date": "Till March 25th",
             "href": "/category/womens",
             "image": "https://res.cloudinary.com/hilnmyskv/image/upload/v1645453422/sales_code_vuatep.jpg",
-            "subtitle": "with the code\nCODE_ALGOLIA",
+            "subtitle": "with the code CODE_ALGOLIA",
             "template": "sales-code",
             "title": "Sale on\nWomen Top"
           },
           {
             "href": "/category/top-seller",
             "image": "https://res.cloudinary.com/hilnmyskv/image/upload/v1645453466/new_collection_nloeb6.jpg",
-            "subtitle": "spring / summer\n2024",
+            "subtitle": "spring / summer 2024",
             "template": "new-collection",
-            "title": "Top\nsellers"
+            "title": "Top sellers"
           },
           {
             "href": "/category/womens-jewelry",
