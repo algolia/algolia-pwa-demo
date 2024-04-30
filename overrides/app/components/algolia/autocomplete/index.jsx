@@ -82,7 +82,6 @@ export function Autocomplete({navigate, currency}) {
         const search = autocomplete({
             container: containerRef.current,
             placeholder: 'Search for products...',
-            autoFocus: true,
             openOnFocus: true,
             plugins: [
                 recentSearchesPlugin,
