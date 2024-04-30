@@ -9,9 +9,6 @@ import type { Hit } from '@algolia/client-search';
  * @property {string[]} image_urls - The image URLs of the product.
  * @property {Object} price - The price details of the product.
  * @property {string} price.currency - The currency of the price.
- * @property {number} price.discount_level - The discount level of the price.
- * @property {number} price.discounted_value - The discounted value of the price.
- * @property {boolean} price.on_sales - Whether the product is on sales.
  * @property {number} price.value - The value of the price.
  * @property {Object} reviews - The reviews of the product.
  * @property {number} reviews.count - The count of the reviews.
@@ -23,12 +20,8 @@ type ProductRecord = {
   name: string;
   brand: string;
   image_urls: string[];
-  image_blurred: string;
   price: {
     currency: string;
-    discount_level: number;
-    discounted_value: number;
-    on_sales: boolean;
     value: number;
   };
   reviews: {
