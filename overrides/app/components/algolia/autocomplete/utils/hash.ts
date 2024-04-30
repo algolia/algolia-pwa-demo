@@ -3,7 +3,8 @@
  *
  * @param {string} text - The text string to hash.
  * @returns {number} A unique hash value for the input text.
- */export function hash(text) {
+ */
+ export function hash(text) {
     let hash = 0;
     if (text.length === 0)
         return hash;
