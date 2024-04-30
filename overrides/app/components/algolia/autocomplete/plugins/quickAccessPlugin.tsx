@@ -9,7 +9,7 @@ import { cx, hash } from '../utils';
 import { QuickAccessHit } from '../types';
 
 /**
- * An Autocomplete Plugin that provides quick access results from Algolia. It is defined a rule in the Algolia dashboard to display same results for all empty queries.
+ * An Autocomplete Plugin that provides quick access results from Algolia. A Rule is defined in the Algolia dashboard to display the same results for all empty queries.
  * Example Configuration is here:
  * {
     "conditions": [
