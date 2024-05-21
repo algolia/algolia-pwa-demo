@@ -67,9 +67,25 @@ const combine = pipe(removeDuplicates, fillWith)
  * @param {Function} props.navigate - Navigation function to handle redirection.
  * @param {Object} props.currency - Currency information for pricing display in product searches.
  * @returns {JSX.Element} - The rendered autocomplete container.
- */
+ */   
 export function Autocomplete({navigate, currency}) {
     const containerRef = useRef(null)
+
+    /** Demo purposed. Feel free to remove this part for your implementation */
+    /*********************************************************************** */
+    const defaultSearches = [
+        {"id":"t-shirt","label":"t-shirt"},
+        {"id":"necklace","label":"necklace"},
+        {"id":"top","label":"top"},
+    ]
+
+    if (typeof window !== 'undefined') {
+        let recentSearches = JSON.parse(window.localStorage.getItem(`AUTOCOMPLETE_RECENT_SEARCHES:pwa-recent-searches`))
+        if(!recentSearches) {
+            window.localStorage.setItem(`AUTOCOMPLETE_RECENT_SEARCHES:pwa-recent-searches`, JSON.stringify(defaultSearches))
+        }
+    }
+    /*********************************************************************** */
 
     useEffect(() => {
         if (!containerRef.current) {
