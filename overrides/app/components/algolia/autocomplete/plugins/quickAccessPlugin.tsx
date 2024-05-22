@@ -62,7 +62,7 @@ import { QuickAccessHit } from '../types';
               }
             ],
             "template": "help",
-            "title": "how can\nwe help?"
+            "title": "how can we help?"
           }
         ]
       },
