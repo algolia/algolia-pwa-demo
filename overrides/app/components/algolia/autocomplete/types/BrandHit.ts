@@ -2,6 +2,7 @@ import { AutocompleteHit } from './AutocompleteHit';
 
 /**
  * Represents matching brands with label and count from product index.
+ * This is used to render brand items in the autocomplete and fetch from facets query.
  *
  * @typedef {Object} BrandRecord
  * @property {string} label - The label of the brand.

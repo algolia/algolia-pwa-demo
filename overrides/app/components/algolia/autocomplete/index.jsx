@@ -1,7 +1,8 @@
 /**
  * @module Autocomplete
  * Provides a comprehensive search experience leveraging various plugins to render different types of search results.
- * This module relies on Algolia's autocomplete library to create a customizable autocomplete dropdown.
+ * This module relies on Algolia's autocomplete library to create a customizable autocomplete dropdown,
+ * For further customization, refer to the Algolia documentation: https://www.algolia.com/doc/ui-libraries/autocomplete/guides/creating-a-multi-column-layout/
  */
 
 import React, { createElement, Fragment, useEffect, useRef } from 'react'
