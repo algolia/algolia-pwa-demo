@@ -36,7 +36,7 @@ import { QuickAccessHit } from '../types';
             "image": "https://res.cloudinary.com/hilnmyskv/image/upload/v1645453422/sales_code_vuatep.jpg",
             "subtitle": "with the code CODE_ALGOLIA",
             "template": "sales-code",
-            "title": "Sale on\nWomen Top"
+            "title": "Sale on Women Top"
           },
           {
             "href": "/category/top-seller",
