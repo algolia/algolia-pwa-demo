@@ -25,6 +25,18 @@ module.exports = {
         // },
         // The sites for your app, which is imported from sites.js
         sites,
+        // Algolia search config
+        algolia: {
+            appId: '4ISNL568WT',
+            apiKey: 'f493f30ee56ca33cf59bac5d3a8fd791',
+            indices: {
+                products: 'pwa__products__en_GB',
+                querySuggestions: 'pwa__products__en_GB_query_suggestions',
+                contents: 'pwa__contents__en_GB',
+                faq: 'pwa__contents__en_GB',
+                categories: 'pwa__categories__en_GB'
+            }
+        },
         // Commerce api config
         commerceAPI: {
             proxyPath: '/mobify/proxy/api',

@@ -44,8 +44,10 @@ const {handler} = runtime.createHandler(options, (app) => {
                 useDefaults: true,
                 directives: {
                     'img-src': [
-                        // Default source for product images - replace with your CDN
-                        '*.commercecloud.salesforce.com'
+                        //@TODO: Default source for product images - replace with your CDN
+                        '*.commercecloud.salesforce.com',
+                        '*.cloudinary.com',
+                        '*.istockphoto.com'
                     ],
                     'script-src': [
                         // Used by the service worker in /worker/main.js
@@ -53,7 +55,11 @@ const {handler} = runtime.createHandler(options, (app) => {
                     ],
                     'connect-src': [
                         // Connect to Einstein APIs
-                        'api.cquotient.com'
+                        'api.cquotient.com',
+                        '*.algolianet.com',
+                        '*.algolia.net',
+                        'insights.algolia.io',
+                        'cdn.jsdelivr.net'
                     ]
                 }
             }
