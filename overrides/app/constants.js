@@ -28,6 +28,7 @@ export {DEFAULT_LIMIT_VALUES, DEFAULT_SEARCH_PARAMS}
 
 export * from '@salesforce/retail-react-app/app/constants'
 
+// Custom color groups, add your own or override existing ones
 export const cssColorGroups = {
     beige: '#d3bca9',
     black: '#000000',
@@ -64,5 +65,12 @@ export const cssColorGroups = {
     cobalt: '#0047ab',
     taupe: '#d3bca9',
     turquoise: '#40e0d0',
+    ivorymulti: 'linear-gradient(to right, ivory, orange, yellow, green, cyan, blue, violet)',
+    darkstone: '#eae6ca',
+    hotpinkcombo: 'linear-gradient(to right, hotpink, pink, purple)',
+    inkmulti: 'linear-gradient(to right, #000080, orange, yellow, green, cyan, blue, violet)',
+    admiralnavy: '#000080',
+    aloemulti: 'linear-gradient(to right, #8e6950, #88c290, #919191)',
+    aquamulti: 'linear-gradient(to right, #40e0d0, #00ffff, #0000ff)',
     miscellaneous: 'linear-gradient(to right, orange , yellow, green, cyan, blue, violet)'
 }
