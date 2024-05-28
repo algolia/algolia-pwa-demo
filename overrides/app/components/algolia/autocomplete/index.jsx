@@ -110,7 +110,7 @@ export function Autocomplete({navigate, currency}) {
                 contentPlugin,
                 popularPlugin,
                 quickAccessPluginFactory(navigate),
-                popularCategoriesPlugin
+                popularCategoriesPlugin(navigate)
             ],
             reshape({sourcesBySourceId, sources, state}) {
                 const {
@@ -126,6 +126,7 @@ export function Autocomplete({navigate, currency}) {
 
                 const sourceIdsToExclude = ['popularPlugin', 'popularCategoriesPlugin']
                 const shouldDisplayPopularCategories = sources.every((source) => {
+                    console.log('source', source.sourceId)
                     if (sourceIdsToExclude.indexOf(source.sourceId) !== -1) {
                         return true
                     }
@@ -154,6 +155,9 @@ export function Autocomplete({navigate, currency}) {
                 } catch (renderError) {
                     console.error('Error during autocomplete rendering:', renderError)
                 }
+            },
+            onStateChange: (state) => {
+                console.log('state', state)
             }
         })
 
@@ -229,7 +233,7 @@ function AutocompletePanel(props) {
                                 <li>Double-check your spelling</li>
                                 <li>Use fewer keywords</li>
                                 <li>Search for a less specific item</li>
-                                <li>Try navigate using on the of the popular categories</li>
+                                <li>Check out popular categories for inspiration</li>
                             </ul>
                         </div>
                     )}

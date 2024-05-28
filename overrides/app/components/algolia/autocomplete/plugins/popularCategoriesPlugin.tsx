@@ -31,7 +31,7 @@ const images = {
  * An Autocomplete Plugin that provides popular categories results from Algolia.
  * Check the [Algolia documentation](https://www.algolia.com/doc/ui-libraries/autocomplete/core-concepts/plugins/#building-your-own-plugin) for more information.
  */
-export const popularCategoriesPlugin: AutocompletePlugin<PopularCategoryHit, {}> = {
+export const popularCategoriesPlugin = (navigate) => ({
   getSources() {
     return [
       {
@@ -64,14 +64,14 @@ export const popularCategoriesPlugin: AutocompletePlugin<PopularCategoryHit, {}>
               </Fragment>
             );
           },
-          item({ item, components }) {
-            return <PopularCategoryItem hit={item} components={components} />;
+          item({ item, components, state }) {
+            return <PopularCategoryItem hit={item} navigate={navigate} />;
           },
         },
       },
     ];
   },
-};
+});
 
 /**
  * Props for the PopularCategoryItem component.
@@ -80,6 +80,7 @@ export const popularCategoriesPlugin: AutocompletePlugin<PopularCategoryHit, {}>
  */
 type PopularCategoryItemProps = {
     hit: PopularCategoryHit;
+    navigate: Function;
 };
 
 /**
@@ -87,9 +88,11 @@ type PopularCategoryItemProps = {
  * @param {PopularCategoryItemProps} props - The props for the component.
  * @returns {React.ReactElement} The rendered component.
  */
-function PopularCategoryItem({ hit }: PopularCategoryItemProps) {
+function PopularCategoryItem({ hit, navigate } : PopularCategoryItemProps) {
+    var category = hit.label.replace(' > ', '/').toLowerCase();
+    console.log('Hit', hit)
     return (
-      <div key={hit.objectID} className="aa-ItemWrapper aa-PopularCategoryItem">
+      <div key={hit.objectID} className="aa-ItemWrapper aa-PopularCategoryItem" onClick={() => navigate('/category/' + category)}>
         <div className="aa-ItemContent">
           <div className="aa-ItemPicture">
             <img className='popularCategoryImage' src={images[hit.label]} alt={hit.label} />

@@ -13,7 +13,7 @@ import { CategoryHit } from '../types';
  * @param {AutocompleteComponents} props.components - The autocomplete components.
  * @returns {JSX.Element} The CategoryItem component.
  */
-function CategoryItem({ hit, components }: CategoryItemProps) {
+function CategoryItem({ hit, components, navigate }: CategoryItemProps) {
     return (
         <div key={hit.objectID} className="aa-ItemWrapper aa-CategoryItem">
           <div className="aa-ItemContent">
@@ -37,10 +37,10 @@ function CategoryItem({ hit, components }: CategoryItemProps) {
  * An Autocomplete Plugin that provides category results from Algolia.
  * Check the [Algolia documentation](https://www.algolia.com/doc/ui-libraries/autocomplete/core-concepts/plugins/#building-your-own-plugin) for more information.
  */
-export const categoriesPlugin: AutocompletePlugin<CategoryHit, {}> = {
+export const categoriesPlugin = (navigate) => ({
     getSources({ query }) {
         if (!query) {
-          return [];
+          return ['test'];
         }
 
         return [
@@ -71,15 +71,16 @@ export const categoriesPlugin: AutocompletePlugin<CategoryHit, {}> = {
                 );
               },
               item({ item, components }) {
-                return <CategoryItem hit={item} components={components} />;
+                return <CategoryItem hit={item} navigate={navigate} components={components} />;
               },
             },
           },
         ];
   },
-};
+});
 
 type CategoryItemProps = {
   hit: CategoryHit;
+  navigate: Function;
   components: AutocompleteComponents;
 };
