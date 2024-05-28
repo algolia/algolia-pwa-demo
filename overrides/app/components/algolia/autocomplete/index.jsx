@@ -161,7 +161,18 @@ export function Autocomplete({navigate, currency}) {
             }
         })
 
-        return () => search.destroy()
+        const handleKeyDown = (e) => {
+            if (e.key === 'Enter' && (e.target.id.indexOf('autocomplete-') > -1)) {
+                navigate('/search?q=' + e.target.value)
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            search.destroy();
+            document.removeEventListener('keypress', handleKeyDown);
+        };
     }, [navigate, currency])
 
     return <div ref={containerRef} className="autocomplete-container"></div>
@@ -211,7 +222,7 @@ function AutocompletePanel(props) {
                                 {recentSearches}
                             </Fragment>
                         )) ||
-                        (props.state.query && (
+                        ((props.state.query && ((recentSearches || querySuggestions || categories || brands || faq ))) ? (
                             <Fragment>
                                 <div className="aa-SourceHeader">
                                     <span className="aa-SourceHeaderTitle">Suggestions</span>
@@ -226,7 +237,8 @@ function AutocompletePanel(props) {
                                     {faq}
                                 </div>
                             </Fragment>
-                        ))
+                        ) : <div className="aa-NoResultsAdvices">There is no suggestions for your search</div>
+                        )
                     ) : (
                         <div className="aa-NoResultsAdvices">
                             <ul className="aa-NoResultsAdvicesList">
