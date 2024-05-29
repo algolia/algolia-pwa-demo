@@ -32,7 +32,7 @@ const PageHeader = ({category, productSearchResult, isLoading, searchQuery, ...o
             {/* Category Title */}
             <Flex>
                 <Heading as="h2" size="lg" marginRight={2}>
-                    {`${category?.name || searchQuery || ''}`}
+                    {`${category?.name || searchQuery || 'All'}`}
                 </Heading>
                 <Heading as="h2" size="lg" marginRight={2}>
                     {isReady && <Fade in={true}>({intl.formatNumber(results.nbHits)})</Fade>}
