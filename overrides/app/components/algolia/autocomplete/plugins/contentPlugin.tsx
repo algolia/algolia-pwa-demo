@@ -7,6 +7,7 @@ import React, { createElement, Fragment } from 'react';
 import { ALGOLIA_CONTENT_INDEX_NAME } from '../constants';
 import { searchClient } from '../searchClient';
 import { ContentHit } from '../types';
+import {InfoIcon} from '@salesforce/retail-react-app/app/components/icons'
 
 /**
  * An Autocomplete Plugin that provides content suggestions from Algolia.
@@ -104,7 +105,7 @@ function ContentItem({ hit }: ContentItemProps) {
     <a key={hit.objectID} href="#" className="aa-ItemLink aa-ContentItem">
       <div className="aa-ItemContent">
         <div className="aa-ItemPicture">
-          <img src={hit.image} alt={hit.name} />
+          {hit.image ? <img src={hit.image} alt={hit.name} /> : <InfoIcon/>}
         </div>
 
         <div className="aa-ItemContentBody">

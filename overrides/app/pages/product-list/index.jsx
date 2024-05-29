@@ -367,6 +367,18 @@ const ProductList = (props) => {
                 <title>{category?.pageTitle}</title>
                 <meta name="description" content={category?.pageDescription} />
                 <meta name="keywords" content={category?.pageKeywords} />
+                <link
+                    rel="stylesheet"
+                    href="https://cdn.jsdelivr.net/npm/instantsearch.css@8.0.0/themes/reset-min.css"
+                />
+                <link
+                    rel="stylesheet"
+                    href="https://cdn.jsdelivr.net/npm/instantsearch.css@8.0.0/themes/satellite-min.css"
+                />
+                <link
+                    rel="stylesheet"
+                    href="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-theme-classic"
+                />
             </Helmet>
             <InstantSearch
                 searchClient={searchClient}
