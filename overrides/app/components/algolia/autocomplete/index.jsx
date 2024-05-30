@@ -223,20 +223,50 @@ function AutocompletePanel(props) {
                             </Fragment>
                         )) ||
                         ((props.state.query && ((recentSearches || querySuggestions || categories || brands || faq ))) ? (
-                            <Fragment>
-                                <div className="aa-SourceHeader">
-                                    <span className="aa-SourceHeaderTitle">Suggestions</span>
-                                    <div className="aa-SourceHeaderLine" />
-                                </div>
+                           <>
+                               {
+                                   recentSearches &&
+                                   <Fragment>
+                                       <div className="aa-SourceHeader">
+                                           <span className="aa-SourceHeaderTitle">Recent Searches</span>
+                                           <div className="aa-SourceHeaderLine" />
+                                       </div>
 
-                                <div className="aa-PanelSectionSources">
-                                    {recentSearches}
-                                    {querySuggestions}
-                                    {categories}
-                                    {brands}
-                                    {faq}
-                                </div>
-                            </Fragment>
+                                       <div className="aa-PanelSectionSources">
+                                           {recentSearches}
+                                       </div>
+                                   </Fragment>
+                               }
+
+                               {
+                                   querySuggestions &&
+                                   <Fragment>
+                                       <div className="aa-SourceHeader">
+                                           <span className="aa-SourceHeaderTitle">Popular Searches</span>
+                                           <div className="aa-SourceHeaderLine" />
+                                       </div>
+
+                                       <div className="aa-PanelSectionSources">
+                                           {querySuggestions}
+                                       </div>
+                                   </Fragment>
+                               }
+
+                               {
+                                   (brands || categories) &&
+                                   <Fragment>
+                                       <div className="aa-SourceHeader">
+                                           <span className="aa-SourceHeaderTitle">Popular Brands</span>
+                                           <div className="aa-SourceHeaderLine" />
+                                       </div>
+
+                                       <div className="aa-PanelSectionSources">
+                                           {brands}
+                                           {categories}
+                                       </div>
+                                   </Fragment>
+                               }
+                           </>
                         ) : <div className="aa-NoResultsAdvices">There is no suggestions for your search</div>
                         )
                     ) : (

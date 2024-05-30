@@ -33,22 +33,27 @@ const AlgoliaColorRefinements = (props) => {
                                 <Button
                                     {...styles.swatch}
                                     color={item.isRefined ? 'black' : 'gray.200'}
-                                    border={item.isRefined ? '1px' : '0'}
                                     aria-checked={item.isRefined}
                                     variant="outline"
                                     marginRight={0}
                                     marginBottom="-1px"
+                                    width="20px"
+                                    height="20px"
+                                    borderRadius="100%"
+                                    overflow="hidden"
+                                    minWidth="auto"
+                                    border={'1px solid #e9e9e9'}
                                 >
                                     <Center
                                         {...styles.swatchButton}
                                         marginRight={0}
-                                        border={lcLabel === 'white' && '1px solid black'}
+                                        width="100%"
+                                        height="100%"
                                     >
                                         <Box
                                             marginRight={0}
                                             height="100%"
                                             width="100%"
-                                            minWidth="32px"
                                             backgroundRepeat="no-repeat"
                                             backgroundSize="cover"
                                             background={cssColorGroups[lcLabel]}
@@ -58,7 +63,7 @@ const AlgoliaColorRefinements = (props) => {
                                 <Text
                                     display="flex"
                                     alignItems="center"
-                                    fontSize="sm"
+                                    fontSize="13px"
                                     isTruncated
                                     marginBottom="1px"
                                     fontWeight={item.isRefined ? 'bold' : 'normal'}

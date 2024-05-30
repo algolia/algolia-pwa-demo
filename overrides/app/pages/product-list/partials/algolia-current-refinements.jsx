@@ -10,14 +10,31 @@ import {CurrentRefinements} from 'react-instantsearch-hooks-web'
 import PropTypes from 'prop-types'
 
 const AlgoliaCurrentRefinements = (props) => {
-    const {includedAttributes, transformItems} = props
+    const {includedAttributes} = props
     const styles = useMultiStyleConfig('AlgoliaCurrentRefinements')
+
+    const customTransformItems = (items) => {
+        return items.map(item => {
+            if (item.attribute === 'price.USD') {
+                return {
+                    ...item,
+                    label: 'price'
+                }
+            } else if (item.attribute === '__primary_category.0') {
+                return {
+                    ...item,
+                    label: 'category'
+                }
+            }
+            return item
+        })
+    }
 
     return (
         <Box sx={styles}>
             <CurrentRefinements
                 includedAttributes={includedAttributes}
-                transformItems={transformItems}
+                transformItems={customTransformItems}
                 classNames={{
                     label: 'label',
                     item: 'item',

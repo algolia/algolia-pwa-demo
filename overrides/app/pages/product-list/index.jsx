@@ -90,6 +90,8 @@ import AlgoliaPagination from './partials/algolia-pagination'
 import AlgoliaSortBy from './partials/algolia-sort-by'
 import AlgoliaClearRefinements from './partials/algolia-clear-refinements'
 import AlgoliaUiStateProvider from './partials/algolia-uistate-provider'
+import SearchTabHeader from './partials/search-tab-header'
+import { Tabs, TabPanels, TabPanel } from '@chakra-ui/react'
 
 // NOTE: You can ignore certain refinements on a template level by updating the below
 // list of ignored refinements.
@@ -386,215 +388,228 @@ const ProductList = (props) => {
                 routing
                 insights={true}
             >
-                <Configure query={query} filters={filters} />
-                <AlgoliaNoResultsBoundary
-                    fallback={<EmptySearchResults searchQuery={searchQuery} category={category} />}
-                >
-                    <>
-                        {/* Header */}
-                        <Stack
-                            display={{base: 'none', lg: 'flex'}}
-                            direction="row"
-                            justify="flex-start"
-                            align="flex-start"
-                            spacing={6}
-                            marginBottom={6}
-                        >
-                            <Flex align="left" width="290px">
-                                <PageHeader
-                                    category={category}
-                                    isLoading={isLoading}
-                                    searchQuery={searchQuery}
-                                />
-                            </Flex>
-                            <Flex flex={1} paddingTop={'45px'} alignItems="center" gap="3">
-                                <AlgoliaCurrentRefinements
-                                    includedAttributes={currentRefinementAttributes}
-                                />
-                                <AlgoliaClearRefinements />
-                            </Flex>
-                            <Box paddingTop={'45px'}>
-                                <AlgoliaSortBy items={allIndices} />
-                            </Box>
-                        </Stack>
-
-                        <HideOnDesktop>
-                            <Stack spacing={6}>
-                                <PageHeader
-                                    category={category}
-                                    isLoading={isLoading}
-                                    searchQuery={searchQuery}
-                                />
-                                <Stack
-                                    display={{base: 'flex', md: 'none'}}
-                                    direction="row"
-                                    justify="flex-start"
-                                    align="center"
-                                    spacing={1}
-                                    height={12}
-                                    borderColor="gray.100"
-                                >
-                                    <Flex align="center">
-                                        <Button
-                                            fontSize="sm"
-                                            colorScheme="black"
-                                            variant="outline"
-                                            marginRight={2}
-                                            display="inline-flex"
-                                            leftIcon={<FilterIcon boxSize={5} />}
-                                            onClick={onOpen}
-                                        >
-                                            <FormattedMessage
-                                                defaultMessage="Filter"
-                                                id="product_list.button.filter"
+                <Tabs>
+                    {
+                        isSearch &&
+                        <SearchTabHeader isLoading={isLoading}/>
+                    }
+                    <TabPanels>
+                        <TabPanel>
+                            <Configure query={query} filters={filters} />
+                            <AlgoliaNoResultsBoundary
+                                fallback={<EmptySearchResults searchQuery={searchQuery} category={category} />}
+                            >
+                                <>
+                                    {/* Header */}
+                                    <Stack
+                                        display={{base: 'none', lg: 'flex'}}
+                                        direction="row"
+                                        justify="flex-start"
+                                        align="flex-start"
+                                        spacing={6}
+                                        marginBottom={6}
+                                    >
+                                        <Flex align="left" width="290px">
+                                            <PageHeader
+                                                category={category}
+                                                isLoading={isLoading}
+                                                searchQuery={searchQuery}
                                             />
-                                        </Button>
-                                    </Flex>
-                                    <Flex align="center">
-                                        <AlgoliaSortBy items={allIndices} />
-                                    </Flex>
-                                </Stack>
-                            </Stack>
-                            <Flex
-                                flex={1}
-                                paddingTop={4}
-                                marginBottom={4}
-                                alignItems="center"
-                                gap="3"
-                            >
-                                <AlgoliaCurrentRefinements
-                                    includedAttributes={currentRefinementAttributes}
-                                />
-                                <AlgoliaClearRefinements />
-                            </Flex>
-                        </HideOnDesktop>
+                                        </Flex>
+                                        <Flex flex={1} paddingTop={'45px'} alignItems="center" gap="3">
+                                            <AlgoliaCurrentRefinements
+                                                includedAttributes={currentRefinementAttributes}
+                                            />
+                                            <AlgoliaClearRefinements />
+                                        </Flex>
+                                        <Box paddingTop={'45px'}>
+                                            <AlgoliaSortBy items={allIndices} />
+                                        </Box>
+                                    </Stack>
 
-                        {/* Body  */}
-                        <Grid templateColumns={{base: '1fr', md: '290px 1fr'}} columnGap={6}>
-                            <Stack
-                                display={{base: 'none', md: 'flex'}}
-                                spacing="6"
-                                direction="column"
-                            >
-                                {filterEls}
-                            </Stack>
-                            <Box>
-                                <SimpleGrid
-                                    columns={[2, 2, 3, 3]}
-                                    spacingX={4}
-                                    spacingY={{base: 12, lg: 8}}
-                                >
-                                    <AlgoliaHits
-                                        isLoading={isLoading}
-                                        hitComponent={({hit, sendEvent}) => {
-                                            const isInWishlist = false;
+                                    <HideOnDesktop>
+                                        <Stack spacing={6}>
+                                            <PageHeader
+                                                category={category}
+                                                isLoading={isLoading}
+                                                searchQuery={searchQuery}
+                                            />
+                                            <Stack
+                                                display={{base: 'flex', md: 'none'}}
+                                                direction="row"
+                                                justify="flex-start"
+                                                align="center"
+                                                spacing={1}
+                                                height={12}
+                                                borderColor="gray.100"
+                                            >
+                                                <Flex align="center">
+                                                    <Button
+                                                        fontSize="sm"
+                                                        colorScheme="black"
+                                                        variant="outline"
+                                                        marginRight={2}
+                                                        display="inline-flex"
+                                                        leftIcon={<FilterIcon boxSize={5} />}
+                                                        onClick={onOpen}
+                                                    >
+                                                        <FormattedMessage
+                                                            defaultMessage="Filter"
+                                                            id="product_list.button.filter"
+                                                        />
+                                                    </Button>
+                                                </Flex>
+                                                <Flex align="center">
+                                                    <AlgoliaSortBy items={allIndices} />
+                                                </Flex>
+                                            </Stack>
+                                        </Stack>
+                                        <Flex
+                                            flex={1}
+                                            paddingTop={4}
+                                            marginBottom={4}
+                                            alignItems="center"
+                                            gap="3"
+                                        >
+                                            <AlgoliaCurrentRefinements
+                                                includedAttributes={currentRefinementAttributes}
+                                            />
+                                            <AlgoliaClearRefinements />
+                                        </Flex>
+                                    </HideOnDesktop>
 
-                                            return (
-                                                <ProductTile
-                                                    data-testid={`sf-product-tile-${hit.id}`}
-                                                    key={hit.id}
-                                                    product={hit}
-                                                    enableFavourite={true}
-                                                    isFavourite={isInWishlist}
-                                                    currency={activeCurrency}
-                                                    onClick={() => {
-                                                        sendEvent('click', hit, 'Product Clicked')
+                                    {/* Body  */}
+                                    <Grid templateColumns={{base: '1fr', md: '290px 1fr'}} columnGap={6}>
+                                        <Stack
+                                            display={{base: 'none', md: 'flex'}}
+                                            spacing="6"
+                                            direction="column"
+                                        >
+                                            {filterEls}
+                                        </Stack>
+                                        <Box>
+                                            <SimpleGrid
+                                                columns={[2, 2, 3, 3]}
+                                                spacingX={4}
+                                                spacingY={{base: 12, lg: 8}}
+                                            >
+                                                <AlgoliaHits
+                                                    isLoading={isLoading}
+                                                    hitComponent={({hit, sendEvent}) => {
+                                                        const isInWishlist = false;
 
-                                                        if (searchQuery) {
-                                                            einstein.sendClickSearch(
-                                                                searchQuery,
-                                                                hit
-                                                            )
-                                                        } else if (category) {
-                                                            einstein.sendClickCategory(
-                                                                category,
-                                                                hit
-                                                            )
-                                                        }
-                                                    }}
-                                                    onFavouriteToggle={(isFavourite) => {
-                                                        const action = isFavourite
-                                                            ? addItemToWishlist
-                                                            : removeItemFromWishlist
-                                                        return action(hit)
-                                                    }}
-                                                    dynamicImageProps={{
-                                                        widths: [
-                                                            '50vw',
-                                                            '50vw',
-                                                            '20vw',
-                                                            '20vw',
-                                                            '25vw'
-                                                        ]
+                                                        return (
+                                                            <ProductTile
+                                                                data-testid={`sf-product-tile-${hit.id}`}
+                                                                key={hit.id}
+                                                                product={hit}
+                                                                enableFavourite={true}
+                                                                isFavourite={isInWishlist}
+                                                                currency={activeCurrency}
+                                                                onClick={() => {
+                                                                    sendEvent('click', hit, 'Product Clicked')
+
+                                                                    if (searchQuery) {
+                                                                        einstein.sendClickSearch(
+                                                                            searchQuery,
+                                                                            hit
+                                                                        )
+                                                                    } else if (category) {
+                                                                        einstein.sendClickCategory(
+                                                                            category,
+                                                                            hit
+                                                                        )
+                                                                    }
+                                                                }}
+                                                                onFavouriteToggle={(isFavourite) => {
+                                                                    const action = isFavourite
+                                                                        ? addItemToWishlist
+                                                                        : removeItemFromWishlist
+                                                                    return action(hit)
+                                                                }}
+                                                                dynamicImageProps={{
+                                                                    widths: [
+                                                                        '50vw',
+                                                                        '50vw',
+                                                                        '20vw',
+                                                                        '20vw',
+                                                                        '25vw'
+                                                                    ]
+                                                                }}
+                                                            />
+                                                        )
                                                     }}
                                                 />
-                                            )
-                                        }}
-                                    />
-                                </SimpleGrid>
-                                {/* Footer */}
-                                <Flex
-                                    justifyContent={['center', 'center', 'flex-start']}
-                                    paddingTop={16}
-                                >
-                                    <AlgoliaPagination onPageChange={() => window.scrollTo(0, 0)} />
-                                </Flex>
-                            </Box>
-                        </Grid>
-                    </>
-                </AlgoliaNoResultsBoundary>
-                {/* Filter */}
-                <Modal
-                    isOpen={isOpen}
-                    onClose={onClose}
-                    size="full"
-                    motionPreset="slideInBottom"
-                    scrollBehavior="inside"
-                >
-                    <AlgoliaUiStateProvider searchClient={searchClient} indexName={indexName}>
-                        <ModalOverlay />
-                        <ModalContent top={0} marginTop={0}>
-                            <ModalHeader>
-                                <Text fontWeight="bold" fontSize="2xl">
-                                    <FormattedMessage
-                                        defaultMessage="Filter"
-                                        id="product_list.modal.title.filter"
-                                    />
-                                </Text>
-                            </ModalHeader>
-                            <ModalCloseButton />
-                            <ModalBody py={4}>
-                                <Stack spacing="6" direction="column">
-                                    {filterEls}
-                                </Stack>
-                            </ModalBody>
-
-                            <ModalFooter
-                                // justify="space-between"
-                                display="block"
-                                width="full"
-                                borderTop="1px solid"
-                                borderColor="gray.100"
-                                paddingBottom={10}
+                                            </SimpleGrid>
+                                            {/* Footer */}
+                                            <Flex
+                                                justifyContent={['center', 'center', 'flex-start']}
+                                                paddingTop={16}
+                                            >
+                                                <AlgoliaPagination onPageChange={() => window.scrollTo(0, 0)} />
+                                            </Flex>
+                                        </Box>
+                                    </Grid>
+                                </>
+                            </AlgoliaNoResultsBoundary>
+                            {/* Filter */}
+                            <Modal
+                                isOpen={isOpen}
+                                onClose={onClose}
+                                size="full"
+                                motionPreset="slideInBottom"
+                                scrollBehavior="inside"
                             >
-                                <Stack>
-                                    <Button width="full" onClick={onClose}>
-                                        {formatMessage(
-                                            {
-                                                id: 'product_list.modal.button.view_items',
-                                                defaultMessage: 'View items'
-                                            },
-                                            {
-                                                prroductCount: ''
-                                            }
-                                        )}
-                                    </Button>
-                                    <AlgoliaClearRefinements variant="button" />
-                                </Stack>
-                            </ModalFooter>
-                        </ModalContent>
-                    </AlgoliaUiStateProvider>
-                </Modal>
+                                <AlgoliaUiStateProvider searchClient={searchClient} indexName={indexName}>
+                                    <ModalOverlay />
+                                    <ModalContent top={0} marginTop={0}>
+                                        <ModalHeader>
+                                            <Text fontWeight="bold" fontSize="2xl">
+                                                <FormattedMessage
+                                                    defaultMessage="Filter"
+                                                    id="product_list.modal.title.filter"
+                                                />
+                                            </Text>
+                                        </ModalHeader>
+                                        <ModalCloseButton />
+                                        <ModalBody py={4}>
+                                            <Stack spacing="6" direction="column">
+                                                {filterEls}
+                                            </Stack>
+                                        </ModalBody>
+
+                                        <ModalFooter
+                                            // justify="space-between"
+                                            display="block"
+                                            width="full"
+                                            borderTop="1px solid"
+                                            borderColor="gray.100"
+                                            paddingBottom={10}
+                                        >
+                                            <Stack>
+                                                <Button width="full" onClick={onClose}>
+                                                    {formatMessage(
+                                                        {
+                                                            id: 'product_list.modal.button.view_items',
+                                                            defaultMessage: 'View items'
+                                                        },
+                                                        {
+                                                            prroductCount: ''
+                                                        }
+                                                    )}
+                                                </Button>
+                                                <AlgoliaClearRefinements variant="button" />
+                                            </Stack>
+                                        </ModalFooter>
+                                    </ModalContent>
+                                </AlgoliaUiStateProvider>
+                            </Modal>
+                        </TabPanel>
+                        <TabPanel>
+                            <h1>Articles</h1>
+                        </TabPanel>
+                    </TabPanels>
+                </Tabs>
             </InstantSearch>
         </Box>
     )
