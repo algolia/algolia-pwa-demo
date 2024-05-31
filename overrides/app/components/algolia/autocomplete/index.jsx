@@ -126,7 +126,6 @@ export function Autocomplete({navigate, currency}) {
 
                 const sourceIdsToExclude = ['popularPlugin', 'popularCategoriesPlugin']
                 const shouldDisplayPopularCategories = sources.every((source) => {
-                    console.log('source', source.sourceId)
                     if (sourceIdsToExclude.indexOf(source.sourceId) !== -1) {
                         return true
                     }
@@ -155,9 +154,6 @@ export function Autocomplete({navigate, currency}) {
                 } catch (renderError) {
                     console.error('Error during autocomplete rendering:', renderError)
                 }
-            },
-            onStateChange: (state) => {
-                console.log('state', state)
             }
         })
 

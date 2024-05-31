@@ -45,7 +45,7 @@ import EmptySearchResults from '@salesforce/retail-react-app/app/pages/product-l
 import PageHeader from './partials/page-header'
 
 // Icons
-import {FilterIcon, ChevronDownIcon} from '@salesforce/retail-react-app/app/components/icons'
+import {FilterIcon} from '@salesforce/retail-react-app/app/components/icons'
 
 // Hooks
 import {
@@ -55,7 +55,6 @@ import {
     useSearchParams
 } from '@salesforce/retail-react-app/app/hooks'
 import {useToast} from '@salesforce/retail-react-app/app/hooks/use-toast'
-import {parse as parseSearchParams} from '@salesforce/retail-react-app/app/hooks/use-search-params'
 import useEinstein from '@salesforce/retail-react-app/app/hooks/use-einstein'
 
 // Others
@@ -63,7 +62,6 @@ import {HTTPNotFound, HTTPError} from '@salesforce/pwa-kit-react-sdk/ssr/univers
 
 // Constants
 import {
-    DEFAULT_LIMIT_VALUES,
     API_ERROR_MESSAGE,
     MAX_CACHE_AGE,
     TOAST_ACTION_VIEW_WISHLIST,
@@ -77,7 +75,7 @@ import {useCurrency} from '@salesforce/retail-react-app/app/hooks'
 
 // Algolia
 import algoliasearch from 'algoliasearch/lite'
-import {Configure, InstantSearch} from 'react-instantsearch-hooks-web'
+import {Configure, InstantSearch, Index, Hits} from 'react-instantsearch-hooks-web'
 import ProductTile from '../../components/algolia-product-tile'
 import AlgoliaHits from './partials/algolia-hits'
 import AlgoliaCurrentRefinements from './partials/algolia-current-refinements'
@@ -127,7 +125,8 @@ const ProductList = (props) => {
 
     // Algolia Settings
     const allIndices = [algoliaConfig.indices.primary, ...algoliaConfig.indices.replicas]
-    const indexName = algoliaConfig.indices.primary.value
+    const productIndexName = algoliaConfig.indices.primary.value
+    const contentIndexName = algoliaConfig.indices.contents
 
     const searchClient = useMemo(() => {
         return algoliasearch(algoliaConfig.appId, algoliaConfig.apiKey)
@@ -384,7 +383,7 @@ const ProductList = (props) => {
             </Helmet>
             <InstantSearch
                 searchClient={searchClient}
-                indexName={indexName}
+                indexName={productIndexName}
                 routing
                 insights={true}
             >
@@ -560,7 +559,7 @@ const ProductList = (props) => {
                                 motionPreset="slideInBottom"
                                 scrollBehavior="inside"
                             >
-                                <AlgoliaUiStateProvider searchClient={searchClient} indexName={indexName}>
+                                <AlgoliaUiStateProvider searchClient={searchClient} indexName={productIndexName}>
                                     <ModalOverlay />
                                     <ModalContent top={0} marginTop={0}>
                                         <ModalHeader>
@@ -607,6 +606,9 @@ const ProductList = (props) => {
                         </TabPanel>
                         <TabPanel>
                             <h1>Articles</h1>
+                            <Index indexName={contentIndexName}>
+                                <Hits />
+                            </Index>
                         </TabPanel>
                     </TabPanels>
                 </Tabs>

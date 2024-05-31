@@ -90,7 +90,6 @@ type PopularCategoryItemProps = {
  */
 function PopularCategoryItem({ hit, navigate } : PopularCategoryItemProps) {
     var category = hit.label.replace(' > ', '/').toLowerCase();
-    console.log('Hit', hit)
     return (
       <div key={hit.objectID} className="aa-ItemWrapper aa-PopularCategoryItem" onClick={() => navigate('/category/' + category)}>
         <div className="aa-ItemContent">
