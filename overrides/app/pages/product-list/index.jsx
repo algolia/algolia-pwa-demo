@@ -91,6 +91,7 @@ import AlgoliaUiStateProvider from './partials/algolia-uistate-provider'
 import SearchTabHeader from './partials/search-tab-header'
 import { Tabs, TabPanels, TabPanel } from '@chakra-ui/react'
 import AlgoliaHitsContent from './partials/algolia-hits-content'
+import AlgoliaHitsProducts from './partials/algolia-hits-products'
 
 // NOTE: You can ignore certain refinements on a template level by updating the below
 // list of ignored refinements.
@@ -494,52 +495,15 @@ const ProductList = (props) => {
                                                 spacingX={4}
                                                 spacingY={{base: 12, lg: 8}}
                                             >
-                                                <AlgoliaHits
+                                                <AlgoliaHitsProducts
                                                     isLoading={isLoading}
-                                                    hitComponent={({hit, sendEvent}) => {
-                                                        const isInWishlist = false;
-
-                                                        return (
-                                                            <ProductTile
-                                                                data-testid={`sf-product-tile-${hit.id}`}
-                                                                key={hit.id}
-                                                                product={hit}
-                                                                enableFavourite={true}
-                                                                isFavourite={isInWishlist}
-                                                                currency={activeCurrency}
-                                                                onClick={() => {
-                                                                    sendEvent('click', hit, 'Product Clicked')
-
-                                                                    if (searchQuery) {
-                                                                        einstein.sendClickSearch(
-                                                                            searchQuery,
-                                                                            hit
-                                                                        )
-                                                                    } else if (category) {
-                                                                        einstein.sendClickCategory(
-                                                                            category,
-                                                                            hit
-                                                                        )
-                                                                    }
-                                                                }}
-                                                                onFavouriteToggle={(isFavourite) => {
-                                                                    const action = isFavourite
-                                                                        ? addItemToWishlist
-                                                                        : removeItemFromWishlist
-                                                                    return action(hit)
-                                                                }}
-                                                                dynamicImageProps={{
-                                                                    widths: [
-                                                                        '50vw',
-                                                                        '50vw',
-                                                                        '20vw',
-                                                                        '20vw',
-                                                                        '25vw'
-                                                                    ]
-                                                                }}
-                                                            />
-                                                        )
-                                                    }}
+                                                    searchQuery={searchQuery}
+                                                    einstein={einstein}
+                                                    category={category}
+                                                    addItemToWishlist={addItemToWishlist}
+                                                    removeItemFromWishlist={removeItemFromWishlist}
+                                                    isInWishlist={false}
+                                                    activeCurrency={activeCurrency}
                                                 />
                                             </SimpleGrid>
                                             {/* Footer */}
