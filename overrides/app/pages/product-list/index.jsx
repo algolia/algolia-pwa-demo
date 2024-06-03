@@ -90,6 +90,7 @@ import AlgoliaClearRefinements from './partials/algolia-clear-refinements'
 import AlgoliaUiStateProvider from './partials/algolia-uistate-provider'
 import SearchTabHeader from './partials/search-tab-header'
 import { Tabs, TabPanels, TabPanel } from '@chakra-ui/react'
+import AlgoliaHitsContent from './partials/algolia-hits-content'
 
 // NOTE: You can ignore certain refinements on a template level by updating the below
 // list of ignored refinements.
@@ -161,6 +162,7 @@ const ProductList = (props) => {
     const [filtersLoading, setFiltersLoading] = useState(false)
     const [wishlistLoading, setWishlistLoading] = useState([])
     const [sortOpen, setSortOpen] = useState(false)
+    const [contentHitsCount, setContentHitsCount] = useState(false)
 
     const urlParams = new URLSearchParams(location.search)
     let searchQuery = urlParams.get('q')
@@ -390,7 +392,7 @@ const ProductList = (props) => {
                 <Tabs>
                     {
                         isSearch &&
-                        <SearchTabHeader isLoading={isLoading}/>
+                        <SearchTabHeader isLoading={isLoading} contentHitsCount={contentHitsCount}/>
                     }
                     <TabPanels>
                         <TabPanel>
@@ -605,9 +607,8 @@ const ProductList = (props) => {
                             </Modal>
                         </TabPanel>
                         <TabPanel>
-                            <h1>Articles</h1>
                             <Index indexName={contentIndexName}>
-                                <Hits />
+                                <AlgoliaHitsContent isLoading={isLoading} setContentHitsCount={setContentHitsCount}/>
                             </Index>
                         </TabPanel>
                     </TabPanels>

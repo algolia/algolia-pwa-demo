@@ -169,7 +169,7 @@ export function Autocomplete({navigate, currency}) {
             search.destroy();
             document.removeEventListener('keypress', handleKeyDown);
         };
-    }, [navigate, currency])
+    }, [])
 
     return <div ref={containerRef} className="autocomplete-container"></div>
 }

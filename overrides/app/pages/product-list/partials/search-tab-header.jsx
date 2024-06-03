@@ -4,7 +4,7 @@ import React from 'react'
 import {useIntl} from 'react-intl'
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 
-const SearchTabHeader =({isLoading})=>{
+const SearchTabHeader =({isLoading,contentHitsCount})=>{
     const intl = useIntl()
     const {results} = useHits()
     const {status} = useInstantSearch()
@@ -13,7 +13,7 @@ const SearchTabHeader =({isLoading})=>{
     return(
         <TabList>
             <Tab>Products <Box sx={{marginLeft:1}}>{isReady && <Fade in={true}>({intl.formatNumber(results.nbHits)})</Fade>}</Box></Tab>
-            <Tab>Articles</Tab>
+            <Tab>Articles ({contentHitsCount})</Tab>
         </TabList>
     )
 }
