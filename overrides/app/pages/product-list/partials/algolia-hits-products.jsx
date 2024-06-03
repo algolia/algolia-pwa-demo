@@ -1,7 +1,9 @@
 import React, {Fragment, useEffect} from 'react'
 import PropTypes from 'prop-types'
-import {useHits, useInstantSearch} from 'react-instantsearch-hooks-web'
-import ProductTile, {Skeleton as ProductTileSkeleton} from '../../../components/algolia-product-tile/index'
+import {useHits, useInstantSearch} from 'react-instantsearch'
+import ProductTile, {
+    Skeleton as ProductTileSkeleton
+} from '../../../components/algolia-product-tile/index'
 
 const AlgoliaHitsProducts = (props) => {
     const {isLoading,searchQuery,category,einstein, addItemToWishlist, removeItemFromWishlist,isInWishlist,activeCurrency} = props
@@ -20,48 +22,32 @@ const AlgoliaHitsProducts = (props) => {
 
     return (
         <>
-            {
-                hits.map((hit, idx) => (
-                    <ProductTile
-                        data-testid={`sf-product-tile-${hit.id}`}
-                        key={hit.id}
-                        product={hit}
-                        enableFavourite={true}
-                        isFavourite={isInWishlist}
-                        currency={activeCurrency}
-                        onClick={() => {
-                            sendEvent('click', hit, 'Product Clicked')
+            {hits.map((hit, idx) => (
+                <ProductTile
+                    data-testid={`sf-product-tile-${hit.id}`}
+                    key={hit.id}
+                    product={hit}
+                    enableFavourite={true}
+                    isFavourite={isInWishlist}
+                    currency={activeCurrency}
+                    onClick={() => {
+                        sendEvent('click', hit, 'Product Clicked')
 
-                            if (searchQuery) {
-                                einstein.sendClickSearch(
-                                    searchQuery,
-                                    hit
-                                )
-                            } else if (category) {
-                                einstein.sendClickCategory(
-                                    category,
-                                    hit
-                                )
-                            }
-                        }}
-                        onFavouriteToggle={(isFavourite) => {
-                            const action = isFavourite
-                                ? addItemToWishlist
-                                : removeItemFromWishlist
-                            return action(hit)
-                        }}
-                        dynamicImageProps={{
-                            widths: [
-                                '50vw',
-                                '50vw',
-                                '20vw',
-                                '20vw',
-                                '25vw'
-                            ]
-                        }}
-                    />
-                ))
-            }
+                        if (searchQuery) {
+                            einstein.sendClickSearch(searchQuery, hit)
+                        } else if (category) {
+                            einstein.sendClickCategory(category, hit)
+                        }
+                    }}
+                    onFavouriteToggle={(isFavourite) => {
+                        const action = isFavourite ? addItemToWishlist : removeItemFromWishlist
+                        return action(hit)
+                    }}
+                    dynamicImageProps={{
+                        widths: ['50vw', '50vw', '20vw', '20vw', '25vw']
+                    }}
+                />
+            ))}
         </>
     )
 }

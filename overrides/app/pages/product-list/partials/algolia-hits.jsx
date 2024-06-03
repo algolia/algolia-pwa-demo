@@ -6,7 +6,7 @@
  */
 import React, {Fragment} from 'react'
 import PropTypes from 'prop-types'
-import {useHits, useInstantSearch} from 'react-instantsearch-hooks-web'
+import {useHits, useInstantSearch} from 'react-instantsearch'
 import {Skeleton as ProductTileSkeleton} from '../../../components/algolia-product-tile/index'
 
 const AlgoliaHits = (props) => {

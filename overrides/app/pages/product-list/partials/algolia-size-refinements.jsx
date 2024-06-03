@@ -6,7 +6,7 @@
  */
 import React from 'react'
 import {SimpleGrid, Button, Center, useMultiStyleConfig} from '@chakra-ui/react'
-import {useRefinementList} from 'react-instantsearch-hooks-web'
+import {useRefinementList} from 'react-instantsearch'
 import AlgoliaRefinementsContainer from './algolia-refinements-container'
 import PropTypes from 'prop-types'
 

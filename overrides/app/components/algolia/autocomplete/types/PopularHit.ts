@@ -1,4 +1,4 @@
-import { Hit } from '@algolia/client-search';
+import {Hit} from '@algolia/client-search'
 
 /**
  * Represents a popular record with a query.
@@ -7,12 +7,12 @@ import { Hit } from '@algolia/client-search';
  * @property {string} query - The query of the popular record.
  */
 type PopularRecord = {
-  query: string;
-};
+    query: string
+}
 
 /**
  * Represents an Algolia hit for a popular record.
  *
  * @typedef {Hit<PopularRecord>} PopularHit
  */
-export type PopularHit = Hit<PopularRecord>;
+export type PopularHit = Hit<PopularRecord>

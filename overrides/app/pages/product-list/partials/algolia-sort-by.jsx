@@ -6,7 +6,7 @@
  */
 import React from 'react'
 import {Box, useMultiStyleConfig} from '@chakra-ui/react'
-import {SortBy} from 'react-instantsearch-hooks-web'
+import {SortBy} from 'react-instantsearch'
 import PropTypes from 'prop-types'
 
 const AlgoliaSortBy = (props) => {

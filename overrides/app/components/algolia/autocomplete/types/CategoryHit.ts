@@ -5,7 +5,7 @@
  * @property {string} name - The name of the record.
  */
 type CategoryRecord = {
-  name: string;
-};
+    name: string
+}
 
-export type CategoryHit = AutocompleteHit<CategoryRecord>;
+export type CategoryHit = AutocompleteHit<CategoryRecord>

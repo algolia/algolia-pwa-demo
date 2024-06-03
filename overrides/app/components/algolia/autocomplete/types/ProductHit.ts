@@ -1,4 +1,4 @@
-import type { Hit } from '@algolia/client-search';
+import type {Hit} from '@algolia/client-search'
 
 /**
  * Represents a product record with name, brand, image URLs, blurred image, price details, reviews, pricebooks, and lsImage.
@@ -17,19 +17,19 @@ import type { Hit } from '@algolia/client-search';
  * @property {string} lsImage - The lsImage of the product.
  */
 type ProductRecord = {
-  name: string;
-  brand: string;
-  image_urls: string[];
-  price: {
-    currency: string;
-    value: number;
-  };
-  reviews: {
-    count: number;
-    rating: number;
-  };
-  pricebooks: Object[];
-  lsImage: string;
-};
+    name: string
+    brand: string
+    image_urls: string[]
+    price: {
+        currency: string
+        value: number
+    }
+    reviews: {
+        count: number
+        rating: number
+    }
+    pricebooks: Object[]
+    lsImage: string
+}
 
-export type ProductHit = Hit<ProductRecord>;
+export type ProductHit = Hit<ProductRecord>

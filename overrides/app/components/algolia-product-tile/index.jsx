@@ -85,7 +85,7 @@ const ProductTile = (props) => {
     const [isFavouriteLoading, setFavouriteLoading] = useState(false)
     const styles = useMultiStyleConfig('ProductTile')
 
-    let imageUrl = product.image;
+    let imageUrl = product.image
     let imageAlt = ''
 
     if (product.image_groups) {
@@ -100,7 +100,6 @@ const ProductTile = (props) => {
 
     const productPrice = product.price ? product.price.USD : ''
     const {currency: activeCurrency} = useCurrency()
-
 
     return (
         <Link
@@ -155,10 +154,10 @@ const ProductTile = (props) => {
 
                 {/* Price */}
                 <Text {...styles.price}>
-                {intl.formatNumber(productPrice, {
-                    style: 'currency',
-                    currency: currency || activeCurrency
-                })}
+                    {intl.formatNumber(productPrice, {
+                        style: 'currency',
+                        currency: currency || activeCurrency
+                    })}
                 </Text>
             </Box>
         </Link>

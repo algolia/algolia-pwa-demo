@@ -1,4 +1,3 @@
-
 /**
  * Intersperses an array with a separator element.
  *
@@ -14,9 +13,6 @@
  * const separator = ',';
  * const result = intersperse(arr, separator);
  * // result = [1, ',', 2, ',', 3]
- */export function intersperse<TItem, TSeparator>(
-  arr: TItem[],
-  separator: TSeparator
-) {
-  return arr.reduce((acc, curr) => [...acc, curr, separator], []).slice(0, -1);
+ */ export function intersperse<TItem, TSeparator>(arr: TItem[], separator: TSeparator) {
+    return arr.reduce((acc, curr) => [...acc, curr, separator], []).slice(0, -1)
 }

@@ -1,6 +1,6 @@
 import React, {Fragment, useEffect} from 'react'
 import PropTypes from 'prop-types'
-import {useHits, useInstantSearch} from 'react-instantsearch-hooks-web'
+import {useHits, useInstantSearch} from 'react-instantsearch'
 import {Skeleton as ProductTileSkeleton} from '../../../components/algolia-product-tile/index'
 import {Box, Collapse, Divider, Text, VStack, Spacer} from '@chakra-ui/react'
 import {prop} from 'ramda'
@@ -11,7 +11,7 @@ const AlgoliaHitsContent = (props) => {
     const {status} = useInstantSearch(props)
 
     useEffect(() => {
-        props.setContentHitsCount(hits.length);
+        props.setContentHitsCount(hits.length)
     }, [hits])
 
     if (isLoading || status === 'loading' || status === 'stalled') {
@@ -29,13 +29,10 @@ const AlgoliaHitsContent = (props) => {
             {hits.map((hit, idx) => (
                 <Fragment key={idx}>
                     <Collapse startingHeight={20} animateOpacity in>
-                        <Box
-                            borderRadius="md"
-                            borderWidth="1px"
-                            borderColor="gray.200"
-                            p={4}
-                        >
-                            <Text fontSize="24px" color="#00a1e0">{hit.name}</Text>
+                        <Box borderRadius="md" borderWidth="1px" borderColor="gray.200" p={4}>
+                            <Text fontSize="24px" color="#00a1e0">
+                                {hit.name}
+                            </Text>
                             <Divider marginY={2} />
                             <Text>{hit.body}</Text>
                         </Box>

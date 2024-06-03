@@ -7,4 +7,4 @@
 
 /* istanbul ignore file */
 
-export * from '@salesforce/retail-react-app/app/hooks';
+export * from '@salesforce/retail-react-app/app/hooks'

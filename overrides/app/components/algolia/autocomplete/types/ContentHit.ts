@@ -7,9 +7,9 @@
  * @property {string} description - The description of the content.
  */
 type ContentRecord = {
-  name: string;
-  image: string;
-  description: string;
-};
+    name: string
+    image: string
+    description: string
+}
 
-export type ContentHit = Hit<ContentRecord>;
+export type ContentHit = Hit<ContentRecord>

@@ -1,4 +1,4 @@
-import { Hit } from '@algolia/client-search';
+import {Hit} from '@algolia/client-search'
 
 /**
  * Represents a popular category record with label and count.
@@ -8,13 +8,13 @@ import { Hit } from '@algolia/client-search';
  * @property {number} count - The count of the popular category.
  */
 type PopularCategoryRecord = {
-  label: string;
-  count: number;
-};
+    label: string
+    count: number
+}
 
 /**
  * Represents an Algolia hit for a popular category record.
  *
  * @typedef {Hit<PopularCategoryRecord>} PopularCategoryHit
  */
-export type PopularCategoryHit = Hit<PopularCategoryRecord>;
+export type PopularCategoryHit = Hit<PopularCategoryRecord>

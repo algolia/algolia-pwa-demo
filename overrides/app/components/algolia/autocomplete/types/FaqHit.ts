@@ -1,4 +1,4 @@
-import { AutocompleteHit } from './AutocompleteHit';
+import {AutocompleteHit} from './AutocompleteHit'
 
 /**
  * Represents a FAQ record with categories, title, description, and name.
@@ -10,10 +10,10 @@ import { AutocompleteHit } from './AutocompleteHit';
  * @property {string} name - The name of the FAQ.
  */
 type FaqRecord = {
-  categories: string[];
-  title: string;
-  description: string;
-  name: string;
-};
+    categories: string[]
+    title: string
+    description: string
+    name: string
+}
 
-export type FaqHit = AutocompleteHit<FaqRecord>;
+export type FaqHit = AutocompleteHit<FaqRecord>

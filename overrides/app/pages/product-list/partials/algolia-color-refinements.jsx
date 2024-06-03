@@ -10,7 +10,7 @@ import {useIntl} from 'react-intl'
 import PropTypes from 'prop-types'
 import {cssColorGroups} from '../../../constants'
 import {capitalize} from '@salesforce/retail-react-app/app/utils/utils'
-import {useRefinementList} from 'react-instantsearch-hooks-web'
+import {useRefinementList} from 'react-instantsearch'
 import AlgoliaRefinementsContainer from './algolia-refinements-container'
 
 const AlgoliaColorRefinements = (props) => {
@@ -26,7 +26,7 @@ const AlgoliaColorRefinements = (props) => {
         <AlgoliaRefinementsContainer title={props.title} attributes={[props.attribute]}>
             <SimpleGrid columns={2} spacing={2} mt={1}>
                 {items.map((item, idx) => {
-                    const lcLabel = item.label.toLowerCase().replace(/\s/g, "").replace(/&/g, "and");
+                    const lcLabel = item.label.toLowerCase().replace(/\s/g, '').replace(/&/g, 'and')
                     return (
                         <Box key={idx}>
                             <HStack onClick={() => refine(item.label)} spacing={1} cursor="pointer">

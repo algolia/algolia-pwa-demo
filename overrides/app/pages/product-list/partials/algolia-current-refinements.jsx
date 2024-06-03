@@ -6,7 +6,7 @@
  */
 import React from 'react'
 import {Box, useMultiStyleConfig} from '@chakra-ui/react'
-import {CurrentRefinements} from 'react-instantsearch-hooks-web'
+import {CurrentRefinements} from 'react-instantsearch'
 import PropTypes from 'prop-types'
 
 const AlgoliaCurrentRefinements = (props) => {
@@ -14,7 +14,7 @@ const AlgoliaCurrentRefinements = (props) => {
     const styles = useMultiStyleConfig('AlgoliaCurrentRefinements')
 
     const customTransformItems = (items) => {
-        return items.map(item => {
+        return items.map((item) => {
             if (item.attribute === 'price.USD') {
                 return {
                     ...item,

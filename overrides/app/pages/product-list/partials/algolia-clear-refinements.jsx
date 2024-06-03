@@ -7,7 +7,7 @@
 import React from 'react'
 import {Box, Button, Link} from '@chakra-ui/react'
 import {FormattedMessage} from 'react-intl'
-import {useClearRefinements} from 'react-instantsearch-hooks'
+import {useClearRefinements} from 'react-instantsearch-core'
 import PropTypes from 'prop-types'
 
 const AlgoliaClearRefinements = (props) => {

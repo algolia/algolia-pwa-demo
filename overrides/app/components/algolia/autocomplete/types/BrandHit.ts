@@ -1,4 +1,4 @@
-import { AutocompleteHit } from './AutocompleteHit';
+import {AutocompleteHit} from './AutocompleteHit'
 
 /**
  * Represents matching brands with label and count from product index.
@@ -9,13 +9,13 @@ import { AutocompleteHit } from './AutocompleteHit';
  * @property {number} count - The count of the brand.
  */
 type BrandRecord = {
-  label: string;
-  count: number;
-};
+    label: string
+    count: number
+}
 
 /**
  * Represents an Algolia hit for a brand record.
  *
  * @typedef {AutocompleteHit<BrandRecord>} BrandHit
  */
-export type BrandHit = AutocompleteHit<BrandRecord>;
+export type BrandHit = AutocompleteHit<BrandRecord>

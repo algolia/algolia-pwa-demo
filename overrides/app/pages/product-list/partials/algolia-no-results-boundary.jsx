@@ -5,7 +5,7 @@
  * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import React from 'react'
-import {useInstantSearch} from 'react-instantsearch-hooks'
+import {useInstantSearch} from 'react-instantsearch-core'
 import PropTypes from 'prop-types'
 
 const AlgoliaNoResultsBoundary = ({children, fallback}) => {

@@ -6,7 +6,7 @@
  */
 import React from 'react'
 import {Box, Text, Radio, RadioGroup, Stack} from '@chakra-ui/react'
-import {useNumericMenu} from 'react-instantsearch-hooks'
+import {useNumericMenu} from 'react-instantsearch-core'
 import PropTypes from 'prop-types'
 
 const AlgoliaRadioRefinements = (props) => {

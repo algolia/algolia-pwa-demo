@@ -7,7 +7,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {Link, ListItem, OrderedList} from '@chakra-ui/react'
-import {usePagination} from 'react-instantsearch-hooks-web'
+import {usePagination} from 'react-instantsearch'
 import {ChevronLeftIcon, ChevronRightIcon} from '../../../components/icons'
 
 const AlgoliaPagination = (props) => {

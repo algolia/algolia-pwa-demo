@@ -6,13 +6,11 @@
  * @returns {boolean} `true` if the environment is detached, `false` otherwise.
  */
 export function isDetached() {
-  if (typeof window === 'undefined') {
-    return false;
-  } else {
-    return window.matchMedia(
-      getComputedStyle(document.documentElement).getPropertyValue(
-        '--aa-detached-media-query'
-      )
-    ).matches;
-  }
+    if (typeof window === 'undefined') {
+        return false
+    } else {
+        return window.matchMedia(
+            getComputedStyle(document.documentElement).getPropertyValue('--aa-detached-media-query')
+        ).matches
+    }
 }

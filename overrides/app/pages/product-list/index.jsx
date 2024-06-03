@@ -75,7 +75,7 @@ import {useCurrency} from '@salesforce/retail-react-app/app/hooks'
 
 // Algolia
 import algoliasearch from 'algoliasearch/lite'
-import {Configure, InstantSearch, Index, Hits} from 'react-instantsearch-hooks-web'
+import {Configure, InstantSearch, Index, Hits} from 'react-instantsearch'
 import ProductTile from '../../components/algolia-product-tile'
 import AlgoliaHits from './partials/algolia-hits'
 import AlgoliaCurrentRefinements from './partials/algolia-current-refinements'
@@ -89,7 +89,7 @@ import AlgoliaSortBy from './partials/algolia-sort-by'
 import AlgoliaClearRefinements from './partials/algolia-clear-refinements'
 import AlgoliaUiStateProvider from './partials/algolia-uistate-provider'
 import SearchTabHeader from './partials/search-tab-header'
-import { Tabs, TabPanels, TabPanel } from '@chakra-ui/react'
+import {Tabs, TabPanels, TabPanel} from '@chakra-ui/react'
 import AlgoliaHitsContent from './partials/algolia-hits-content'
 import AlgoliaHitsProducts from './partials/algolia-hits-products'
 
@@ -140,12 +140,7 @@ const ProductList = (props) => {
         `__primary_category.2`
     ]
 
-    const currentRefinementAttributes = [
-        'size',
-        'color',
-        'price.USD',
-        '__primary_category.0'
-    ]
+    const currentRefinementAttributes = ['size', 'color', 'price.USD', '__primary_category.0']
 
     const filterEls = (
         <>
@@ -157,7 +152,7 @@ const ProductList = (props) => {
             <AlgoliaSizeRefinements attribute="size" title="Size" />
             <AlgoliaRangeRefinements attribute="price.USD" title="Price" />
         </>
-    )    
+    )
 
     /**************** Page State ****************/
     const [filtersLoading, setFiltersLoading] = useState(false)
@@ -391,15 +386,22 @@ const ProductList = (props) => {
                 insights={true}
             >
                 <Tabs>
-                    {
-                        isSearch &&
-                        <SearchTabHeader isLoading={isLoading} contentHitsCount={contentHitsCount}/>
-                    }
+                    {isSearch && (
+                        <SearchTabHeader
+                            isLoading={isLoading}
+                            contentHitsCount={contentHitsCount}
+                        />
+                    )}
                     <TabPanels>
                         <TabPanel>
                             <Configure query={query} filters={filters} />
                             <AlgoliaNoResultsBoundary
-                                fallback={<EmptySearchResults searchQuery={searchQuery} category={category} />}
+                                fallback={
+                                    <EmptySearchResults
+                                        searchQuery={searchQuery}
+                                        category={category}
+                                    />
+                                }
                             >
                                 <>
                                     {/* Header */}
@@ -418,7 +420,12 @@ const ProductList = (props) => {
                                                 searchQuery={searchQuery}
                                             />
                                         </Flex>
-                                        <Flex flex={1} paddingTop={'45px'} alignItems="center" gap="3">
+                                        <Flex
+                                            flex={1}
+                                            paddingTop={'45px'}
+                                            alignItems="center"
+                                            gap="3"
+                                        >
                                             <AlgoliaCurrentRefinements
                                                 includedAttributes={currentRefinementAttributes}
                                             />
@@ -481,7 +488,10 @@ const ProductList = (props) => {
                                     </HideOnDesktop>
 
                                     {/* Body  */}
-                                    <Grid templateColumns={{base: '1fr', md: '290px 1fr'}} columnGap={6}>
+                                    <Grid
+                                        templateColumns={{base: '1fr', md: '290px 1fr'}}
+                                        columnGap={6}
+                                    >
                                         <Stack
                                             display={{base: 'none', md: 'flex'}}
                                             spacing="6"
@@ -511,7 +521,9 @@ const ProductList = (props) => {
                                                 justifyContent={['center', 'center', 'flex-start']}
                                                 paddingTop={16}
                                             >
-                                                <AlgoliaPagination onPageChange={() => window.scrollTo(0, 0)} />
+                                                <AlgoliaPagination
+                                                    onPageChange={() => window.scrollTo(0, 0)}
+                                                />
                                             </Flex>
                                         </Box>
                                     </Grid>
@@ -525,7 +537,10 @@ const ProductList = (props) => {
                                 motionPreset="slideInBottom"
                                 scrollBehavior="inside"
                             >
-                                <AlgoliaUiStateProvider searchClient={searchClient} indexName={productIndexName}>
+                                <AlgoliaUiStateProvider
+                                    searchClient={searchClient}
+                                    indexName={productIndexName}
+                                >
                                     <ModalOverlay />
                                     <ModalContent top={0} marginTop={0}>
                                         <ModalHeader>
@@ -572,7 +587,10 @@ const ProductList = (props) => {
                         </TabPanel>
                         <TabPanel>
                             <Index indexName={contentIndexName}>
-                                <AlgoliaHitsContent isLoading={isLoading} setContentHitsCount={setContentHitsCount}/>
+                                <AlgoliaHitsContent
+                                    isLoading={isLoading}
+                                    setContentHitsCount={setContentHitsCount}
+                                />
                             </Index>
                         </TabPanel>
                     </TabPanels>

@@ -15,7 +15,7 @@ import {
 } from '@chakra-ui/react'
 import {useIntl} from 'react-intl'
 import {useCurrency} from '@salesforce/retail-react-app/app/hooks'
-import {useConnector} from 'react-instantsearch-hooks-web'
+import {useConnector} from 'react-instantsearch'
 import connectRange from 'instantsearch.js/es/connectors/range/connectRange'
 import AlgoliaRefinementsContainer from './algolia-refinements-container'
 import PropTypes from 'prop-types'

@@ -14,15 +14,13 @@ import {useIntl} from 'react-intl'
 // Project Components
 import Breadcrumb from '@salesforce/retail-react-app/app/components/breadcrumb'
 
-// Algolia
-import {useHits, useInstantSearch} from 'react-instantsearch-hooks-web'
+import {useHits, useInstantSearch} from 'react-instantsearch'
 
 const PageHeader = ({category, productSearchResult, isLoading, searchQuery, ...otherProps}) => {
     const intl = useIntl()
     const {results} = useHits()
     const {status} = useInstantSearch()
     const isReady = !isLoading && ['stalled', 'idle'].includes(status)
-
 
     return (
         <Box {...otherProps} data-testid="sf-product-list-breadcrumb">
@@ -34,12 +32,11 @@ const PageHeader = ({category, productSearchResult, isLoading, searchQuery, ...o
                 <Heading as="h2" size="lg" marginRight={2}>
                     {`${category?.name || searchQuery || 'All'}`}
                 </Heading>
-                {
-                    !searchQuery &&
+                {!searchQuery && (
                     <Heading as="h2" size="lg" marginRight={2}>
                         {isReady && <Fade in={true}>({intl.formatNumber(results.nbHits)})</Fade>}
                     </Heading>
-                }
+                )}
             </Flex>
         </Box>
     )

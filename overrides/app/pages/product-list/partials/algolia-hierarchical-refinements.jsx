@@ -6,7 +6,7 @@
  */
 import React from 'react'
 import {Box, useMultiStyleConfig} from '@chakra-ui/react'
-import {HierarchicalMenu} from 'react-instantsearch-hooks-web'
+import {HierarchicalMenu} from 'react-instantsearch'
 import AlgoliaRefinementsContainer from './algolia-refinements-container'
 import PropTypes from 'prop-types'
 

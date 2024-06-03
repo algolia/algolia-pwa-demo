@@ -6,18 +6,18 @@
  */
 import {useLayoutEffect} from 'react'
 import {createInsightsMiddleware} from 'instantsearch.js/es/middlewares'
-import {useInstantSearch} from 'react-instantsearch-hooks-web'
+import {useInstantSearch} from 'react-instantsearch'
 
 const AlgoliaInsights = () => {
-    const {use} = useInstantSearch()
+    const {addMiddlewares} = useInstantSearch()
 
     useLayoutEffect(() => {
         const middleware = createInsightsMiddleware({
             insightsClient: window.aa
         })
 
-        return use(middleware)
-    }, [use])
+        return addMiddlewares(middleware);
+    }, [addMiddlewares])
 
     return null
 }

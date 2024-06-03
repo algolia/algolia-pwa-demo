@@ -26,7 +26,6 @@ const contactUsMessage = defineMessage({
 })
 
 const EmptySearchResults = ({searchQuery, category}) => {
-
     const intl = useIntl()
     return (
         <Flex
