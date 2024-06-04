@@ -45,7 +45,7 @@ export const productsPluginFactory = (navigate, currency) => ({
                     })
                 },
                 onSelect({setIsOpen}) {
-                    setIsOpen(true)
+                    setIsOpen(false)
                 },
                 renderer: {createElement, Fragment, render: () => {}},
                 templates: {

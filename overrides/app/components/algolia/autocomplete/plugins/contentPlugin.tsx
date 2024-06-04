@@ -62,8 +62,7 @@ export const contentPlugin: AutocompletePlugin<ContentHit, {}> = {
                             state.context.nbContent > 2 && (
                                 <div style={{textAlign: 'center'}}>
                                     <a
-                                        href="https://example.org/"
-                                        target="_blank"
+                                        href={`/search?q=${state.query}&tab=articles`}
                                         rel="noreferrer noopener"
                                         className="aa-SeeAllLink"
                                     >
@@ -99,7 +98,7 @@ type ContentItemProps = {
  */
 function ContentItem({hit}: ContentItemProps) {
     return (
-        <a key={hit.objectID} href="#" className="aa-ItemLink aa-ContentItem">
+        <a key={hit.objectID} href="https://support.algolia.com/hc/en-us" target="_blank" className="aa-ItemLink aa-ContentItem">
             <div className="aa-ItemContent">
                 <div className="aa-ItemPicture">
                     {hit.image ? <img src={hit.image} alt={hit.name} /> : <InfoIcon />}

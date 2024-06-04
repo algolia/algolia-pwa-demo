@@ -23,6 +23,7 @@ import {recentSearchesPlugin} from './plugins/recentSearchesPlugin'
 import {contentPlugin} from './plugins/contentPlugin'
 import {brandsPlugin} from './plugins/brandsPlugin'
 import {cx, hasSourceActiveItem, isDetached} from './utils'
+import { createLocalStorageRecentSearchesPlugin } from '@algolia/autocomplete-plugin-recent-searches';
 
 import '@algolia/autocomplete-theme-classic'
 import './style.css'
@@ -100,6 +101,21 @@ export function Autocomplete({navigate, currency}) {
         }
 
         let rootRef
+
+
+        const recentSearchesPlugin = createLocalStorageRecentSearchesPlugin({
+            key: 'pwa-recent-searches',
+            limit: 5,
+            transformSource({ source, onTapAheadItem }) {
+                return {
+                    ...source,
+                    onSelect({ item }) {
+                        navigate(`/search?q=${item.label}`);
+                    },
+                };
+            },
+        });
+
 
         const search = autocomplete({
             container: containerRef.current,

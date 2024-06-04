@@ -137,14 +137,18 @@ type QuickAccessItemProps = {
  * @returns {React.ReactElement} The QuickAccessItem component.
  */
 function QuickAccessItem({hit, navigate}: QuickAccessItemProps) {
-    function handleClick(ref) {
-        navigate(ref)
+    function handleClick(selectedHit) {
+        if(selectedHit.template === "help"){
+            window.open(selectedHit.href, '_blank');
+        }else{
+            navigate(selectedHit.href)
+        }
     }
 
     return (
         <a
             key={hash(hit.title)}
-            onClick={() => handleClick(hit.href)}
+            onClick={() => handleClick(hit)}
             className={cx('aa-ItemLink aa-QuickAccessItem', `aa-QuickAccessItem--${hit.template}`)}
         >
             <div className="aa-ItemContent">

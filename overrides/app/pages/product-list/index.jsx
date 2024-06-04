@@ -385,7 +385,8 @@ const ProductList = (props) => {
                 routing
                 insights={true}
             >
-                <Tabs>
+
+                <Tabs defaultIndex={urlParams.get('tab') === "articles" ? 1 : 0}>
                     {isSearch && (
                         <SearchTabHeader
                             isLoading={isLoading}
@@ -521,10 +522,12 @@ const ProductList = (props) => {
                                                 justifyContent={['center', 'center', 'flex-start']}
                                                 paddingTop={16}
                                             >
+
                                                 <AlgoliaPagination
                                                     onPageChange={() => window.scrollTo(0, 0)}
                                                 />
                                             </Flex>
+
                                         </Box>
                                     </Grid>
                                 </>
