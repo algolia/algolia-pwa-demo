@@ -30,7 +30,6 @@ module.exports = {
             appId: '4ISNL568WT',
             apiKey: 'f493f30ee56ca33cf59bac5d3a8fd791',
             indices: {
-                products: 'pwa__products__en_GB',
                 querySuggestions: 'pwa__products__en_GB_query_suggestions',
                 contents: 'pwa__contents__en_GB',
                 faq: 'pwa__contents__en_GB',

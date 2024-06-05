@@ -1,6 +1,6 @@
 import config from '../../../../../config/default'
 
-export const ALGOLIA_PRODUCTS_INDEX_NAME = config.app.algolia.indices.products
+export const ALGOLIA_PRODUCTS_INDEX_NAME = config.app.algolia.indices.primary.value
 export const ALGOLIA_PRODUCTS_QUERY_SUGGESTIONS_INDEX_NAME =
     config.app.algolia.indices.querySuggestions
 export const ALGOLIA_CONTENT_INDEX_NAME = config.app.algolia.indices.contents
