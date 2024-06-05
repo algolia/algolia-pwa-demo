@@ -69,7 +69,10 @@ export const productsPluginFactory = (navigate, currency) => ({
                             />
                         )
                     },
-                    footer({state}) {
+                    footer({state, setIsOpen}) {
+                        console.log('setIsOpen', setIsOpen)
+                        console.log('state', state)
+                        state.isOpen = false
                         return (
                             state.context.nbProducts > 4 && (
                                 <div style={{textAlign: 'center'}}>

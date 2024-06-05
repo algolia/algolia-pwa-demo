@@ -153,6 +153,9 @@ export function Autocomplete({navigate, currency}) {
                     return source.getItems().length === 0
                 })
 
+                document.addEventListener('click', handleClicks)
+
+
                 return [
                     combine(recentSearches, querySuggestions, categories, brands, faq),
                     [
@@ -183,6 +186,14 @@ export function Autocomplete({navigate, currency}) {
                 navigate('/search?q=' + e.target.value)
             }
         }
+
+        const handleClicks = (e) => {
+            if (e.target.className.indexOf('aa-SeeAllBtn') > -1) {
+                search.setIsOpen(false)
+            }
+        }
+
+        document.addEventListener('click', handleClicks)
 
         document.addEventListener('keydown', handleKeyDown)
 
