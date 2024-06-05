@@ -2,7 +2,7 @@ import {useHits, useInstantSearch} from 'react-instantsearch'
 import {Box, Fade} from '@salesforce/retail-react-app/app/components/shared/ui'
 import React from 'react'
 import {useIntl} from 'react-intl'
-import {Tabs, TabList, TabPanels, Tab, TabPanel} from '@chakra-ui/react'
+import {TabList, Tab} from '@chakra-ui/react'
 
 const SearchTabHeader = ({isLoading, contentHitsCount}) => {
     const intl = useIntl()
