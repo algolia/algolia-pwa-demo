@@ -8,7 +8,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {Link, ListItem, OrderedList} from '@chakra-ui/react'
 import {usePagination} from 'react-instantsearch'
-import {ChevronLeftIcon, ChevronRightIcon} from '../../../components/icons'
+import {ChevronLeftIcon, ChevronRightIcon} from '@salesforce/retail-react-app/app/components/icons'
 
 const AlgoliaPagination = (props) => {
     const {onPageChange, ...rest} = props

@@ -13,7 +13,7 @@
 
 import React, {useState} from 'react'
 import PropTypes from 'prop-types'
-import {HeartIcon, HeartSolidIcon} from '../icons'
+import {HeartIcon, HeartSolidIcon} from '@salesforce/retail-react-app/app/components/icons'
 
 // Components
 import {
