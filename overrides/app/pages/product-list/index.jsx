@@ -76,8 +76,6 @@ import {useCurrency} from '@salesforce/retail-react-app/app/hooks'
 // Algolia
 import algoliasearch from 'algoliasearch/lite'
 import {Configure, InstantSearch, Index, Hits} from 'react-instantsearch'
-import ProductTile from '../../components/algolia-product-tile'
-import AlgoliaHits from './partials/algolia-hits'
 import AlgoliaCurrentRefinements from './partials/algolia-current-refinements'
 import AlgoliaHierarchicalRefinements from './partials/algolia-hierarchical-refinements'
 import AlgoliaColorRefinements from './partials/algolia-color-refinements'
