@@ -21,7 +21,7 @@ const fallback = <Skeleton height="75vh" width="100%" />
 const Home = loadable(() => import('./pages/home'), {fallback})
 const MyNewRoute = loadable(() => import('./pages/my-new-route'))
 
-const ProductList = loadable(() => import('./pages/product-list'), {
+const ProductList = loadable(() => import('./pages/algolia-product-list'), {
     fallback
 })
 
