@@ -26,6 +26,7 @@ import {
     IconButton
 } from '@chakra-ui/react'
 import DynamicImage from '../dynamic-image'
+import AlgoliaProductColors from "../algolia-product-colors/index";
 
 // Hooks
 import {useIntl} from 'react-intl'
@@ -74,6 +75,8 @@ const ProductTile = (props) => {
         isFavourite,
         onFavouriteToggle,
         dynamicImageProps,
+        selectedColors,
+        setSelectedColors,
         ...rest
     } = props
     // ProductTile is used by two components, RecommendedProducts and ProductList.
@@ -111,7 +114,7 @@ const ProductTile = (props) => {
             <Box {...styles.imageWrapper}>
                 <AspectRatio {...styles.image}>
                     <DynamicImage
-                        src={`${imageUrl}[?sw={width}&q=60]`}
+                        src={`${selectedColors[product.masterID] ? selectedColors[product.masterID] : imageUrl}[?sw={width}&q=60]`}
                         widths={dynamicImageProps?.widths}
                         imageProps={{
                             alt: imageAlt,
@@ -160,6 +163,8 @@ const ProductTile = (props) => {
                     })}
                 </Text>
             </Box>
+
+            <AlgoliaProductColors product={product} selectedColors={selectedColors} setSelectedColors={setSelectedColors}/>
         </Link>
     )
 }
