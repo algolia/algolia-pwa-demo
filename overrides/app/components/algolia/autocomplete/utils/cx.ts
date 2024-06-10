@@ -12,8 +12,6 @@
  * // Returns "class1 class3" (ignores false and undefined)
  * cx('class1', false, 'class2', undefined, 'class3');
  */
-export function cx(
-  ...classNames: Array<string | number | boolean | undefined | null>
-) {
-  return classNames.filter(Boolean).join(' ');
+export function cx(...classNames: Array<string | number | boolean | undefined | null>) {
+    return classNames.filter(Boolean).join(' ')
 }

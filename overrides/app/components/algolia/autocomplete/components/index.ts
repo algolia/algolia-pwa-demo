@@ -1,2 +1,2 @@
-export * from './Icons';
-export * from './Breadcrumb';
+export * from './Icons'
+export * from './Breadcrumb'

@@ -19,7 +19,9 @@ const fallback = <Skeleton height="75vh" width="100%" />
 // Create your pages here and add them to the routes array
 // Use loadable to split code into smaller js chunks
 const Home = loadable(() => import('./pages/home'), {fallback})
-const MyNewRoute = loadable(() => import('./pages/my-new-route'))
+const ProductList = loadable(() => import('./pages/algolia-product-list'), {
+    fallback
+})
 
 const routes = [
     {
@@ -28,8 +30,12 @@ const routes = [
         exact: true
     },
     {
-        path: '/my-new-route',
-        component: MyNewRoute
+        path: '/search',
+        component: ProductList
+    },
+    {
+        path: '/category/:categoryId',
+        component: ProductList
     },
     ..._routes
 ]

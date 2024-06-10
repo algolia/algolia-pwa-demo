@@ -5,24 +5,25 @@
  * For further customization, refer to the Algolia documentation: https://www.algolia.com/doc/ui-libraries/autocomplete/guides/creating-a-multi-column-layout/
  */
 
-import React, { createElement, Fragment, useEffect, useRef } from 'react'
-import { createRoot } from 'react-dom/client'
-import { autocomplete } from '@algolia/autocomplete-js'
+import React, {createElement, Fragment, useEffect, useRef} from 'react'
+import {createRoot} from 'react-dom/client'
+import {autocomplete} from '@algolia/autocomplete-js'
 import PropTypes from 'prop-types'
-import { pipe } from 'ramda'
+import {pipe} from 'ramda'
 
-import { createFillWith, uniqBy } from './functions'
-import { categoriesPlugin } from './plugins/categoriesPlugin'
-import { faqPlugin } from './plugins/faqPlugin'
-import { popularCategoriesPlugin } from './plugins/popularCategoriesPlugin'
-import { popularPlugin } from './plugins/popularPlugin'
-import { productsPluginFactory } from './plugins/productsPlugin'
-import { querySuggestionsPlugin } from './plugins/querySuggestionsPlugin'
-import { quickAccessPluginFactory } from './plugins/quickAccessPlugin'
-import { recentSearchesPlugin } from './plugins/recentSearchesPlugin'
-import { contentPlugin } from './plugins/contentPlugin'
-import { brandsPlugin } from './plugins/brandsPlugin'
-import { cx, hasSourceActiveItem, isDetached } from './utils'
+import {createFillWith, uniqBy} from './functions'
+import {categoriesPlugin} from './plugins/categoriesPlugin'
+import {faqPlugin} from './plugins/faqPlugin'
+import {popularCategoriesPlugin} from './plugins/popularCategoriesPlugin'
+import {popularPlugin} from './plugins/popularPlugin'
+import {productsPluginFactory} from './plugins/productsPlugin'
+import {querySuggestionsPlugin} from './plugins/querySuggestionsPlugin'
+import {quickAccessPluginFactory} from './plugins/quickAccessPlugin'
+import {recentSearchesPlugin} from './plugins/recentSearchesPlugin'
+import {contentPlugin} from './plugins/contentPlugin'
+import {brandsPlugin} from './plugins/brandsPlugin'
+import {cx, hasSourceActiveItem, isDetached} from './utils'
+import { createLocalStorageRecentSearchesPlugin } from '@algolia/autocomplete-plugin-recent-searches';
 
 import '@algolia/autocomplete-theme-classic'
 import './style.css'
@@ -68,22 +69,27 @@ const combine = pipe(removeDuplicates, fillWith)
  * @param {Function} props.navigate - Navigation function to handle redirection.
  * @param {Object} props.currency - Currency information for pricing display in product searches.
  * @returns {JSX.Element} - The rendered autocomplete container.
- */   
+ */
 export function Autocomplete({navigate, currency}) {
     const containerRef = useRef(null)
 
     /** Demo purposed. Feel free to remove this part for your implementation */
     /*********************************************************************** */
     const defaultSearches = [
-        {"id":"t-shirt","label":"t-shirt"},
-        {"id":"necklace","label":"necklace"},
-        {"id":"top","label":"top"},
+        {id: 't-shirt', label: 't-shirt'},
+        {id: 'necklace', label: 'necklace'},
+        {id: 'top', label: 'top'}
     ]
 
     if (typeof window !== 'undefined') {
-        let recentSearches = JSON.parse(window.localStorage.getItem(`AUTOCOMPLETE_RECENT_SEARCHES:pwa-recent-searches`))
-        if(!recentSearches) {
-            window.localStorage.setItem(`AUTOCOMPLETE_RECENT_SEARCHES:pwa-recent-searches`, JSON.stringify(defaultSearches))
+        let recentSearches = JSON.parse(
+            window.localStorage.getItem(`AUTOCOMPLETE_RECENT_SEARCHES:pwa-recent-searches`)
+        )
+        if (!recentSearches) {
+            window.localStorage.setItem(
+                `AUTOCOMPLETE_RECENT_SEARCHES:pwa-recent-searches`,
+                JSON.stringify(defaultSearches)
+            )
         }
     }
     /*********************************************************************** */
@@ -95,6 +101,21 @@ export function Autocomplete({navigate, currency}) {
         }
 
         let rootRef
+
+
+        const recentSearchesPlugin = createLocalStorageRecentSearchesPlugin({
+            key: 'pwa-recent-searches',
+            limit: 5,
+            transformSource({ source, onTapAheadItem }) {
+                return {
+                    ...source,
+                    onSelect({ item }) {
+                        navigate(`/search?q=${item.label}`);
+                    },
+                };
+            },
+        });
+
 
         const search = autocomplete({
             container: containerRef.current,
@@ -110,7 +131,7 @@ export function Autocomplete({navigate, currency}) {
                 contentPlugin,
                 popularPlugin,
                 quickAccessPluginFactory(navigate),
-                popularCategoriesPlugin
+                popularCategoriesPlugin(navigate)
             ],
             reshape({sourcesBySourceId, sources, state}) {
                 const {
@@ -131,6 +152,9 @@ export function Autocomplete({navigate, currency}) {
                     }
                     return source.getItems().length === 0
                 })
+
+                document.addEventListener('click', handleClicks)
+
 
                 return [
                     combine(recentSearches, querySuggestions, categories, brands, faq),
@@ -157,8 +181,27 @@ export function Autocomplete({navigate, currency}) {
             }
         })
 
-        return () => search.destroy()
-    }, [navigate, currency])
+        const handleKeyDown = (e) => {
+            if (e.key === 'Enter' && e.target.id.indexOf('autocomplete-') > -1) {
+                navigate('/search?q=' + e.target.value)
+            }
+        }
+
+        const handleClicks = (e) => {
+            if (e.target.className.indexOf('aa-SeeAllBtn') > -1) {
+                search.setIsOpen(false)
+            }
+        }
+
+        document.addEventListener('click', handleClicks)
+
+        document.addEventListener('keydown', handleKeyDown)
+
+        return () => {
+            search.destroy()
+            document.removeEventListener('keypress', handleKeyDown)
+        }
+    }, [])
 
     return <div ref={containerRef} className="autocomplete-container"></div>
 }
@@ -207,21 +250,59 @@ function AutocompletePanel(props) {
                                 {recentSearches}
                             </Fragment>
                         )) ||
-                        (props.state.query && (
-                            <Fragment>
-                                <div className="aa-SourceHeader">
-                                    <span className="aa-SourceHeaderTitle">Suggestions</span>
-                                    <div className="aa-SourceHeaderLine" />
-                                </div>
+                        (props.state.query &&
+                        (recentSearches || querySuggestions || categories || brands || faq) ? (
+                            <>
+                                {recentSearches && (
+                                    <Fragment>
+                                        <div className="aa-SourceHeader">
+                                            <span className="aa-SourceHeaderTitle">
+                                                Recent Searches
+                                            </span>
+                                            <div className="aa-SourceHeaderLine" />
+                                        </div>
 
-                                <div className="aa-PanelSectionSources">
-                                    {recentSearches}
-                                    {querySuggestions}
-                                    {categories}
-                                    {brands}
-                                    {faq}
-                                </div>
-                            </Fragment>
+                                        <div className="aa-PanelSectionSources">
+                                            {recentSearches}
+                                        </div>
+                                    </Fragment>
+                                )}
+
+                                {querySuggestions && (
+                                    <Fragment>
+                                        <div className="aa-SourceHeader">
+                                            <span className="aa-SourceHeaderTitle">
+                                                Popular Searches
+                                            </span>
+                                            <div className="aa-SourceHeaderLine" />
+                                        </div>
+
+                                        <div className="aa-PanelSectionSources">
+                                            {querySuggestions}
+                                        </div>
+                                    </Fragment>
+                                )}
+
+                                {(brands || categories) && (
+                                    <Fragment>
+                                        <div className="aa-SourceHeader">
+                                            <span className="aa-SourceHeaderTitle">
+                                                Popular Brands
+                                            </span>
+                                            <div className="aa-SourceHeaderLine" />
+                                        </div>
+
+                                        <div className="aa-PanelSectionSources">
+                                            {brands}
+                                            {categories}
+                                        </div>
+                                    </Fragment>
+                                )}
+                            </>
+                        ) : (
+                            <div className="aa-NoResultsAdvices">
+                                There is no suggestions for your search
+                            </div>
                         ))
                     ) : (
                         <div className="aa-NoResultsAdvices">
@@ -229,7 +310,7 @@ function AutocompletePanel(props) {
                                 <li>Double-check your spelling</li>
                                 <li>Use fewer keywords</li>
                                 <li>Search for a less specific item</li>
-                                <li>Try navigate using on the of the popular categories</li>
+                                <li>Check out popular categories for inspiration</li>
                             </ul>
                         </div>
                     )}

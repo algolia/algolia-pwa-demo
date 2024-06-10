@@ -1,8 +1,5 @@
-import {
-  AutocompleteReshapeSource,
-  BaseItem,
-} from '@algolia/autocomplete-core';
-import { flatten } from '@algolia/autocomplete-shared';
+import {AutocompleteReshapeSource, BaseItem} from '@algolia/autocomplete-core'
+import {flatten} from '@algolia/autocomplete-shared'
 
 /**
  * Normalizes and reshapes the sources. It filters out falsy values because dynamic sources may not exist at every render.
@@ -13,7 +10,7 @@ import { flatten } from '@algolia/autocomplete-shared';
  * @returns {Array<AutocompleteReshapeSource<TItem>>} The normalized and reshaped sources.
  */
 export function normalizeReshapeSources<TItem extends BaseItem>(
-  sources: Array<AutocompleteReshapeSource<TItem>>
+    sources: Array<AutocompleteReshapeSource<TItem>>
 ) {
-  return flatten(sources).filter(Boolean);
+    return flatten(sources).filter(Boolean)
 }

@@ -59,6 +59,9 @@
     "@algolia/autocomplete-plugin-recent-searches": "1.17.0",
     "@algolia/autocomplete-theme-classic": "1.17.0",
     "algoliasearch": "4.23.3",
-    "ramda": "0.29.1"
+    "prop-types": "^15.8.1",
+    "ramda": "0.29.1",
+    "react-instantsearch": "^7.10.0",
+    "react-instantsearch-core": "^7.10.0"
   }
 }

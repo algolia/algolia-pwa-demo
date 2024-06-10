@@ -7,9 +7,9 @@
  * @returns {boolean} `true` if the device is a touch device, `false` otherwise.
  */
 export function isTouchDevice() {
-  if (window) {
-    return 'ontouchstart' in window;
-  } else {
-    return false;
-  }
+    if (window) {
+        return 'ontouchstart' in window
+    } else {
+        return false
+    }
 }

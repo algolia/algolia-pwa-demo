@@ -30,12 +30,25 @@ module.exports = {
             appId: '4ISNL568WT',
             apiKey: 'f493f30ee56ca33cf59bac5d3a8fd791',
             indices: {
-                products: 'pwa__products__en_GB',
                 querySuggestions: 'pwa__products__en_GB_query_suggestions',
                 contents: 'pwa__contents__en_GB',
                 faq: 'pwa__contents__en_GB',
-                categories: 'pwa__categories__en_GB'
-            }
+                categories: 'pwa__categories__en_GB',
+                primary: {
+                    label: 'Sort By: Best Matches',
+                    value: 'pwa__products__en_GB'
+                },
+                replicas: [
+                    {
+                        label: 'Sort By: Price Low to High',
+                        value: 'pwa__products__en_GB_price_asc'
+                    },
+                    {
+                        label: 'Sort By: Price High to Low',
+                        value: 'pwa__products__en_GB_price_desc'
+                    }
+                ]
+            },
         },
         // Commerce api config
         commerceAPI: {
