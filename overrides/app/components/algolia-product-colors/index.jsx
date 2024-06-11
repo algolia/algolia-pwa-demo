@@ -4,12 +4,19 @@
  * SPDX-License-Identifier: BSD-3-Clause
  * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import React from "react";
+import React, { useState } from "react";
 import { Box, HStack, Button, Center, useMultiStyleConfig, Flex } from "@chakra-ui/react";
 import { cssColorGroups } from "../../constants";
+import {productUrlBuilder} from '@salesforce/retail-react-app/app/utils/url'
+import Link from "@salesforce/retail-react-app/app/components/link";
+import { useIntl } from "react-intl";
 
 const AlgoliaProductColors = (props) => {
-  const { product, setSelectedColors, selectedColors } = props;
+  const { product, setSelectedColors, selectedColors, setProductUrl, productUrl } = props;
+
+  //define hook and state for url
+  const intl = useIntl();
+
   const styles = useMultiStyleConfig("SwatchGroup", {
     variant: "circle",
     disabled: false
@@ -33,12 +40,17 @@ const AlgoliaProductColors = (props) => {
   return (
     <>
       {
-        (colorVariations && colorVariations.length>1) &&
+        (colorVariations && colorVariations.length) &&
         <HStack spacing='5px' mt={1}>
           {colorVariations.map((variant, idx) => {
             const lcLabel = variant.color.toLowerCase().replace(/\s/g, "").replace(/&/g, "and");
             return (
               <Box key={idx} onMouseOver={() => handleSetSelectedColors(variant)}>
+                <Link
+                  data-testid="product-tile"
+                  {...styles.container}
+                  to={productUrlBuilder({id: variant.variantID}, intl.local)}
+                >
                 <HStack cursor="pointer">
                   <Button
                     {...styles.swatch}
@@ -70,10 +82,12 @@ const AlgoliaProductColors = (props) => {
                     </Center>
                   </Button>
                 </HStack>
+                </Link>
               </Box>
             );
           })}
         </HStack>
+
       }
     </>
   );

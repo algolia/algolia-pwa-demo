@@ -85,6 +85,8 @@ const ProductTile = (props) => {
     // use the `name` property.
     const localizedProductName = product.name ?? product.productName
 
+    const [url, setProductUrl] = useState(productUrlBuilder({id: product.objectID}, intl.local));
+
     const [isFavouriteLoading, setFavouriteLoading] = useState(false)
     const styles = useMultiStyleConfig('ProductTile')
 
@@ -105,10 +107,11 @@ const ProductTile = (props) => {
     const {currency: activeCurrency} = useCurrency()
 
     return (
+        <Box>
         <Link
             data-testid="product-tile"
             {...styles.container}
-            to={productUrlBuilder({id: product.objectID}, intl.local)}
+            to={url}
             {...rest}
         >
             <Box {...styles.imageWrapper}>
@@ -163,9 +166,9 @@ const ProductTile = (props) => {
                     })}
                 </Text>
             </Box>
-
-            <AlgoliaProductColors product={product} selectedColors={selectedColors} setSelectedColors={setSelectedColors}/>
         </Link>
+        <AlgoliaProductColors product={product} selectedColors={selectedColors} setSelectedColors={setSelectedColors} setProductUrl={setProductUrl} productUrl={url}/>
+        </Box>
     )
 }
 
