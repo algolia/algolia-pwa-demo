@@ -6,13 +6,13 @@
  */
 import React, { useState } from "react";
 import { Box, HStack, Button, Center, useMultiStyleConfig, Flex } from "@chakra-ui/react";
-import { cssColorGroups } from "../../constants";
-import {productUrlBuilder} from '@salesforce/retail-react-app/app/utils/url'
+import { cssColorGroups } from "../../../constants";
+import {productUrlBuilder, rebuildPathWithParams} from '@salesforce/retail-react-app/app/utils/url'
 import Link from "@salesforce/retail-react-app/app/components/link";
 import { useIntl } from "react-intl";
 
 const AlgoliaProductColors = (props) => {
-  const { product, setSelectedColors, selectedColors, setProductUrl, productUrl } = props;
+  const { product, setSelectedColors, selectedColors } = props;
 
   //define hook and state for url
   const intl = useIntl();
@@ -37,6 +37,11 @@ const AlgoliaProductColors = (props) => {
     }
   };
 
+  const linkBuilder = (product, variant) => {
+    const path = productUrlBuilder({ id: product.masterID }, intl.local);
+    return rebuildPathWithParams(path,  {color: variant.colorCode} );
+  };
+
   return (
     <>
       {
@@ -49,7 +54,7 @@ const AlgoliaProductColors = (props) => {
                 <Link
                   data-testid="product-tile"
                   {...styles.container}
-                  to={productUrlBuilder({id: variant.variantID}, intl.local)}
+                  to={linkBuilder(product, variant)}
                 >
                 <HStack cursor="pointer">
                   <Button

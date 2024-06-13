@@ -26,7 +26,7 @@ import {
     IconButton
 } from '@chakra-ui/react'
 import DynamicImage from '../dynamic-image'
-import AlgoliaProductColors from "../algolia-product-colors/index";
+import AlgoliaProductColors from "../../pages/algolia-product-list/partials/algolia-product-colors";
 
 // Hooks
 import {useIntl} from 'react-intl'
@@ -85,8 +85,6 @@ const ProductTile = (props) => {
     // use the `name` property.
     const localizedProductName = product.name ?? product.productName
 
-    const [url, setProductUrl] = useState(productUrlBuilder({id: product.objectID}, intl.local));
-
     const [isFavouriteLoading, setFavouriteLoading] = useState(false)
     const styles = useMultiStyleConfig('ProductTile')
 
@@ -111,7 +109,7 @@ const ProductTile = (props) => {
         <Link
             data-testid="product-tile"
             {...styles.container}
-            to={url}
+            to={productUrlBuilder({id: product.objectID}, intl.local)}
             {...rest}
         >
             <Box {...styles.imageWrapper}>
@@ -167,7 +165,7 @@ const ProductTile = (props) => {
                 </Text>
             </Box>
         </Link>
-        <AlgoliaProductColors product={product} selectedColors={selectedColors} setSelectedColors={setSelectedColors} setProductUrl={setProductUrl} productUrl={url}/>
+        <AlgoliaProductColors product={product} selectedColors={selectedColors} setSelectedColors={setSelectedColors}/>
         </Box>
     )
 }
