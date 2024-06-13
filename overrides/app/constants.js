@@ -87,6 +87,7 @@ export const cssColorGroups = {
     silverox: '#c0c0c0',
     hematite: 'linear-gradient(to right, #2c3e50, #36454f)',
     linenwhite: '#f9f9f9',
-    sundriedcoral: '#f5a0ca',
+    sundriedcoral: '#FF7F50',
     bluestone: '#4089c0',
+    navysky: '#000080',
 }

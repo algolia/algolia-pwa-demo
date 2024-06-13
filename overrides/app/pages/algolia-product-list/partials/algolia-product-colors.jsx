@@ -10,6 +10,7 @@ import { cssColorGroups } from "../../../constants";
 import {productUrlBuilder, rebuildPathWithParams} from '@salesforce/retail-react-app/app/utils/url'
 import Link from "@salesforce/retail-react-app/app/components/link";
 import { useIntl } from "react-intl";
+import { slice } from "../../../../../config/sites";
 
 const AlgoliaProductColors = (props) => {
   const { product, setSelectedColors, selectedColors } = props;
@@ -42,12 +43,24 @@ const AlgoliaProductColors = (props) => {
     return rebuildPathWithParams(path,  {color: variant.colorCode} );
   };
 
+  //This function resort colorVariations and put product color first
+  const sortColorVariations = (colorVariations) => {
+
+    if (!colorVariations) return [];
+
+    const productColor = colorVariations.find((color) => color.color === product.color);
+    const otherColors = colorVariations.filter((color) => color.color !== product.color);
+    return [productColor, ...otherColors];
+  };
+
+  const [sortedColorVariations, setSortedColorVariations] = useState(sortColorVariations(colorVariations));
+
   return (
     <>
       {
         (colorVariations && colorVariations.length) &&
         <HStack spacing='5px' mt={1}>
-          {colorVariations.map((variant, idx) => {
+          {sortedColorVariations.map((variant, idx) => {
             const lcLabel = variant.color.toLowerCase().replace(/\s/g, "").replace(/&/g, "and");
             return (
               <Box key={idx} onMouseOver={() => handleSetSelectedColors(variant)}>
