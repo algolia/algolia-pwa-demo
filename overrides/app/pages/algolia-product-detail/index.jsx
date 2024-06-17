@@ -48,6 +48,9 @@ import {rebuildPathWithParams} from '@salesforce/retail-react-app/app/utils/url'
 import {useHistory, useLocation, useParams} from 'react-router-dom'
 import {useToast} from '@salesforce/retail-react-app/app/hooks/use-toast'
 import {useWishList} from '@salesforce/retail-react-app/app/hooks/use-wish-list'
+import FrequentlyBoughtTogether from '../../components/recommend/freqBoughtTogether'
+import RelatedProducts from '../../components/recommend/relatedProducts'
+import LookingSimilar from '../../components/recommend/lookingSimilar'
 
 const ProductDetail = () => {
     const {formatMessage} = useIntl()
@@ -60,6 +63,8 @@ const ProductDetail = () => {
     const [productSetSelection, setProductSetSelection] = useState({})
     const childProductRefs = React.useRef({})
     const customerId = useCustomerId()
+    const [selectedColors, setSelectedColors] = useState({})
+
     /****************************** Basket *********************************/
     const {data: basket} = useCurrentBasket()
     const addItemToBasketMutation = useShopperBasketsMutation('addItemToBasket')
@@ -415,18 +420,25 @@ const ProductDetail = () => {
                 {/* Product Recommendations */}
                 <Stack spacing={16}>
                     {!isProductASet && (
-                        <RecommendedProducts
-                            title={
-                                <FormattedMessage
-                                    defaultMessage="Complete the Set"
-                                    id="product_detail.recommended_products.title.complete_set"
-                                />
-                            }
-                            recommender={EINSTEIN_RECOMMENDERS.PDP_COMPLETE_SET}
-                            products={[product]}
-                            mx={{base: -4, md: -8, lg: 0}}
-                            shouldFetch={() => product?.id}
-                        />
+                        <>
+                            <FrequentlyBoughtTogether
+                                product={product}
+                                selectedColors={selectedColors}
+                                setSelectedColors={setSelectedColors}
+                            />
+
+                            <RelatedProducts
+                                product={product}
+                                selectedColors={selectedColors}
+                                setSelectedColors={setSelectedColors}
+                            />
+
+                            <LookingSimilar
+                                product={product}
+                                selectedColors={selectedColors}
+                                setSelectedColors={setSelectedColors}
+                            />
+                        </>
                     )}
                     <RecommendedProducts
                         title={

@@ -137,6 +137,7 @@ const ProductTile = (props) => {
                                     await onFavouriteToggle(!isFavourite)
                                     setFavouriteLoading(false)
                                 }}
+                                style={{outlineOffset: '0px', outlineColor: 'transparent'}}
                             />
                         </Box>
                     )}
