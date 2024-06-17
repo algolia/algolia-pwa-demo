@@ -1,16 +1,3 @@
-/*
- * Copyright (c) 2023, Salesforce, Inc.
- * All rights reserved.
- * SPDX-License-Identifier: BSD-3-Clause
- * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
- */
-/*
- * Copyright (c) 2022, Salesforce, Inc.
- * All rights reserved.
- * SPDX-License-Identifier: BSD-3-Clause
- * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
- */
-
 import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 import {HeartIcon, HeartSolidIcon} from '@salesforce/retail-react-app/app/components/icons'
@@ -26,6 +13,7 @@ import {
     IconButton
 } from '@chakra-ui/react'
 import DynamicImage from '../dynamic-image'
+import AlgoliaProductSwatch from '../../pages/algolia-product-list/partials/algolia-product-swatch'
 
 // Hooks
 import {useIntl} from 'react-intl'
@@ -74,6 +62,8 @@ const ProductTile = (props) => {
         isFavourite,
         onFavouriteToggle,
         dynamicImageProps,
+        selectedColors,
+        setSelectedColors,
         ...rest
     } = props
     // ProductTile is used by two components, RecommendedProducts and ProductList.
@@ -102,65 +92,76 @@ const ProductTile = (props) => {
     const {currency: activeCurrency} = useCurrency()
 
     return (
-        <Link
-            data-testid="product-tile"
-            {...styles.container}
-            to={productUrlBuilder({id: product.objectID}, intl.local)}
-            {...rest}
-        >
-            <Box {...styles.imageWrapper}>
-                <AspectRatio {...styles.image}>
-                    <DynamicImage
-                        src={`${imageUrl}[?sw={width}&q=60]`}
-                        widths={dynamicImageProps?.widths}
-                        imageProps={{
-                            alt: imageAlt,
-                            ...dynamicImageProps?.imageProps
-                        }}
-                    />
-                </AspectRatio>
-
-                {enableFavourite && (
-                    <Box
-                        onClick={(e) => {
-                            // stop click event from bubbling
-                            // to avoid user from clicking the underlying
-                            // product while the favourite icon is disabled
-                            e.preventDefault()
-                        }}
-                    >
-                        <IconButtonWithRegistration
-                            aria-label={intl.formatMessage({
-                                id: 'product_tile.assistive_msg.wishlist',
-                                defaultMessage: 'Wishlist'
-                            })}
-                            icon={isFavourite ? <HeartSolidIcon /> : <HeartIcon />}
-                            {...styles.favIcon}
-                            disabled={isFavouriteLoading}
-                            onClick={async () => {
-                                setFavouriteLoading(true)
-                                await onFavouriteToggle(!isFavourite)
-                                setFavouriteLoading(false)
+        <Box>
+            <Link
+                data-testid="product-tile"
+                {...styles.container}
+                to={productUrlBuilder({id: product.objectID}, intl.local)}
+                {...rest}
+            >
+                <Box {...styles.imageWrapper}>
+                    <AspectRatio {...styles.image}>
+                        <DynamicImage
+                            src={`${
+                                selectedColors[product.masterID]
+                                    ? selectedColors[product.masterID]
+                                    : imageUrl
+                            }[?sw={width}&q=60]`}
+                            widths={dynamicImageProps?.widths}
+                            imageProps={{
+                                alt: imageAlt,
+                                ...dynamicImageProps?.imageProps
                             }}
                         />
-                    </Box>
-                )}
-            </Box>
-            <Box {...styles.detailsWrapper}>
-                {/* Title */}
-                <Text {...styles.title}>
-                    <span dangerouslySetInnerHTML={{__html: localizedProductName}} />
-                </Text>
+                    </AspectRatio>
 
-                {/* Price */}
-                <Text {...styles.price}>
-                    {intl.formatNumber(productPrice, {
-                        style: 'currency',
-                        currency: currency || activeCurrency
-                    })}
-                </Text>
-            </Box>
-        </Link>
+                    {enableFavourite && (
+                        <Box
+                            onClick={(e) => {
+                                // stop click event from bubbling
+                                // to avoid user from clicking the underlying
+                                // product while the favourite icon is disabled
+                                e.preventDefault()
+                            }}
+                        >
+                            <IconButtonWithRegistration
+                                aria-label={intl.formatMessage({
+                                    id: 'product_tile.assistive_msg.wishlist',
+                                    defaultMessage: 'Wishlist'
+                                })}
+                                icon={isFavourite ? <HeartSolidIcon /> : <HeartIcon />}
+                                {...styles.favIcon}
+                                disabled={isFavouriteLoading}
+                                onClick={async () => {
+                                    setFavouriteLoading(true)
+                                    await onFavouriteToggle(!isFavourite)
+                                    setFavouriteLoading(false)
+                                }}
+                            />
+                        </Box>
+                    )}
+                </Box>
+                <Box {...styles.detailsWrapper}>
+                    {/* Title */}
+                    <Text {...styles.title}>
+                        <span dangerouslySetInnerHTML={{__html: localizedProductName}} />
+                    </Text>
+
+                    {/* Price */}
+                    <Text {...styles.price}>
+                        {intl.formatNumber(productPrice, {
+                            style: 'currency',
+                            currency: currency || activeCurrency
+                        })}
+                    </Text>
+                </Box>
+            </Link>
+            <AlgoliaProductSwatch
+                product={product}
+                selectedColors={selectedColors}
+                setSelectedColors={setSelectedColors}
+            />
+        </Box>
     )
 }
 

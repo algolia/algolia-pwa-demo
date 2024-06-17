@@ -1,9 +1,3 @@
-/*
- * Copyright (c) 2023, Salesforce, Inc.
- * All rights reserved.
- * SPDX-License-Identifier: BSD-3-Clause
- * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
- */
 import React from 'react'
 import PropTypes from 'prop-types'
 import {Link, ListItem, OrderedList} from '@chakra-ui/react'
@@ -15,7 +9,13 @@ const AlgoliaPagination = (props) => {
     const {currentRefinement, pages, refine, nbPages} = usePagination(rest)
 
     return (
-        <OrderedList listStyleType="none" display="flex" flexShrink="0" margin="0" className="aa-pagination">
+        <OrderedList
+            listStyleType="none"
+            display="flex"
+            flexShrink="0"
+            margin="0"
+            className="aa-pagination"
+        >
             <ListItem>
                 <Link
                     px="3"
