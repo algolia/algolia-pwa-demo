@@ -13,7 +13,7 @@ import {
     IconButton
 } from '@chakra-ui/react'
 import DynamicImage from '../dynamic-image'
-import AlgoliaProductColors from '../../pages/algolia-product-list/partials/algolia-product-colors'
+import AlgoliaProductSwatch from '../../pages/algolia-product-list/partials/algolia-product-swatch'
 
 // Hooks
 import {useIntl} from 'react-intl'
@@ -156,7 +156,7 @@ const ProductTile = (props) => {
                     </Text>
                 </Box>
             </Link>
-            <AlgoliaProductColors
+            <AlgoliaProductSwatch
                 product={product}
                 selectedColors={selectedColors}
                 setSelectedColors={setSelectedColors}

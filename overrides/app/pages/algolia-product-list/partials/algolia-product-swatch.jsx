@@ -6,7 +6,7 @@ import Link from '@salesforce/retail-react-app/app/components/link'
 import {useIntl} from 'react-intl'
 import {slice} from '../../../../../config/sites'
 
-const AlgoliaProductColors = (props) => {
+const AlgoliaProductSwatch = (props) => {
     const {product, setSelectedColors, selectedColors} = props
 
     //define hook and state for url
@@ -107,4 +107,4 @@ const AlgoliaProductColors = (props) => {
     )
 }
 
-export default AlgoliaProductColors
+export default AlgoliaProductSwatch
