@@ -50,15 +50,22 @@ const AlgoliaProductSwatch = (props) => {
         sortColorVariations(colorVariations)
     )
 
+    const findSwatchImage = (variant) => {
+        var image_groups = variant.image_groups
+
+        for (var i = 0; i < image_groups.length; i++) {
+            if (image_groups[i].view_type === 'swatch') {
+                return image_groups[i].images[0].dis_base_link
+            }
+        }
+        return ''
+    }
+
     return (
         <>
             {colorVariations && colorVariations.length && (
                 <HStack spacing="5px" mt={1}>
                     {sortedColorVariations.map((variant, idx) => {
-                        const lcLabel = variant.color
-                            .toLowerCase()
-                            .replace(/\s/g, '')
-                            .replace(/&/g, 'and')
                         return (
                             <Box key={idx} onMouseOver={() => handleSetSelectedColors(variant)}>
                                 <Link
@@ -92,7 +99,9 @@ const AlgoliaProductSwatch = (props) => {
                                                     width="100%"
                                                     backgroundRepeat="no-repeat"
                                                     backgroundSize="cover"
-                                                    background={cssColorGroups[lcLabel]}
+                                                    backgroundImage={`url(${findSwatchImage(
+                                                        variant
+                                                    )})`}
                                                 />
                                             </Center>
                                         </Button>
