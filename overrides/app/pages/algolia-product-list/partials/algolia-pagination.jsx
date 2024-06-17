@@ -9,7 +9,13 @@ const AlgoliaPagination = (props) => {
     const {currentRefinement, pages, refine, nbPages} = usePagination(rest)
 
     return (
-        <OrderedList listStyleType="none" display="flex" flexShrink="0" margin="0" className="aa-pagination">
+        <OrderedList
+            listStyleType="none"
+            display="flex"
+            flexShrink="0"
+            margin="0"
+            className="aa-pagination"
+        >
             <ListItem>
                 <Link
                     px="3"

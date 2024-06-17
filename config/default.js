@@ -48,7 +48,7 @@ module.exports = {
                         value: 'pwa__products__en_GB_price_desc'
                     }
                 ]
-            },
+            }
         },
         // Commerce api config
         commerceAPI: {

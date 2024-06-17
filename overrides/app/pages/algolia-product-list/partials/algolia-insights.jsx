@@ -10,7 +10,7 @@ const AlgoliaInsights = () => {
             insightsClient: window.aa
         })
 
-        return addMiddlewares(middleware);
+        return addMiddlewares(middleware)
     }, [addMiddlewares])
 
     return null

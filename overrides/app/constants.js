@@ -88,5 +88,5 @@ export const cssColorGroups = {
     linenwhite: '#f9f9f9',
     sundriedcoral: '#FF7F50',
     bluestone: '#4089c0',
-    navysky: '#000080',
+    navysky: '#000080'
 }

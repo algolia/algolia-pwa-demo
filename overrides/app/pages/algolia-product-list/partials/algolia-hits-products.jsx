@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, {Fragment, useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
 import {useHits, useInstantSearch} from 'react-instantsearch'
 import ProductTile, {
@@ -6,7 +6,16 @@ import ProductTile, {
 } from '../../../components/algolia-product-tile/index'
 
 const AlgoliaHitsProducts = (props) => {
-    const {isLoading,searchQuery,category,einstein, addItemToWishlist, removeItemFromWishlist,isInWishlist,activeCurrency} = props
+    const {
+        isLoading,
+        searchQuery,
+        category,
+        einstein,
+        addItemToWishlist,
+        removeItemFromWishlist,
+        isInWishlist,
+        activeCurrency
+    } = props
     const {hits, sendEvent} = useHits()
     const {status} = useInstantSearch(props)
     const [selectedColors, setSelectedColors] = useState({})

@@ -13,7 +13,7 @@ import {
     IconButton
 } from '@chakra-ui/react'
 import DynamicImage from '../dynamic-image'
-import AlgoliaProductColors from "../../pages/algolia-product-list/partials/algolia-product-colors";
+import AlgoliaProductColors from '../../pages/algolia-product-list/partials/algolia-product-colors'
 
 // Hooks
 import {useIntl} from 'react-intl'
@@ -93,66 +93,74 @@ const ProductTile = (props) => {
 
     return (
         <Box>
-        <Link
-            data-testid="product-tile"
-            {...styles.container}
-            to={productUrlBuilder({id: product.objectID}, intl.local)}
-            {...rest}
-        >
-            <Box {...styles.imageWrapper}>
-                <AspectRatio {...styles.image}>
-                    <DynamicImage
-                        src={`${selectedColors[product.masterID] ? selectedColors[product.masterID] : imageUrl}[?sw={width}&q=60]`}
-                        widths={dynamicImageProps?.widths}
-                        imageProps={{
-                            alt: imageAlt,
-                            ...dynamicImageProps?.imageProps
-                        }}
-                    />
-                </AspectRatio>
-
-                {enableFavourite && (
-                    <Box
-                        onClick={(e) => {
-                            // stop click event from bubbling
-                            // to avoid user from clicking the underlying
-                            // product while the favourite icon is disabled
-                            e.preventDefault()
-                        }}
-                    >
-                        <IconButtonWithRegistration
-                            aria-label={intl.formatMessage({
-                                id: 'product_tile.assistive_msg.wishlist',
-                                defaultMessage: 'Wishlist'
-                            })}
-                            icon={isFavourite ? <HeartSolidIcon /> : <HeartIcon />}
-                            {...styles.favIcon}
-                            disabled={isFavouriteLoading}
-                            onClick={async () => {
-                                setFavouriteLoading(true)
-                                await onFavouriteToggle(!isFavourite)
-                                setFavouriteLoading(false)
+            <Link
+                data-testid="product-tile"
+                {...styles.container}
+                to={productUrlBuilder({id: product.objectID}, intl.local)}
+                {...rest}
+            >
+                <Box {...styles.imageWrapper}>
+                    <AspectRatio {...styles.image}>
+                        <DynamicImage
+                            src={`${
+                                selectedColors[product.masterID]
+                                    ? selectedColors[product.masterID]
+                                    : imageUrl
+                            }[?sw={width}&q=60]`}
+                            widths={dynamicImageProps?.widths}
+                            imageProps={{
+                                alt: imageAlt,
+                                ...dynamicImageProps?.imageProps
                             }}
                         />
-                    </Box>
-                )}
-            </Box>
-            <Box {...styles.detailsWrapper}>
-                {/* Title */}
-                <Text {...styles.title}>
-                    <span dangerouslySetInnerHTML={{__html: localizedProductName}} />
-                </Text>
+                    </AspectRatio>
 
-                {/* Price */}
-                <Text {...styles.price}>
-                    {intl.formatNumber(productPrice, {
-                        style: 'currency',
-                        currency: currency || activeCurrency
-                    })}
-                </Text>
-            </Box>
-        </Link>
-        <AlgoliaProductColors product={product} selectedColors={selectedColors} setSelectedColors={setSelectedColors}/>
+                    {enableFavourite && (
+                        <Box
+                            onClick={(e) => {
+                                // stop click event from bubbling
+                                // to avoid user from clicking the underlying
+                                // product while the favourite icon is disabled
+                                e.preventDefault()
+                            }}
+                        >
+                            <IconButtonWithRegistration
+                                aria-label={intl.formatMessage({
+                                    id: 'product_tile.assistive_msg.wishlist',
+                                    defaultMessage: 'Wishlist'
+                                })}
+                                icon={isFavourite ? <HeartSolidIcon /> : <HeartIcon />}
+                                {...styles.favIcon}
+                                disabled={isFavouriteLoading}
+                                onClick={async () => {
+                                    setFavouriteLoading(true)
+                                    await onFavouriteToggle(!isFavourite)
+                                    setFavouriteLoading(false)
+                                }}
+                            />
+                        </Box>
+                    )}
+                </Box>
+                <Box {...styles.detailsWrapper}>
+                    {/* Title */}
+                    <Text {...styles.title}>
+                        <span dangerouslySetInnerHTML={{__html: localizedProductName}} />
+                    </Text>
+
+                    {/* Price */}
+                    <Text {...styles.price}>
+                        {intl.formatNumber(productPrice, {
+                            style: 'currency',
+                            currency: currency || activeCurrency
+                        })}
+                    </Text>
+                </Box>
+            </Link>
+            <AlgoliaProductColors
+                product={product}
+                selectedColors={selectedColors}
+                setSelectedColors={setSelectedColors}
+            />
         </Box>
     )
 }
