@@ -5,9 +5,8 @@
  * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-/* 
-    Hello there! This is a demonstration of how to override a file from the base template.
-    
+/*
+    This is a demonstration of how to override a file from the base template.
     It's necessary that the module export interface remain consistent, 
     as other files in the base template rely on constants.js, thus we
     import the underlying constants.js, modifies it and re-export it.
