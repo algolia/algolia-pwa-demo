@@ -11,6 +11,8 @@ import {AutocompleteHit} from './AutocompleteHit'
 type BrandRecord = {
     label: string
     count: number
+    facetValue: string
+    hits: Array<AutocompleteHit>
 }
 
 /**

@@ -232,7 +232,7 @@ function AutocompletePanel(props) {
     return (
         <div className="aa-PanelLayout aa-Panel--scrollable">
             {!hasResults && (
-                <div className="aa-NoResultsQuery">No results for `{props.state.query}`</div>
+                <div className="aa-NoResultsQuery">We couldn’t find anything for `{props.state.query}`</div>
             )}
 
             <div className="aa-PanelSections">
@@ -245,6 +245,12 @@ function AutocompletePanel(props) {
                                     <div className="aa-SourceHeaderLine" />
                                 </div>
                                 {recentSearches}
+
+                                <div className="aa-SourceHeader">
+                                    <span className="aa-SourceHeaderTitle">Popular Brands</span>
+                                    <div className="aa-SourceHeaderLine" />
+                                </div>
+                                <div className="aa-PanelSectionSources">{brands}</div>
                             </Fragment>
                         )) ||
                         (props.state.query &&
@@ -279,22 +285,6 @@ function AutocompletePanel(props) {
                                         </div>
                                     </Fragment>
                                 )}
-
-                                {(brands || categories) && (
-                                    <Fragment>
-                                        <div className="aa-SourceHeader">
-                                            <span className="aa-SourceHeaderTitle">
-                                                Popular Brands
-                                            </span>
-                                            <div className="aa-SourceHeaderLine" />
-                                        </div>
-
-                                        <div className="aa-PanelSectionSources">
-                                            {brands}
-                                            {categories}
-                                        </div>
-                                    </Fragment>
-                                )}
                             </>
                         ) : (
                             <div className="aa-NoResultsAdvices">
@@ -302,7 +292,7 @@ function AutocompletePanel(props) {
                             </div>
                         ))
                     ) : (
-                        <div className="aa-NoResultsAdvices">
+                        <div className="aa-NoResultsAdvices aa-mt-5">
                             <ul className="aa-NoResultsAdvicesList">
                                 <li>Double-check your spelling</li>
                                 <li>Use fewer keywords</li>

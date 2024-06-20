@@ -41,7 +41,7 @@ import {
 
 // Project Components
 import {HideOnDesktop} from '@salesforce/retail-react-app/app/components/responsive'
-import EmptySearchResults from '@salesforce/retail-react-app/app/pages/product-list/partials/empty-results'
+import EmptySearchResults from './partials/empty-results'
 import PageHeader from './partials/page-header'
 
 // Icons

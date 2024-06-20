@@ -440,32 +440,6 @@ const ProductDetail = () => {
                             />
                         </>
                     )}
-                    <RecommendedProducts
-                        title={
-                            <FormattedMessage
-                                defaultMessage="You might also like"
-                                id="product_detail.recommended_products.title.might_also_like"
-                            />
-                        }
-                        recommender={EINSTEIN_RECOMMENDERS.PDP_MIGHT_ALSO_LIKE}
-                        products={[product]}
-                        mx={{base: -4, md: -8, lg: 0}}
-                        shouldFetch={() => product?.id}
-                    />
-
-                    <RecommendedProducts
-                        // The Recently Viewed recommender doesn't use `products`, so instead we
-                        // provide a key to update the recommendations on navigation.
-                        key={location.key}
-                        title={
-                            <FormattedMessage
-                                defaultMessage="Recently Viewed"
-                                id="product_detail.recommended_products.title.recently_viewed"
-                            />
-                        }
-                        recommender={EINSTEIN_RECOMMENDERS.PDP_RECENTLY_VIEWED}
-                        mx={{base: -4, md: -8, lg: 0}}
-                    />
                 </Stack>
             </Stack>
         </Box>

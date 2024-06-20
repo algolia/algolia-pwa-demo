@@ -7,7 +7,7 @@ import {LookingSimilar as AlgoliaLookingSimilar} from '@algolia/recommend-react'
 import recommend from '@algolia/recommend'
 import {useCurrency} from '@salesforce/retail-react-app/app/hooks'
 import {getConfig} from '@salesforce/pwa-kit-runtime/utils/ssr-config'
-import WidgetHeader from './widgetheader'
+import WidgetHeader from './utils/widgetheader'
 
 const LookingSimilar = ({product, selectedColors, setSelectedColors}) => {
     const {currency: activeCurrency} = useCurrency()
