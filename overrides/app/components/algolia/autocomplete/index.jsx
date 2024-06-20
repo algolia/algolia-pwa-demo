@@ -231,12 +231,12 @@ function AutocompletePanel(props) {
 
     return (
         <div className="aa-PanelLayout aa-Panel--scrollable">
-            {!hasResults && (
-                <div className="aa-NoResultsQuery">We couldn’t find anything for `{props.state.query}`</div>
-            )}
-
             <div className="aa-PanelSections">
                 <div className="aa-PanelSection--left">
+                    {!hasResults && (
+                        <div className="aa-NoResultsQuery">We couldn’t find anything for `{props.state.query}`</div>
+                    )}
+                    
                     {hasResults ? (
                         (!props.state.query && recentSearches && (
                             <Fragment>

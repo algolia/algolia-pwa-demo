@@ -34,18 +34,14 @@ export const brandsPlugin: AutocompletePlugin<BrandHit, {}> = {
                           facetName: 'brand'
                         },
                     ])
-                    return response.results
+
+                    return response.results[0].hits
                 },
                 renderer: {createElement, Fragment, render: () => {}},
                 templates: {
                   item({ item, components }) {
-                    console.log('result', item)
                     return (
-                      <Fragment>
-                        {item.hits.map((hit) => (
-                          <BrandItem hit={hit} components={''}/>
-                        ))}
-                      </Fragment>
+                        <BrandItem hit={item} components={''}/>
                     );
                   },
                 }
