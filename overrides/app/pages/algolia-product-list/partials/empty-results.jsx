@@ -5,7 +5,7 @@
  * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import React, {Fragment} from 'react'
+import React, {Fragment, useState} from 'react'
 import {
     Button,
     Text,
@@ -17,8 +17,7 @@ import PropTypes from 'prop-types'
 import {Link as RouteLink} from 'react-router-dom'
 import {defineMessage, FormattedMessage, useIntl} from 'react-intl'
 import {SearchIcon} from '@salesforce/retail-react-app/app/components/icons'
-import RecommendedProducts from '@salesforce/retail-react-app/app/components/recommended-products'
-import {EINSTEIN_RECOMMENDERS} from '@salesforce/retail-react-app/app/constants'
+import TrendingItems from '../../../components/recommend/trendingItems'
 
 const contactUsMessage = defineMessage({
     id: 'empty_search_results.link.contact_us',
@@ -27,6 +26,7 @@ const contactUsMessage = defineMessage({
 
 const EmptySearchResults = ({searchQuery, category}) => {
     const intl = useIntl()
+    const [selectedColors, setSelectedColors] = useState({})
     return (
         <Flex
             data-testid="sf-product-empty-list-page"
@@ -48,7 +48,7 @@ const EmptySearchResults = ({searchQuery, category}) => {
                                     'We couldn’t find anything for {category}. Try searching for a product or {link}.'
                             },
                             {
-                                category: category.name,
+                                category: category?.name,
                                 link: (
                                     <Link as={RouteLink} to={'/'}>
                                         {intl.formatMessage(contactUsMessage)}
@@ -56,7 +56,17 @@ const EmptySearchResults = ({searchQuery, category}) => {
                                 )
                             }
                         )}
-                    </Text>{' '}
+                    </Text>
+                    <Text fontSize={['md', 'md', 'md', 'md']} fontWeight="400">
+                        <div className="aa-NoResultsAdvices aa-mt-5">
+                            <ul className="aa-NoResultsAdvicesList">
+                                <li>Double-check your spelling</li>
+                                <li>Use fewer keywords</li>
+                                <li>Search for a less specific item</li>
+                                <li>Check out popular categories for inspiration</li>
+                            </ul>
+                        </div>
+                    </Text>
                 </Fragment>
             ) : (
                 <Fragment>
@@ -72,42 +82,19 @@ const EmptySearchResults = ({searchQuery, category}) => {
                         )}
                     </Text>
                     <Text fontSize={['md', 'md', 'md', 'md']} fontWeight="400">
-                        {intl.formatMessage(
-                            {
-                                id: 'empty_search_results.info.double_check_spelling',
-                                defaultMessage:
-                                    'Double-check your spelling and try again or {link}.'
-                            },
-                            {
-                                link: (
-                                    <Button variant="link" to={'/'}>
-                                        {intl.formatMessage(contactUsMessage)}
-                                    </Button>
-                                )
-                            }
-                        )}
+                        <div className="aa-NoResultsAdvices aa-mt-5">
+                            <ul className="aa-NoResultsAdvicesList">
+                                <li>Double-check your spelling</li>
+                                <li>Use fewer keywords</li>
+                                <li>Search for a less specific item</li>
+                                <li>Check out popular categories for inspiration</li>
+                            </ul>
+                        </div>
                     </Text>
                     <Stack spacing={16} marginTop={32}>
-                        <RecommendedProducts
-                            title={
-                                <FormattedMessage
-                                    defaultMessage="Top Sellers"
-                                    id="empty_search_results.recommended_products.title.top_sellers"
-                                />
-                            }
-                            recommender={EINSTEIN_RECOMMENDERS.EMPTY_SEARCH_RESULTS_TOP_SELLERS}
-                            mx={{base: -4, md: -8, lg: 0}}
-                        />
-
-                        <RecommendedProducts
-                            title={
-                                <FormattedMessage
-                                    defaultMessage="Most Viewed"
-                                    id="empty_search_results.recommended_products.title.most_viewed"
-                                />
-                            }
-                            recommender={EINSTEIN_RECOMMENDERS.EMPTY_SEARCH_RESULTS_MOST_VIEWED}
-                            mx={{base: -4, md: -8, lg: 0}}
+                        <TrendingItems
+                            selectedColors={selectedColors}
+                            setSelectedColors={setSelectedColors}
                         />
                     </Stack>
                 </Fragment>

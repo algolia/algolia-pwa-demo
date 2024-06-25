@@ -1,10 +1,8 @@
 import React, {useState} from 'react'
 import {Box, HStack, Button, Center, useMultiStyleConfig, Flex} from '@chakra-ui/react'
-import {cssColorGroups} from '../../../constants'
 import {productUrlBuilder, rebuildPathWithParams} from '@salesforce/retail-react-app/app/utils/url'
 import Link from '@salesforce/retail-react-app/app/components/link'
 import {useIntl} from 'react-intl'
-import {slice} from '../../../../../config/sites'
 
 const AlgoliaProductSwatch = (props) => {
     const {product, setSelectedColors, selectedColors} = props
@@ -64,7 +62,7 @@ const AlgoliaProductSwatch = (props) => {
     return (
         <>
             {colorVariations && colorVariations.length && (
-                <HStack spacing="5px" mt={1}>
+                <HStack spacing="5px" mt={1} style={{border: '4px red !important'}}>
                     {sortedColorVariations.map((variant, idx) => {
                         return (
                             <Box key={idx} onMouseOver={() => handleSetSelectedColors(variant)}>
@@ -86,6 +84,10 @@ const AlgoliaProductSwatch = (props) => {
                                             overflow="hidden"
                                             minWidth="auto"
                                             border={'1px solid #e9e9e9'}
+                                            style={{
+                                                outlineOffset: '0px',
+                                                outlineColor: 'transparent'
+                                            }}
                                         >
                                             <Center
                                                 {...styles.swatchButton}

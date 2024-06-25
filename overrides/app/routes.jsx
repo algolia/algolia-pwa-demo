@@ -23,6 +23,10 @@ const ProductList = loadable(() => import('./pages/algolia-product-list'), {
     fallback
 })
 
+const ProductDetail = loadable(() => import('./pages/algolia-product-detail'), {
+    fallback
+})
+
 const routes = [
     {
         path: '/',
@@ -36,6 +40,10 @@ const routes = [
     {
         path: '/category/:categoryId',
         component: ProductList
+    },
+    {
+        path: '/product/:productId',
+        component: ProductDetail
     },
     ..._routes
 ]

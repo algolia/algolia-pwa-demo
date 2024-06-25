@@ -868,3 +868,24 @@ body {
 .aa-pagination li{
   height: 100%;
 }
+
+.aa-mb-5 {
+  margin-bottom: 5px !important;
+}
+
+.aa-mt-5 {
+  margin-top: 5px !important;
+}
+
+.aa-PanelLayout{
+  padding: 20px;
+}
+
+.chakra-stack{
+  max-width: 100%;
+}
+
+.auc-Recommend{
+  width: 1496px;
+  max-width: 100%;
+}
