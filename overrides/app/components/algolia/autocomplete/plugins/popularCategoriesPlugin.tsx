@@ -59,7 +59,7 @@ export const popularCategoriesPlugin = (navigate) => ({
                     header({Fragment}) {
                         return (
                             <Fragment>
-                                <span className="aa-SourceHeaderTitle">Popular categories</span>
+                                <span className="aa-SourceHeaderTitle">Check out popular products for inspiration</span>
                                 <div className="aa-SourceHeaderLine" />
                             </Fragment>
                         )
