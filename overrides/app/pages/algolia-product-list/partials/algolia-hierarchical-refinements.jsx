@@ -1,26 +1,35 @@
 import React from 'react'
-import {Box, useMultiStyleConfig} from '@chakra-ui/react'
+import {Box, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon} from '@chakra-ui/react'
 import {HierarchicalMenu} from 'react-instantsearch'
-import AlgoliaRefinementsContainer from './algolia-refinements-container'
 import PropTypes from 'prop-types'
+import AlgoliaRefinementsContainer from './algolia-refinements-container'
 
 const AlgoliaHierarchicalRefinements = (props) => {
     const {attributes, rootPath, title} = props
-    const styles = useMultiStyleConfig('AlgoliaHierarchicalRefinements')
 
     return (
-        <AlgoliaRefinementsContainer title={title} attributes={attributes}>
-            <Box sx={styles}>
-                <HierarchicalMenu
-                    attributes={attributes}
-                    rootPath={rootPath}
-                    classNames={{
-                        root: 'root',
-                        count: 'category-count'
-                    }}
-                />
-            </Box>
-        </AlgoliaRefinementsContainer>
+        <AccordionItem>
+            <h2>
+                <AccordionButton>
+                    <Box as="span" flex="1" textAlign="left">
+                        {title}
+                    </Box>
+                    <AccordionIcon />
+                </AccordionButton>
+            </h2>
+            <AccordionPanel pb={4}>
+                <AlgoliaRefinementsContainer attributes={attributes}>
+                    <HierarchicalMenu
+                        attributes={attributes}
+                        rootPath={rootPath}
+                        classNames={{
+                            root: 'root',
+                            count: 'category-count'
+                        }}
+                    />
+                </AlgoliaRefinementsContainer>
+            </AccordionPanel>
+        </AccordionItem>
     )
 }
 

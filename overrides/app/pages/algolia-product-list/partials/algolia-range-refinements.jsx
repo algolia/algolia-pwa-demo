@@ -1,12 +1,15 @@
 import React, {useEffect, useState} from 'react'
 import {
     Box,
-    RangeSlider,
-    RangeSliderMark,
-    RangeSliderTrack,
-    RangeSliderFilledTrack,
-    RangeSliderThumb
+    AccordionItem,
+    AccordionButton,
+    AccordionPanel,
+    AccordionIcon,
+    Input,
+    FormControl,
+    FormLabel
 } from '@chakra-ui/react'
+
 import {useIntl} from 'react-intl'
 import {useCurrency} from '@salesforce/retail-react-app/app/hooks'
 import {useConnector} from 'react-instantsearch'
@@ -28,66 +31,100 @@ const AlgoliaRangeRefinements = (props) => {
     const {currency} = useCurrency()
 
     const {start, range, refine} = useAlgoliaRangeSlider(props)
-    const [sliderValue, setSliderValue] = useState([range.min, range.max])
-    const isMax = sliderValue[1] === range.max
-    const step = Math.ceil((range.max - range.min) / 4)
+    const [minValue, setMinValue] = useState(range.min)
+    const [maxValue, setMaxValue] = useState(range.max)
+    const [rangeLoad, setRangeLoad] = useState(false)
+    const [minTimeout, setMinTimeout] = useState(null)
+    const [maxTimeout, setMaxTimeout] = useState(null)
 
     useEffect(() => {
-        setSliderValue([range.min, range.max])
+        if (!rangeLoad) {
+            if (range.min > 0 || range.max > 0) {
+                setMinValue(range.min)
+                setMaxValue(range.max)
+                setRangeLoad(true)
+            }
+        }
     }, [range])
 
+    const handleMinValueChange = (e) => {
+        let val = Number(e.target.value)
+        clearTimeout(minTimeout)
+        setMinValue(val)
+        const newTimeout = setTimeout(() => {
+            if (val < range.min) {
+                val = range.min
+            }
+
+            if (val > maxValue) {
+                val = maxValue
+            }
+
+            setMinValue(val)
+
+            refine([val, maxValue])
+        }, 500)
+        setMinTimeout(newTimeout)
+    }
+
+    const handleMaxValueChange = (e) => {
+        let val = Number(e.target.value)
+
+        clearTimeout(maxTimeout)
+        setMaxValue(val)
+        const newTimeout = setTimeout(() => {
+            if (val > range.max) {
+                val = range.max
+            }
+            if (val < minValue) {
+                val = minValue
+            }
+            setMaxValue(val)
+            refine([minValue, val])
+        }, 500)
+        setMaxTimeout(newTimeout)
+    }
+
     return (
-        <AlgoliaRefinementsContainer title={props.title} attributes={[props.attribute]}>
-            <Box pb="1">
-                <RangeSlider
-                    aria-label={['min', 'max']}
-                    defaultValue={start}
-                    min={range.min}
-                    max={range.max}
-                    step={step}
-                    onChange={(val) => {
-                        setSliderValue(val)
-                        refine(val)
-                    }}
-                >
-                    <RangeSliderMark
-                        value={sliderValue[0]}
-                        textAlign="center"
-                        bg="black"
-                        color="white"
-                        p="1"
-                        mt="0.5"
-                        fontSize="sm"
-                    >
-                        {intl.formatNumber(sliderValue[0], {
-                            ...fnOpts,
-                            currency
-                        })}
-                    </RangeSliderMark>
-                    <RangeSliderMark
-                        value={sliderValue[1]}
-                        textAlign="center"
-                        bg="black"
-                        color="white"
-                        p="1"
-                        mt="0.5"
-                        fontSize="sm"
-                        left={isMax && 'auto !important'}
-                        right={isMax && '0'}
-                    >
-                        {intl.formatNumber(sliderValue[1], {
-                            ...fnOpts,
-                            currency
-                        })}
-                    </RangeSliderMark>
-                    <RangeSliderTrack bg="gray.200">
-                        <RangeSliderFilledTrack bg="black" />
-                    </RangeSliderTrack>
-                    <RangeSliderThumb boxSize={6} index={0} border="2px" borderColor="gray.200" />
-                    <RangeSliderThumb boxSize={6} index={1} border="2px" borderColor="gray.200" />
-                </RangeSlider>
-            </Box>
-        </AlgoliaRefinementsContainer>
+        <AccordionItem>
+            <h2>
+                <AccordionButton>
+                    <Box as="span" flex="1" textAlign="left">
+                        {props.title}
+                    </Box>
+                    <AccordionIcon />
+                </AccordionButton>
+            </h2>
+            <AccordionPanel pb={4}>
+                <AlgoliaRefinementsContainer attributes={[props.attribute]}>
+                    <Box pb="1" display="flex" gap="4">
+                        <FormControl>
+                            <FormLabel htmlFor="minValue">Min</FormLabel>
+                            <Input
+                                id="minValue"
+                                type="number"
+                                value={minValue}
+                                min={range.min}
+                                max={range.max}
+                                onChange={handleMinValueChange}
+                            />
+                        </FormControl>
+
+                        <FormControl>
+                            <FormLabel htmlFor="maxValue">Max</FormLabel>
+                            <Input
+                                id="maxValue"
+                                type="number"
+                                value={maxValue}
+                                min={range.min}
+                                max={range.max}
+                                onChange={handleMaxValueChange}
+                            />
+                        </FormControl>
+                    </Box>
+                </AlgoliaRefinementsContainer>
+            </AccordionPanel>
+        </AccordionItem>
     )
 }
 

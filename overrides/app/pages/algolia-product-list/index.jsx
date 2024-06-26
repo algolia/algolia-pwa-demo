@@ -80,7 +80,7 @@ import AlgoliaCurrentRefinements from './partials/algolia-current-refinements'
 import AlgoliaHierarchicalRefinements from './partials/algolia-hierarchical-refinements'
 import AlgoliaColorRefinements from './partials/algolia-color-refinements'
 import AlgoliaNoResultsBoundary from './partials/algolia-no-results-boundary'
-import AlgoliaSizeRefinements from './partials/algolia-size-refinements'
+import AlgoliaCheckboxRefinements from './partials/algolia-checkbox-refinements'
 import AlgoliaRangeRefinements from './partials/algolia-range-refinements'
 import AlgoliaPagination from './partials/algolia-pagination'
 import AlgoliaSortBy from './partials/algolia-sort-by'
@@ -90,7 +90,7 @@ import SearchTabHeader from './partials/search-tab-header'
 import {Tabs, TabPanels, TabPanel} from '@chakra-ui/react'
 import AlgoliaHitsContent from './partials/algolia-hits-content'
 import AlgoliaHitsProducts from './partials/algolia-hits-products'
-
+import {Accordion} from '@chakra-ui/react'
 // NOTE: You can ignore certain refinements on a template level by updating the below
 // list of ignored refinements.
 const REFINEMENT_DISALLOW_LIST = ['c_isNew']
@@ -138,17 +138,26 @@ const ProductList = (props) => {
         `__primary_category.2`
     ]
 
-    const currentRefinementAttributes = ['size', 'color', 'price.USD', '__primary_category.0']
+    const currentRefinementAttributes = [
+        'size',
+        'color',
+        'price.USD',
+        '__primary_category.0',
+        'brand'
+    ]
 
     const filterEls = (
         <>
-            <AlgoliaHierarchicalRefinements
-                attributes={hierarchicalCategoryAttributes}
-                title="Category"
-            />
-            <AlgoliaColorRefinements attribute="color" title="Color" />
-            <AlgoliaSizeRefinements attribute="size" title="Size" />
-            <AlgoliaRangeRefinements attribute="price.USD" title="Price" />
+            <Accordion allowMultiple>
+                <AlgoliaHierarchicalRefinements
+                    attributes={hierarchicalCategoryAttributes}
+                    title="Category"
+                />
+                <AlgoliaColorRefinements attribute="color" title="Color" />
+                <AlgoliaCheckboxRefinements attribute="size" title="Size" />
+                <AlgoliaRangeRefinements attribute="price.USD" title="Price" />
+                <AlgoliaCheckboxRefinements attribute="brand" title="Brand" />
+            </Accordion>
         </>
     )
 
