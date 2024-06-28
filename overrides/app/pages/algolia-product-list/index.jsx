@@ -75,14 +75,13 @@ import {useCurrency} from '@salesforce/retail-react-app/app/hooks'
 
 // Algolia
 import algoliasearch from 'algoliasearch/lite'
-import {Configure, InstantSearch, Index} from 'react-instantsearch'
+import {Configure, InstantSearch, Index, Pagination} from 'react-instantsearch'
 import AlgoliaCurrentRefinements from './partials/algolia-current-refinements'
 import AlgoliaHierarchicalRefinements from './partials/algolia-hierarchical-refinements'
 import AlgoliaColorRefinements from './partials/algolia-color-refinements'
 import AlgoliaNoResultsBoundary from './partials/algolia-no-results-boundary'
 import AlgoliaCheckboxRefinements from './partials/algolia-checkbox-refinements'
 import AlgoliaRangeRefinements from './partials/algolia-range-refinements'
-import AlgoliaPagination from './partials/algolia-pagination'
 import AlgoliaSortBy from './partials/algolia-sort-by'
 import AlgoliaClearRefinements from './partials/algolia-clear-refinements'
 import AlgoliaUiStateProvider from './partials/algolia-uistate-provider'
@@ -525,12 +524,19 @@ const ProductList = (props) => {
                                             </SimpleGrid>
                                             {/* Footer */}
                                             <Flex
-                                                justifyContent={['center', 'center', 'flex-start']}
+                                                justifyContent={['center', 'center', 'flex-center']}
                                                 paddingTop={16}
                                             >
-                                                <AlgoliaPagination
-                                                    onPageChange={() => window.scrollTo(0, 0)}
-                                                />
+                                               <Pagination
+                                                    showNext={false}
+                                                    showPrevious={false}
+                                                    classNames={{
+                                                        root: 'custom-pagination-root',
+                                                        item: 'custom-pagination-item',
+                                                        link: 'custom-pagination-link',
+                                                        selectedItem: 'custom-pagination-item-selected',
+                                                    }}
+                                                 />
                                             </Flex>
                                         </Box>
                                     </Grid>
