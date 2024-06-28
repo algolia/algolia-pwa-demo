@@ -1018,3 +1018,37 @@ body {
 .wt-navbar .css-15rdum4,.wt-navbar button{
   display: none;
 }
+
+
+.custom-pagination-item:hover {
+  position: relative !important;
+  top: -1px !important;
+  border: #232121 1px solid !important;
+  font-weight: 800 !important;
+  font-size: large !important;
+}
+
+.custom-pagination-item * {
+  border: #232121 1px solid !important;
+  color: #232121 !important;
+  font-weight: 800 !important;
+  font-size: large !important;
+  padding: 0.6rem !important;
+}
+
+.custom-pagination-item-selected a {
+  box-shadow: none !important;
+  text-decoration: underline;
+}
+
+.custom-pagination-item:last-child>.custom-pagination-link {
+  border-radius: 0 3px 3px 0;
+  color: #232121 !important;
+  border: #232121 1px solid !important;
+}
+
+.custom-pagination-item:first-child>.custom-pagination-link {
+  border-radius: 3px 0 0 3px !important;
+  color: #232121 !important;
+  border: #232121 1px solid !important;
+}

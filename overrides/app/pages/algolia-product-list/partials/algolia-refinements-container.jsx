@@ -15,7 +15,6 @@ const AlgoliaRefinementsContainer = (props) => {
                 {props.title}
             </Text>
             <Box mt="4">{props.children}</Box>
-            {divider && <Divider mt="6" />}
         </Box>
     )
 }

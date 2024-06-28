@@ -75,14 +75,13 @@ import {useCurrency} from '@salesforce/retail-react-app/app/hooks'
 
 // Algolia
 import algoliasearch from 'algoliasearch/lite'
-import {Configure, InstantSearch, Index} from 'react-instantsearch'
+import {Configure, InstantSearch, Index, Pagination} from 'react-instantsearch'
 import AlgoliaCurrentRefinements from './partials/algolia-current-refinements'
 import AlgoliaHierarchicalRefinements from './partials/algolia-hierarchical-refinements'
 import AlgoliaColorRefinements from './partials/algolia-color-refinements'
 import AlgoliaNoResultsBoundary from './partials/algolia-no-results-boundary'
-import AlgoliaSizeRefinements from './partials/algolia-size-refinements'
+import AlgoliaCheckboxRefinements from './partials/algolia-checkbox-refinements'
 import AlgoliaRangeRefinements from './partials/algolia-range-refinements'
-import AlgoliaPagination from './partials/algolia-pagination'
 import AlgoliaSortBy from './partials/algolia-sort-by'
 import AlgoliaClearRefinements from './partials/algolia-clear-refinements'
 import AlgoliaUiStateProvider from './partials/algolia-uistate-provider'
@@ -90,7 +89,7 @@ import SearchTabHeader from './partials/search-tab-header'
 import {Tabs, TabPanels, TabPanel} from '@chakra-ui/react'
 import AlgoliaHitsContent from './partials/algolia-hits-content'
 import AlgoliaHitsProducts from './partials/algolia-hits-products'
-
+import {Accordion} from '@chakra-ui/react'
 // NOTE: You can ignore certain refinements on a template level by updating the below
 // list of ignored refinements.
 const REFINEMENT_DISALLOW_LIST = ['c_isNew']
@@ -138,17 +137,26 @@ const ProductList = (props) => {
         `__primary_category.2`
     ]
 
-    const currentRefinementAttributes = ['size', 'color', 'price.USD', '__primary_category.0']
+    const currentRefinementAttributes = [
+        'size',
+        'color',
+        'price.USD',
+        '__primary_category.0',
+        'brand'
+    ]
 
     const filterEls = (
         <>
-            <AlgoliaHierarchicalRefinements
-                attributes={hierarchicalCategoryAttributes}
-                title="Category"
-            />
-            <AlgoliaColorRefinements attribute="color" title="Color" />
-            <AlgoliaSizeRefinements attribute="size" title="Size" />
-            <AlgoliaRangeRefinements attribute="price.USD" title="Price" />
+            <Accordion allowMultiple>
+                <AlgoliaHierarchicalRefinements
+                    attributes={hierarchicalCategoryAttributes}
+                    title="Category"
+                />
+                <AlgoliaColorRefinements attribute="color" title="Color" />
+                <AlgoliaCheckboxRefinements attribute="size" title="Size" />
+                <AlgoliaRangeRefinements attribute="price.USD" title="Price" />
+                <AlgoliaCheckboxRefinements attribute="brand" title="Brand" />
+            </Accordion>
         </>
     )
 
@@ -516,12 +524,19 @@ const ProductList = (props) => {
                                             </SimpleGrid>
                                             {/* Footer */}
                                             <Flex
-                                                justifyContent={['center', 'center', 'flex-start']}
+                                                justifyContent={['center', 'center', 'flex-center']}
                                                 paddingTop={16}
                                             >
-                                                <AlgoliaPagination
-                                                    onPageChange={() => window.scrollTo(0, 0)}
-                                                />
+                                               <Pagination
+                                                    showNext={false}
+                                                    showPrevious={false}
+                                                    classNames={{
+                                                        root: 'custom-pagination-root',
+                                                        item: 'custom-pagination-item',
+                                                        link: 'custom-pagination-link',
+                                                        selectedItem: 'custom-pagination-item-selected',
+                                                    }}
+                                                 />
                                             </Flex>
                                         </Box>
                                     </Grid>
