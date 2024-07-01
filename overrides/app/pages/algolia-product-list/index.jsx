@@ -10,16 +10,12 @@ import PropTypes from 'prop-types'
 import {useHistory, useLocation, useParams} from 'react-router-dom'
 import {FormattedMessage, useIntl} from 'react-intl'
 import {Helmet} from 'react-helmet'
-import {
-    useCategory,
-    useCustomerId,
-    useProductSearch,
-    useShopperCustomersMutation
-} from '@salesforce/commerce-sdk-react'
+import {useCategory, useProductSearch} from '@salesforce/commerce-sdk-react'
 import {useServerContext} from '@salesforce/pwa-kit-react-sdk/ssr/universal/hooks'
 
 // Components
 import {
+    Accordion,
     Box,
     Flex,
     SimpleGrid,
@@ -48,28 +44,14 @@ import PageHeader from './partials/page-header'
 import {FilterIcon} from '@salesforce/retail-react-app/app/components/icons'
 
 // Hooks
-import {
-    useLimitUrls,
-    usePageUrls,
-    useSortUrls,
-    useSearchParams
-} from '@salesforce/retail-react-app/app/hooks'
-import {useToast} from '@salesforce/retail-react-app/app/hooks/use-toast'
+import {useSearchParams} from '@salesforce/retail-react-app/app/hooks'
 import useEinstein from '@salesforce/retail-react-app/app/hooks/use-einstein'
 
 // Others
 import {HTTPNotFound, HTTPError} from '@salesforce/pwa-kit-react-sdk/ssr/universal/errors'
 
 // Constants
-import {
-    API_ERROR_MESSAGE,
-    MAX_CACHE_AGE,
-    TOAST_ACTION_VIEW_WISHLIST,
-    TOAST_MESSAGE_ADDED_TO_WISHLIST,
-    TOAST_MESSAGE_REMOVED_FROM_WISHLIST
-} from '@salesforce/retail-react-app/app/constants'
-import useNavigation from '@salesforce/retail-react-app/app/hooks/use-navigation'
-import {useWishList} from '@salesforce/retail-react-app/app/hooks/use-wish-list'
+import {MAX_CACHE_AGE} from '@salesforce/retail-react-app/app/constants'
 import {getConfig} from '@salesforce/pwa-kit-runtime/utils/ssr-config'
 import {useCurrency} from '@salesforce/retail-react-app/app/hooks'
 
@@ -89,7 +71,9 @@ import SearchTabHeader from './partials/search-tab-header'
 import {Tabs, TabPanels, TabPanel} from '@chakra-ui/react'
 import AlgoliaHitsContent from './partials/algolia-hits-content'
 import AlgoliaHitsProducts from './partials/algolia-hits-products'
-import {Accordion} from '@chakra-ui/react'
+import {useWishlistOperations} from '../../hooks/use-wishlist-operations'
+import '../../components/algolia/style.css'
+
 // NOTE: You can ignore certain refinements on a template level by updating the below
 // list of ignored refinements.
 const REFINEMENT_DISALLOW_LIST = ['c_isNew']
@@ -106,21 +90,19 @@ const ProductList = (props) => {
     const {isLoading: _unusedIsLoading, staticContext, ...rest} = props
     const {isOpen, onOpen, onClose} = useDisclosure()
     const {formatMessage} = useIntl()
-    const navigate = useNavigation()
-    const history = useHistory()
     const params = useParams()
     const location = useLocation()
-    const toast = useToast()
     const einstein = useEinstein()
     const {res} = useServerContext()
-    const customerId = useCustomerId()
-    const [searchParams, {stringify: stringifySearchParams}] = useSearchParams()
+    const [searchParams] = useSearchParams()
     const {currency: activeCurrency} = useCurrency()
 
     let {app: algoliaConfig} = useMemo(() => getConfig(), [])
     algoliaConfig = {
         ...algoliaConfig.algolia
     }
+
+    const {addItemToWishlist, removeItemFromWishlist, isInWishlist} = useWishlistOperations()
 
     // Algolia Settings
     const allIndices = [algoliaConfig.indices.primary, ...algoliaConfig.indices.replicas]
@@ -161,9 +143,6 @@ const ProductList = (props) => {
     )
 
     /**************** Page State ****************/
-    const [filtersLoading, setFiltersLoading] = useState(false)
-    const [wishlistLoading, setWishlistLoading] = useState([])
-    const [sortOpen, setSortOpen] = useState(false)
     const [contentHitsCount, setContentHitsCount] = useState(false)
 
     const urlParams = new URLSearchParams(location.search)
@@ -174,20 +153,8 @@ const ProductList = (props) => {
         searchParams._refine.push(`cgid=${params.categoryId}`)
     }
 
-    /**************** Mutation Actions ****************/
-    const {mutateAsync: createCustomerProductListItem} = useShopperCustomersMutation(
-        'createCustomerProductListItem'
-    )
-    const {mutateAsync: deleteCustomerProductListItem} = useShopperCustomersMutation(
-        'deleteCustomerProductListItem'
-    )
-
     /**************** Query Actions ****************/
-    const {
-        isLoading,
-        isRefetching,
-        data: productSearchResult
-    } = useProductSearch(
+    const {isLoading, data: productSearchResult} = useProductSearch(
         {
             parameters: {
                 ...searchParams,
@@ -235,121 +202,8 @@ const ProductList = (props) => {
     }
 
     // Reset scroll position when `isRefetching` becomes `true`.
-    useEffect(() => {
-        isRefetching && window.scrollTo(0, 0)
-        setFiltersLoading(isRefetching)
-    }, [isRefetching])
-
     const query = searchQuery ?? ''
     const filters = !isLoading && category?.id ? `categories.id:${category.id}` : ''
-
-    /**************** Render Variables ****************/
-    const basePath = `${location.pathname}${location.search}`
-    const showNoResults = !isLoading && productSearchResult && !productSearchResult?.hits
-    const {total, sortingOptions} = productSearchResult || {}
-    const selectedSortingOptionLabel =
-        sortingOptions?.find(
-            (option) => option.id === productSearchResult?.selectedSortingOption
-        ) ?? sortingOptions?.[0]
-
-    // Get urls to be used for pagination, page size changes, and sorting.
-    const pageUrls = usePageUrls({total})
-    const sortUrls = useSortUrls({options: sortingOptions})
-    const limitUrls = useLimitUrls()
-
-    /**************** Action Handlers ****************/
-    const {data: wishlist} = useWishList()
-    const addItemToWishlist = async (product) => {
-        setWishlistLoading([...wishlistLoading, product.productId])
-
-        // TODO: This wishlist object is from an old API, we need to replace it with the new one.
-        const listId = wishlist.id
-        await createCustomerProductListItem(
-            {
-                parameters: {customerId, listId},
-                body: {
-                    quantity: 1,
-                    public: false,
-                    priority: 1,
-                    type: 'product',
-                    productId: product.productId
-                }
-            },
-            {
-                onError: () => {
-                    toast({
-                        title: formatMessage(API_ERROR_MESSAGE),
-                        status: 'error'
-                    })
-                },
-                onSuccess: () => {
-                    toast({
-                        title: formatMessage(TOAST_MESSAGE_ADDED_TO_WISHLIST, {quantity: 1}),
-                        status: 'success',
-                        action: (
-                            // it would be better if we could use <Button as={Link}>
-                            // but unfortunately the Link component is not compatible
-                            // with Chakra Toast, since the ToastManager is rendered via portal
-                            // and the toast doesn't have access to intl provider, which is a
-                            // requirement of the Link component.
-                            <Button variant="link" onClick={() => navigate('/account/wishlist')}>
-                                {formatMessage(TOAST_ACTION_VIEW_WISHLIST)}
-                            </Button>
-                        )
-                    })
-                },
-                onSettled: () => {
-                    setWishlistLoading(wishlistLoading.filter((id) => id !== product.productId))
-                }
-            }
-        )
-    }
-
-    const removeItemFromWishlist = async (product) => {
-        setWishlistLoading([...wishlistLoading, product.productId])
-
-        const listId = wishlist.id
-        const itemId = wishlist.customerProductListItems.find(
-            (i) => i.productId === product.productId
-        ).id
-
-        await deleteCustomerProductListItem(
-            {
-                body: {},
-                parameters: {customerId, listId, itemId}
-            },
-            {
-                onError: () => {
-                    toast({
-                        title: formatMessage(API_ERROR_MESSAGE),
-                        status: 'error'
-                    })
-                },
-                onSuccess: () => {
-                    toast({
-                        title: formatMessage(TOAST_MESSAGE_REMOVED_FROM_WISHLIST),
-                        status: 'success'
-                    })
-                },
-                onSettled: () => {
-                    setWishlistLoading(wishlistLoading.filter((id) => id !== product.productId))
-                }
-            }
-        )
-    }
-
-    // Clears all filters
-    const resetFilters = () => {
-        const newSearchParams = {
-            ...searchParams,
-            refine: []
-        }
-        const newPath = isSearch
-            ? `/search?${stringifySearchParams(newSearchParams)}`
-            : `/category/${params.categoryId}?${stringifySearchParams(newSearchParams)}`
-
-        navigate(newPath)
-    }
 
     /**************** Einstein ****************/
     useEffect(() => {
@@ -518,7 +372,7 @@ const ProductList = (props) => {
                                                     category={category}
                                                     addItemToWishlist={addItemToWishlist}
                                                     removeItemFromWishlist={removeItemFromWishlist}
-                                                    isInWishlist={false}
+                                                    isInWishlist={isInWishlist}
                                                     activeCurrency={activeCurrency}
                                                 />
                                             </SimpleGrid>
@@ -527,16 +381,17 @@ const ProductList = (props) => {
                                                 justifyContent={['center', 'center', 'flex-center']}
                                                 paddingTop={16}
                                             >
-                                               <Pagination
+                                                <Pagination
                                                     showNext={false}
                                                     showPrevious={false}
                                                     classNames={{
                                                         root: 'custom-pagination-root',
                                                         item: 'custom-pagination-item',
                                                         link: 'custom-pagination-link',
-                                                        selectedItem: 'custom-pagination-item-selected',
+                                                        selectedItem:
+                                                            'custom-pagination-item-selected'
                                                     }}
-                                                 />
+                                                />
                                             </Flex>
                                         </Box>
                                     </Grid>

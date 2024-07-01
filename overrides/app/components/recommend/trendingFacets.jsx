@@ -44,4 +44,9 @@ TrendingFacets.propTypes = {
     title: PropTypes.string
 }
 
+TrendingFacetItem.propTypes = {
+    item: PropTypes.object.isRequired,
+    components: PropTypes.object.isRequired
+}
+
 export default TrendingFacets
