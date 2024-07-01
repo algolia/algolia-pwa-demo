@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {Flex, Heading} from '@salesforce/retail-react-app/app/components/shared/ui'
 
 const WidgetHeader = ({recommendations, title}) => {
@@ -12,6 +13,11 @@ const WidgetHeader = ({recommendations, title}) => {
         )
     }
     return null
+}
+
+WidgetHeader.propTypes = {
+    recommendations: PropTypes.object,
+    title: PropTypes.string
 }
 
 export default WidgetHeader

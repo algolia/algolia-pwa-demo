@@ -16,7 +16,7 @@ import {useIntl} from 'react-intl'
 import PropTypes from 'prop-types'
 import {cssColorGroups} from '../../../constants'
 import {capitalize} from '@salesforce/retail-react-app/app/utils/utils'
-import {HierarchicalMenu, useRefinementList} from 'react-instantsearch'
+import {useRefinementList} from 'react-instantsearch'
 import AlgoliaRefinementsContainer from './algolia-refinements-container'
 
 const AlgoliaColorRefinements = (props) => {

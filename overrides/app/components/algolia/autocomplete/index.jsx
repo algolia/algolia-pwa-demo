@@ -19,7 +19,6 @@ import {popularPlugin} from './plugins/popularPlugin'
 import {productsPluginFactory} from './plugins/productsPlugin'
 import {querySuggestionsPlugin} from './plugins/querySuggestionsPlugin'
 import {quickAccessPluginFactory} from './plugins/quickAccessPlugin'
-import {recentSearchesPlugin} from './plugins/recentSearchesPlugin'
 import {contentPlugin} from './plugins/contentPlugin'
 import {brandsPlugin} from './plugins/brandsPlugin'
 import {cx, hasSourceActiveItem, isDetached} from './utils'
@@ -108,7 +107,7 @@ export function Autocomplete({navigate, currency}) {
         const recentSearchesPlugin = createLocalStorageRecentSearchesPlugin({
             key: 'pwa-recent-searches',
             limit: 5,
-            transformSource({source, onTapAheadItem}) {
+            transformSource({source}) {
                 return {
                     ...source,
                     onSelect({item}) {
@@ -235,9 +234,7 @@ function AutocompletePanel(props, search) {
     const {
         recentSearchesPlugin: recentSearches,
         querySuggestionsPlugin: querySuggestions,
-        categoriesPlugin: categories,
         brandsPlugin: brands,
-        faqPlugin: faq,
         productsPlugin: products,
         contentPlugin: content,
         popularPlugin: popular,
@@ -357,7 +354,17 @@ function AutocompletePanel(props, search) {
                 </div>
             </div>
 
-            <div className="blur" onClick={() => search.setIsOpen(false)}></div>
+            <div
+                className="blur"
+                onClick={() => search.setIsOpen(false)}
+                onKeyDown={(event) => {
+                    if (event.key === 'Escape') {
+                        search.setIsOpen(false)
+                    }
+                }}
+                role="button"
+                tabIndex={0}
+            ></div>
         </>
     )
 }

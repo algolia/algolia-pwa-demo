@@ -8,7 +8,7 @@
 import React, {Fragment, useCallback, useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
 import {Helmet} from 'react-helmet'
-import {FormattedMessage, useIntl} from 'react-intl'
+import {useIntl} from 'react-intl'
 
 // Components
 import {Box, Button, Stack} from '@salesforce/retail-react-app/app/components/shared/ui'
@@ -28,7 +28,6 @@ import useEinstein from '@salesforce/retail-react-app/app/hooks/use-einstein'
 import useActiveData from '@salesforce/retail-react-app/app/hooks/use-active-data'
 import {useServerContext} from '@salesforce/pwa-kit-react-sdk/ssr/universal/hooks'
 // Project Components
-import RecommendedProducts from '@salesforce/retail-react-app/app/components/recommended-products'
 import ProductView from '@salesforce/retail-react-app/app/components/product-view'
 import InformationAccordion from '@salesforce/retail-react-app/app/pages/product-detail/partials/information-accordion'
 
@@ -37,7 +36,6 @@ import {HTTPNotFound, HTTPError} from '@salesforce/pwa-kit-react-sdk/ssr/univers
 // constant
 import {
     API_ERROR_MESSAGE,
-    EINSTEIN_RECOMMENDERS,
     MAX_CACHE_AGE,
     TOAST_ACTION_VIEW_WISHLIST,
     TOAST_MESSAGE_ADDED_TO_WISHLIST,
@@ -425,6 +423,8 @@ const ProductDetail = () => {
                                 product={product}
                                 selectedColors={selectedColors}
                                 setSelectedColors={setSelectedColors}
+                                addItemToWishlist={handleAddToWishlist}
+                                removeItemFromWishlist={handleAddToWishlist}
                             />
 
                             <RelatedProducts

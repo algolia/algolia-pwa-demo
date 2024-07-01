@@ -1,8 +1,9 @@
-import React, {useState} from 'react'
-import {Box, HStack, Button, Center, useMultiStyleConfig, Flex} from '@chakra-ui/react'
+import React from 'react'
+import {Box, HStack, Button, Center, useMultiStyleConfig} from '@chakra-ui/react'
 import {productUrlBuilder, rebuildPathWithParams} from '@salesforce/retail-react-app/app/utils/url'
 import Link from '@salesforce/retail-react-app/app/components/link'
 import {useIntl} from 'react-intl'
+import PropTypes from 'prop-types'
 
 const AlgoliaProductSwatch = (props) => {
     const {product, setSelectedColors, selectedColors} = props
@@ -44,9 +45,7 @@ const AlgoliaProductSwatch = (props) => {
         return [productColor, ...otherColors]
     }
 
-    const [sortedColorVariations, setSortedColorVariations] = useState(
-        sortColorVariations(colorVariations)
-    )
+    const sortedColorVariations = sortColorVariations(colorVariations)
 
     const findSwatchImage = (variant) => {
         var image_groups = variant.image_groups
@@ -116,6 +115,30 @@ const AlgoliaProductSwatch = (props) => {
             )}
         </>
     )
+}
+
+AlgoliaProductSwatch.propTypes = {
+    product: PropTypes.shape({
+        masterID: PropTypes.string.isRequired,
+        color: PropTypes.string.isRequired,
+        colorVariations: PropTypes.arrayOf(
+            PropTypes.shape({
+                color: PropTypes.string.isRequired,
+                image_groups: PropTypes.arrayOf(
+                    PropTypes.shape({
+                        view_type: PropTypes.string.isRequired,
+                        images: PropTypes.arrayOf(
+                            PropTypes.shape({
+                                dis_base_link: PropTypes.string.isRequired
+                            })
+                        ).isRequired
+                    })
+                ).isRequired
+            })
+        ).isRequired
+    }).isRequired,
+    setSelectedColors: PropTypes.func.isRequired,
+    selectedColors: PropTypes.object.isRequired
 }
 
 export default AlgoliaProductSwatch

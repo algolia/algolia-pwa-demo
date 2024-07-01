@@ -79,7 +79,6 @@ const ProductTile = (props) => {
     let imageAlt = ''
 
     if (product.image_groups) {
-        // eslint-disable-next-line react/prop-types
         product.image_groups.forEach((imageGroup) => {
             if (imageGroup.view_type == 'large') {
                 imageUrl = imageGroup.images[0].dis_base_link
@@ -195,7 +194,10 @@ ProductTile.propTypes = {
         // See: https://developer.salesforce.com/docs/commerce/einstein-api/references/einstein-api-quick-start-guide?meta=getRecommendations
         // Note: useEinstein() transforms snake_case property names from the API response to camelCase
         productName: PropTypes.string,
-        productId: PropTypes.string
+        productId: PropTypes.string,
+        image_groups: PropTypes.arrayOf(PropTypes.object),
+        masterID: PropTypes.string,
+        objectID: PropTypes.string
     }),
     /**
      * Enable adding/removing product as a favourite.
@@ -212,7 +214,9 @@ ProductTile.propTypes = {
      */
     onFavouriteToggle: PropTypes.func,
     dynamicImageProps: PropTypes.object,
-    currency: PropTypes.string
+    currency: PropTypes.string,
+    selectedColors: PropTypes.object,
+    setSelectedColors: PropTypes.func
 }
 
 export default ProductTile

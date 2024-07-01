@@ -62,7 +62,6 @@ export const cssColorGroups = {
     swissnavyandwhite: 'linear-gradient(to right, #ffffff, #000080)',
     blackandsugar: 'linear-gradient(to right, #f9f9f9, #000000)',
     cobalt: '#0047ab',
-    taupe: '#d3bca9',
     turquoise: '#40e0d0',
     ivorymulti: 'linear-gradient(to right, ivory, orange, yellow, green, cyan, blue, violet)',
     darkstone: '#eae6ca',

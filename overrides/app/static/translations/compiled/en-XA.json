@@ -5018,15 +5018,7 @@
     },
     {
       "type": 0,
-      "value": "Ṽīḗḗẇ "
-    },
-    {
-      "type": 1,
-      "value": "prroductCount"
-    },
-    {
-      "type": 0,
-      "value": " īŧḗḗḿş"
+      "value": "Ṽīḗḗẇ īŧḗḗḿş"
     },
     {
       "type": 0,
@@ -5227,6 +5219,20 @@
     {
       "type": 0,
       "value": " ƒřǿǿḿ ẇīşħŀīşŧ"
+    },
+    {
+      "type": 0,
+      "value": "]"
+    }
+  ],
+  "product_tile.assistive_msg.wishlist": [
+    {
+      "type": 0,
+      "value": "["
+    },
+    {
+      "type": 0,
+      "value": "Ẇīşħŀīşŧ"
     },
     {
       "type": 0,
@@ -5870,7 +5876,7 @@
     },
     {
       "type": 0,
-      "value": "Ƈŀḗḗȧȧř Ȧŀŀ"
+      "value": "Ƈŀḗḗȧȧř Ƒīŀŧḗḗřş"
     },
     {
       "type": 0,

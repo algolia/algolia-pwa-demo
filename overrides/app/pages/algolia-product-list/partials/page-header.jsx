@@ -16,7 +16,7 @@ import Breadcrumb from '@salesforce/retail-react-app/app/components/breadcrumb'
 
 import {useHits, useInstantSearch} from 'react-instantsearch'
 
-const PageHeader = ({category, productSearchResult, isLoading, searchQuery, ...otherProps}) => {
+const PageHeader = ({category, isLoading, searchQuery, ...otherProps}) => {
     const intl = useIntl()
     const {results} = useHits()
     const {status} = useInstantSearch()
