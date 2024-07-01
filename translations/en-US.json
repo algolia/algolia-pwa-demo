@@ -1018,7 +1018,7 @@
     "defaultMessage": "Clear Filters"
   },
   "product_list.modal.button.view_items": {
-    "defaultMessage": "View {prroductCount} items"
+    "defaultMessage": "View items"
   },
   "product_list.modal.title.filter": {
     "defaultMessage": "Filter"
@@ -1049,6 +1049,9 @@
   },
   "product_tile.assistive_msg.remove_from_wishlist": {
     "defaultMessage": "Remove {product} from wishlist"
+  },
+  "product_tile.assistive_msg.wishlist": {
+    "defaultMessage": "Wishlist"
   },
   "product_tile.label.starting_at_price": {
     "defaultMessage": "Starting at {price}"
@@ -1178,7 +1181,7 @@
     "defaultMessage": "Clear all filters"
   },
   "selected_refinements.action.clear_all": {
-    "defaultMessage": "Clear All"
+    "defaultMessage": "Clear Filters"
   },
   "shipping_address.button.continue_to_shipping": {
     "defaultMessage": "Continue to Shipping Method"

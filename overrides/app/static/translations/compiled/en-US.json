@@ -2334,15 +2334,7 @@
   "product_list.modal.button.view_items": [
     {
       "type": 0,
-      "value": "View "
-    },
-    {
-      "type": 1,
-      "value": "prroductCount"
-    },
-    {
-      "type": 0,
-      "value": " items"
+      "value": "View items"
     }
   ],
   "product_list.modal.title.filter": [
@@ -2463,6 +2455,12 @@
     {
       "type": 0,
       "value": " from wishlist"
+    }
+  ],
+  "product_tile.assistive_msg.wishlist": [
+    {
+      "type": 0,
+      "value": "Wishlist"
     }
   ],
   "product_tile.label.starting_at_price": [
@@ -2762,7 +2760,7 @@
   "selected_refinements.action.clear_all": [
     {
       "type": 0,
-      "value": "Clear All"
+      "value": "Clear Filters"
     }
   ],
   "shipping_address.button.continue_to_shipping": [
