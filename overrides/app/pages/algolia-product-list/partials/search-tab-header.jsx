@@ -3,6 +3,7 @@ import {Box, Fade} from '@salesforce/retail-react-app/app/components/shared/ui'
 import React from 'react'
 import {useIntl} from 'react-intl'
 import {TabList, Tab} from '@chakra-ui/react'
+import PropTypes from 'prop-types'
 
 const SearchTabHeader = ({isLoading, contentHitsCount}) => {
     const intl = useIntl()
@@ -21,6 +22,11 @@ const SearchTabHeader = ({isLoading, contentHitsCount}) => {
             <Tab>Articles ({contentHitsCount})</Tab>
         </TabList>
     )
+}
+
+SearchTabHeader.propTypes = {
+    isLoading: PropTypes.bool,
+    contentHitsCount: PropTypes.number
 }
 
 export default SearchTabHeader

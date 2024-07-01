@@ -1,5 +1,5 @@
 import React from 'react'
-import {Box, Divider, Text} from '@chakra-ui/react'
+import {Box, Text} from '@chakra-ui/react'
 import {useHits} from 'react-instantsearch'
 import {useHasRefinements} from '../../../hooks/use-has-refinements'
 

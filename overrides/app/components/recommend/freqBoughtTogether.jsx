@@ -8,6 +8,7 @@ import recommend from '@algolia/recommend'
 import {useCurrency} from '@salesforce/retail-react-app/app/hooks'
 import {getConfig} from '@salesforce/pwa-kit-runtime/utils/ssr-config'
 import WidgetHeader from './utils/widgetheader'
+import {useWishlistOperations} from '../../hooks/use-wishlist-operations'
 
 const FrequentlyBoughtTogether = ({product, selectedColors, setSelectedColors}) => {
     const {currency: activeCurrency} = useCurrency()
@@ -21,6 +22,10 @@ const FrequentlyBoughtTogether = ({product, selectedColors, setSelectedColors}) 
     const recommendClient = useMemo(() => {
         return recommend(algoliaConfig.appId, algoliaConfig.apiKey)
     }, [])
+
+    // Use the wishlist operations hook
+    const {addItemToWishlist, removeItemFromWishlist, isInWishlist, isWishlistLoading} =
+        useWishlistOperations()
 
     const getReferenceProductId = (product) => {
         if (!product) {
@@ -51,7 +56,7 @@ const FrequentlyBoughtTogether = ({product, selectedColors, setSelectedColors}) 
                         key={item.id}
                         product={item}
                         enableFavourite={true}
-                        isFavourite={false}
+                        isFavourite={isInWishlist(item)}
                         currency={activeCurrency}
                         selectedColors={selectedColors}
                         setSelectedColors={setSelectedColors}
@@ -62,6 +67,7 @@ const FrequentlyBoughtTogether = ({product, selectedColors, setSelectedColors}) 
                         dynamicImageProps={{
                             widths: ['50vw', '50vw', '20vw', '20vw', '25vw']
                         }}
+                        isLoading={isWishlistLoading}
                     />
                 )
             }}

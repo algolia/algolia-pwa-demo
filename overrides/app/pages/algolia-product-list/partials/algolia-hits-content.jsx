@@ -2,12 +2,11 @@ import React, {Fragment, useEffect} from 'react'
 import PropTypes from 'prop-types'
 import {useHits, useInstantSearch} from 'react-instantsearch'
 import {Skeleton as ProductTileSkeleton} from '../../../components/algolia-product-tile/index'
-import {Box, Collapse, Divider, Text, VStack, Spacer} from '@chakra-ui/react'
-import {prop} from 'ramda'
+import {Box, Collapse, Divider, Text, VStack} from '@chakra-ui/react'
 
 const AlgoliaHitsContent = (props) => {
     const {isLoading} = props
-    const {hits, sendEvent} = useHits()
+    const {hits} = useHits()
     const {status} = useInstantSearch(props)
 
     useEffect(() => {
@@ -45,7 +44,8 @@ const AlgoliaHitsContent = (props) => {
 
 AlgoliaHitsContent.propTypes = {
     hitComponent: PropTypes.func,
-    isLoading: PropTypes.bool
+    isLoading: PropTypes.bool,
+    setContentHitsCount: PropTypes.func
 }
 
 export default AlgoliaHitsContent

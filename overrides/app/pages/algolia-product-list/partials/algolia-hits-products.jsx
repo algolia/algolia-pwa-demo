@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useState} from 'react'
+import React, {Fragment, useState} from 'react'
 import PropTypes from 'prop-types'
 import {useHits, useInstantSearch} from 'react-instantsearch'
 import ProductTile, {
@@ -32,13 +32,12 @@ const AlgoliaHitsProducts = (props) => {
 
     return (
         <>
-            {hits.map((hit, idx) => (
+            {hits.map((hit) => (
                 <ProductTile
                     data-testid={`sf-product-tile-${hit.id}`}
                     key={hit.id}
                     product={hit}
                     enableFavourite={true}
-                    isFavourite={isInWishlist}
                     currency={activeCurrency}
                     selectedColors={selectedColors}
                     setSelectedColors={setSelectedColors}
@@ -51,6 +50,7 @@ const AlgoliaHitsProducts = (props) => {
                             einstein.sendClickCategory(category, hit)
                         }
                     }}
+                    isFavourite={isInWishlist(hit)}
                     onFavouriteToggle={(isFavourite) => {
                         const action = isFavourite ? addItemToWishlist : removeItemFromWishlist
                         return action(hit)
@@ -66,7 +66,14 @@ const AlgoliaHitsProducts = (props) => {
 
 AlgoliaHitsProducts.propTypes = {
     hitComponent: PropTypes.func,
-    isLoading: PropTypes.bool
+    isLoading: PropTypes.bool,
+    searchQuery: PropTypes.string,
+    category: PropTypes.string,
+    einstein: PropTypes.object,
+    addItemToWishlist: PropTypes.func,
+    removeItemFromWishlist: PropTypes.func,
+    isInWishlist: PropTypes.func,
+    activeCurrency: PropTypes.object
 }
 
 export default AlgoliaHitsProducts

@@ -6,16 +6,10 @@
  */
 
 import React, {Fragment, useState} from 'react'
-import {
-    Button,
-    Text,
-    Flex,
-    Stack,
-    Link
-} from '@salesforce/retail-react-app/app/components/shared/ui'
+import {Text, Flex, Stack, Link} from '@salesforce/retail-react-app/app/components/shared/ui'
 import PropTypes from 'prop-types'
 import {Link as RouteLink} from 'react-router-dom'
-import {defineMessage, FormattedMessage, useIntl} from 'react-intl'
+import {defineMessage, useIntl} from 'react-intl'
 import {SearchIcon} from '@salesforce/retail-react-app/app/components/icons'
 import TrendingItems from '../../../components/recommend/trendingItems'
 
