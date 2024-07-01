@@ -1,0 +1,30 @@
+name: Format Code
+
+on:
+  pull_request:
+    branches: [ feature/linter-format-github-actions ]
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: ${{ github.head_ref }}
+    
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '14'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Run formatter
+      run: npm run format
+    
+    - name: Commit changes
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: "style: format code with npm run format"
+        branch: ${{ github.head_ref }}
