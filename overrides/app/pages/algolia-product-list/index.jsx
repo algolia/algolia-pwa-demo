@@ -113,6 +113,7 @@ const ProductList = (props) => {
         return algoliasearch(algoliaConfig.appId, algoliaConfig.apiKey)
     }, [])
 
+    // Algolia Refinements - You can adjust these to match your Algolia index.
     const hierarchicalCategoryAttributes = [
         `__primary_category.0`,
         `__primary_category.1`,
