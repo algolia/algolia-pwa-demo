@@ -20,3 +20,16 @@ jobs:
     
     - name: Run linter
       run: npm run lint
+    
+    - name: Update PR status
+      if: failure()
+      uses: actions/github-script@v6
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: '❌ Linting check failed. Please fix the linting errors and update your PR.'
+          })

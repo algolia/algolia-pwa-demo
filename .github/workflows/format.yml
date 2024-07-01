@@ -23,8 +23,27 @@ jobs:
     - name: Run formatter
       run: npm run format
     
+    - name: Check for changes
+      id: git-check
+      run: |
+        git diff --exit-code || echo "changes=true" >> $GITHUB_OUTPUT
+    
     - name: Commit changes
+      if: steps.git-check.outputs.changes == 'true'
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
         commit_message: "style: format code with npm run format"
         branch: ${{ github.head_ref }}
+    
+    - name: Update PR status
+      if: failure()
+      uses: actions/github-script@v6
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: '❌ Code formatting check failed. Please run `npm run format` locally and commit the changes.'
+          })
