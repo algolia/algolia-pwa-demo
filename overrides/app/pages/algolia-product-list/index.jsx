@@ -361,7 +361,7 @@ const ProductList = (props) => {
                                         </Stack>
                                         <Box>
                                             <SimpleGrid
-                                                columns={[2, 2, 3, 3]}
+                                                columns={[2, 2, 3, 4]}
                                                 spacingX={4}
                                                 spacingY={{base: 12, lg: 8}}
                                             >
