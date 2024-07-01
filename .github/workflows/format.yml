@@ -2,7 +2,7 @@ name: Format Code
 
 on:
   pull_request:
-    branches: [ feature/linter-format-github-actions ]
+    branches: [ develop ]
 
 jobs:
   format:
