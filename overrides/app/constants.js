@@ -89,5 +89,5 @@ export const cssColorGroups = {
     sundriedcoral: '#FF7F50',
     bluestone: '#4089c0',
     navysky: '#000080',
-    test: 'linear-gradient(to right, #000080, #4089c0, #000080)',
+    test: 'linear-gradient(to right, #000080, #4089c0, #000080)'
 }

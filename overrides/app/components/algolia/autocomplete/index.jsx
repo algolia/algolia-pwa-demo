@@ -74,7 +74,7 @@ const combine = pipe(removeDuplicates, fillWith)
 export function Autocomplete({navigate, currency}) {
     const containerRef = useRef(null)
     const searchRef = useRef(null) // Ref for autocomplete search instance
-    const panelAnimationRef = useRef(null);
+    const panelAnimationRef = useRef(null)
 
     /** Demo purposed. Feel free to remove this part for your implementation */
     /*********************************************************************** */
@@ -172,32 +172,32 @@ export function Autocomplete({navigate, currency}) {
                         rootRef = createRoot(root)
                     }
 
-                    var autocompleteElement = AutocompletePanel(state,searchRef.current)
+                    var autocompleteElement = AutocompletePanel(state, searchRef.current)
 
                     rootRef.render(autocompleteElement)
                 } catch (renderError) {
                     console.error('Error during autocomplete rendering:', renderError)
                 }
             },
-            onStateChange({ state }) {
-                if(state.isOpen){
-                    document.querySelector(".css-1bcprh").classList.add('wt-navbar');
-                    document.querySelector(".aa-Form").classList.add('search-hidden');
-                    clearTimeout(panelAnimationRef.current);
-                    panelAnimationRef.current = setTimeout(()=>{
-                        document.querySelector(".aa-PanelLayout").classList.add('panel-animation');
-                        document.querySelector(".aa-Form").classList.add('search-animation');
-                    },200)
-                }else{
-                    document.querySelector(".css-1bcprh").classList.remove('wt-navbar');
-                    document.querySelector(".aa-Form").classList.remove('search-hidden');
-                    var panelAnimationElement = document.querySelector(".panel-animation");
+            onStateChange({state}) {
+                if (state.isOpen) {
+                    document.querySelector('.css-1bcprh').classList.add('wt-navbar')
+                    document.querySelector('.aa-Form').classList.add('search-hidden')
+                    clearTimeout(panelAnimationRef.current)
+                    panelAnimationRef.current = setTimeout(() => {
+                        document.querySelector('.aa-PanelLayout').classList.add('panel-animation')
+                        document.querySelector('.aa-Form').classList.add('search-animation')
+                    }, 200)
+                } else {
+                    document.querySelector('.css-1bcprh').classList.remove('wt-navbar')
+                    document.querySelector('.aa-Form').classList.remove('search-hidden')
+                    var panelAnimationElement = document.querySelector('.panel-animation')
                     if (panelAnimationElement) {
-                        panelAnimationElement.classList.remove('panel-animation');
-                        document.querySelector(".aa-Form").classList.remove('search-animation');
+                        panelAnimationElement.classList.remove('panel-animation')
+                        document.querySelector('.aa-Form').classList.remove('search-animation')
                     }
                 }
-            },
+            }
         })
 
         const handleKeyDown = (e) => {
@@ -231,7 +231,7 @@ export function Autocomplete({navigate, currency}) {
  * @param {Object} props - The properties of the panel, including state and elements from plugins.
  * @returns {JSX.Element} - The rendered panel layout for autocomplete results.
  */
-function AutocompletePanel(props,search) {
+function AutocompletePanel(props, search) {
     const {
         recentSearchesPlugin: recentSearches,
         querySuggestionsPlugin: querySuggestions,
@@ -252,112 +252,113 @@ function AutocompletePanel(props,search) {
             .reduce((prev, curr) => prev + curr.items.length, 0) > 0
 
     return (
-      <>
-          <div className="aa-PanelLayout aa-Panel--scrollable">
-              <div className="aa-PanelSection--top">
-                  <CloseIcon onClick={() => search.setIsOpen(false)} />
-              </div>
-              <div className="aa-PanelSections">
-                  <div className="aa-PanelSection--left">
-                      {!hasResults && (
-                        <div className="aa-NoResultsQuery">We couldn’t find anything for `{props.state.query}`</div>
-                      )}
+        <>
+            <div className="aa-PanelLayout aa-Panel--scrollable">
+                <div className="aa-PanelSection--top">
+                    <CloseIcon onClick={() => search.setIsOpen(false)} />
+                </div>
+                <div className="aa-PanelSections">
+                    <div className="aa-PanelSection--left">
+                        {!hasResults && (
+                            <div className="aa-NoResultsQuery">
+                                We couldn’t find anything for `{props.state.query}`
+                            </div>
+                        )}
 
-                      {hasResults ? (
-                        (!props.state.query && recentSearches && (
-                          <Fragment>
-                              <div className="aa-SourceHeader">
-                                  <span className="aa-SourceHeaderTitle">Recent</span>
-                                  <div className="aa-SourceHeaderLine" />
-                              </div>
-                              {recentSearches}
-
-                              <div className="aa-SourceHeader">
-                                  <span className="aa-SourceHeaderTitle">Popular Brands</span>
-                                  <div className="aa-SourceHeaderLine" />
-                              </div>
-                              <div className="aa-PanelSectionSources">{brands}</div>
-                          </Fragment>
-                        )) ||
-                        (props.state.query &&
-                        (querySuggestions) ? (
-                          <>
-                              {querySuggestions && (
+                        {hasResults ? (
+                            (!props.state.query && recentSearches && (
                                 <Fragment>
                                     <div className="aa-SourceHeader">
-                                            <span className="aa-SourceHeaderTitle">
-                                                Suggestions
-                                            </span>
+                                        <span className="aa-SourceHeaderTitle">Recent</span>
                                         <div className="aa-SourceHeaderLine" />
                                     </div>
+                                    {recentSearches}
 
-                                    <div className="aa-PanelSectionSources">
-                                        {querySuggestions}
+                                    <div className="aa-SourceHeader">
+                                        <span className="aa-SourceHeaderTitle">Popular Brands</span>
+                                        <div className="aa-SourceHeaderLine" />
                                     </div>
+                                    <div className="aa-PanelSectionSources">{brands}</div>
                                 </Fragment>
-                              )}
-                          </>
+                            )) ||
+                            (props.state.query && querySuggestions ? (
+                                <>
+                                    {querySuggestions && (
+                                        <Fragment>
+                                            <div className="aa-SourceHeader">
+                                                <span className="aa-SourceHeaderTitle">
+                                                    Suggestions
+                                                </span>
+                                                <div className="aa-SourceHeaderLine" />
+                                            </div>
+
+                                            <div className="aa-PanelSectionSources">
+                                                {querySuggestions}
+                                            </div>
+                                        </Fragment>
+                                    )}
+                                </>
+                            ) : (
+                                <div className="aa-NoResultsAdvices">
+                                    There is no suggestions for your search
+                                </div>
+                            ))
                         ) : (
-                          <div className="aa-NoResultsAdvices">
-                              There is no suggestions for your search
-                          </div>
-                        ))
-                      ) : (
-                        <div className="aa-NoResultsAdvices aa-mt-5">
-                            <ul className="aa-NoResultsAdvicesList">
-                                <li>Double-check your spelling</li>
-                                <li>Use fewer keywords</li>
-                                <li>Search for a less specific item</li>
-                                <li>Check out popular categories for inspiration</li>
-                            </ul>
-                        </div>
-                      )}
+                            <div className="aa-NoResultsAdvices aa-mt-5">
+                                <ul className="aa-NoResultsAdvicesList">
+                                    <li>Double-check your spelling</li>
+                                    <li>Use fewer keywords</li>
+                                    <li>Search for a less specific item</li>
+                                    <li>Check out popular categories for inspiration</li>
+                                </ul>
+                            </div>
+                        )}
 
-                      {!props.state.query && (
-                        <div className="aa-PanelSection--popular">{popular}</div>
-                      )}
-                  </div>
-                  <div className="aa-PanelSection--right">
-                      {products && (
-                        <div className="aa-PanelSection--products">
-                            <div className="aa-PanelSectionSource">{products}</div>
-                        </div>
-                      )}
-                      {content && (
-                        <div className="aa-PanelSection--content">
-                            <div className="aa-PanelSectionSource">{content}</div>
-                        </div>
-                      )}
+                        {!props.state.query && (
+                            <div className="aa-PanelSection--popular">{popular}</div>
+                        )}
+                    </div>
+                    <div className="aa-PanelSection--right">
+                        {products && (
+                            <div className="aa-PanelSection--products">
+                                <div className="aa-PanelSectionSource">{products}</div>
+                            </div>
+                        )}
+                        {content && (
+                            <div className="aa-PanelSection--content">
+                                <div className="aa-PanelSectionSource">{content}</div>
+                            </div>
+                        )}
 
-                      {quickAccess && (
-                        <div
-                          className={cx(
-                            "aa-PanelSection--quickAccess aa-PanelSection--zoomable",
-                            hasSourceActiveItem("quickAccessPlugin", props.state) &&
-                            "aa-PanelSection--active"
-                          )}
-                        >
-                            {quickAccess}
-                        </div>
-                      )}
+                        {quickAccess && (
+                            <div
+                                className={cx(
+                                    'aa-PanelSection--quickAccess aa-PanelSection--zoomable',
+                                    hasSourceActiveItem('quickAccessPlugin', props.state) &&
+                                        'aa-PanelSection--active'
+                                )}
+                            >
+                                {quickAccess}
+                            </div>
+                        )}
 
-                      {!hasResults && (
-                        <div
-                          className={cx(
-                            "aa-PanelSection--popularCategories aa-PanelSection--zoomable",
-                            hasSourceActiveItem("popularCategoriesPlugin", props.state) &&
-                            "aa-PanelSection--active"
-                          )}
-                        >
-                            {popularCategories}
-                        </div>
-                      )}
-                  </div>
-              </div>
-          </div>
+                        {!hasResults && (
+                            <div
+                                className={cx(
+                                    'aa-PanelSection--popularCategories aa-PanelSection--zoomable',
+                                    hasSourceActiveItem('popularCategoriesPlugin', props.state) &&
+                                        'aa-PanelSection--active'
+                                )}
+                            >
+                                {popularCategories}
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </div>
 
-          <div className="blur" onClick={() => search.setIsOpen(false)} ></div>
-      </>
+            <div className="blur" onClick={() => search.setIsOpen(false)}></div>
+        </>
     )
 }
 

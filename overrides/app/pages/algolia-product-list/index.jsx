@@ -527,16 +527,17 @@ const ProductList = (props) => {
                                                 justifyContent={['center', 'center', 'flex-center']}
                                                 paddingTop={16}
                                             >
-                                               <Pagination
+                                                <Pagination
                                                     showNext={false}
                                                     showPrevious={false}
                                                     classNames={{
                                                         root: 'custom-pagination-root',
                                                         item: 'custom-pagination-item',
                                                         link: 'custom-pagination-link',
-                                                        selectedItem: 'custom-pagination-item-selected',
+                                                        selectedItem:
+                                                            'custom-pagination-item-selected'
                                                     }}
-                                                 />
+                                                />
                                             </Flex>
                                         </Box>
                                     </Grid>
