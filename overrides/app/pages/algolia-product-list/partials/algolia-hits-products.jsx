@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {useHits, useInstantSearch} from 'react-instantsearch'
 import ProductTile, {
     Skeleton as ProductTileSkeleton
-} from '../../../components/algolia-product-tile/index'
+} from '../../../components/algolia/algolia-product-tile/index'
 
 const AlgoliaHitsProducts = (props) => {
     const {

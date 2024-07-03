@@ -1,16 +1,16 @@
 import React, {useMemo} from 'react'
 import PropTypes from 'prop-types'
-import ProductTile from '../../components/algolia-product-tile'
+import ProductTile from '../algolia-product-tile'
 import {HorizontalSlider} from '@algolia/ui-components-horizontal-slider-react'
 import '@algolia/ui-components-horizontal-slider-theme'
-import {FrequentlyBoughtTogether as AlgoliaFrequentlyBoughtTogether} from '@algolia/recommend-react'
+import {TrendingItems as AlgoliaTrendingItems} from '@algolia/recommend-react'
 import recommend from '@algolia/recommend'
 import {useCurrency} from '@salesforce/retail-react-app/app/hooks'
 import {getConfig} from '@salesforce/pwa-kit-runtime/utils/ssr-config'
 import WidgetHeader from './utils/widgetheader'
-import {useWishlistOperations} from '../../hooks/use-wishlist-operations'
+import {useWishlistOperations} from '../../../hooks/use-wishlist-operations'
 
-const FrequentlyBoughtTogether = ({product, selectedColors, setSelectedColors}) => {
+const TrendingItems = ({facetName, facetValue, selectedColors, setSelectedColors}) => {
     const {currency: activeCurrency} = useCurrency()
     let {app: algoliaConfig} = useMemo(() => getConfig(), [])
     algoliaConfig = {
@@ -27,36 +27,23 @@ const FrequentlyBoughtTogether = ({product, selectedColors, setSelectedColors}) 
     const {addItemToWishlist, removeItemFromWishlist, isInWishlist, isWishlistLoading} =
         useWishlistOperations()
 
-    const getReferenceProductId = (product) => {
-        if (!product) {
-            return null
-        }
-
-        if (product && product.type.master) {
-            return product.variants[0].productId
-        }
-        return product.id
-    }
-
     return (
-        <AlgoliaFrequentlyBoughtTogether
+        <AlgoliaTrendingItems
             recommendClient={recommendClient}
             indexName={indexName}
-            objectIDs={[getReferenceProductId(product)]}
+            facetName={facetName}
+            facetValue={facetValue}
             headerComponent={(recommendations) => (
-                <WidgetHeader
-                    recommendations={recommendations}
-                    title="Frequently Bought Together"
-                />
+                <WidgetHeader recommendations={recommendations} title="Trending Products" />
             )}
             itemComponent={({item}) => {
                 return (
                     <ProductTile
                         data-testid={`sf-product-tile-${item.id}`}
                         key={item.id}
-                        product={item}
                         enableFavourite={true}
                         isFavourite={isInWishlist(item)}
+                        product={item}
                         currency={activeCurrency}
                         selectedColors={selectedColors}
                         setSelectedColors={setSelectedColors}
@@ -76,10 +63,11 @@ const FrequentlyBoughtTogether = ({product, selectedColors, setSelectedColors}) 
     )
 }
 
-FrequentlyBoughtTogether.propTypes = {
-    product: PropTypes.object.isRequired,
+TrendingItems.propTypes = {
+    facetName: PropTypes.string.isRequired,
+    facetValue: PropTypes.string.isRequired,
     selectedColors: PropTypes.object.isRequired,
     setSelectedColors: PropTypes.func.isRequired
 }
 
-export default FrequentlyBoughtTogether
+export default TrendingItems

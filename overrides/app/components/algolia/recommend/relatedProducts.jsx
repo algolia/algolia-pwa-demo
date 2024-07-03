@@ -1,6 +1,6 @@
 import React, {useMemo} from 'react'
 import PropTypes from 'prop-types'
-import ProductTile from '../../components/algolia-product-tile'
+import ProductTile from '../algolia-product-tile'
 import {HorizontalSlider} from '@algolia/ui-components-horizontal-slider-react'
 import '@algolia/ui-components-horizontal-slider-theme'
 import {RelatedProducts as AlgoliaRelatedProducts} from '@algolia/recommend-react'
@@ -8,7 +8,7 @@ import recommend from '@algolia/recommend'
 import {useCurrency} from '@salesforce/retail-react-app/app/hooks'
 import {getConfig} from '@salesforce/pwa-kit-runtime/utils/ssr-config'
 import WidgetHeader from './utils/widgetheader'
-import {useWishlistOperations} from '../../hooks/use-wishlist-operations'
+import {useWishlistOperations} from '../../../hooks/use-wishlist-operations'
 
 const RelatedProducts = ({product, selectedColors, setSelectedColors}) => {
     const {currency: activeCurrency} = useCurrency()

@@ -46,9 +46,9 @@ import {rebuildPathWithParams} from '@salesforce/retail-react-app/app/utils/url'
 import {useHistory, useLocation, useParams} from 'react-router-dom'
 import {useToast} from '@salesforce/retail-react-app/app/hooks/use-toast'
 import {useWishList} from '@salesforce/retail-react-app/app/hooks/use-wish-list'
-import FrequentlyBoughtTogether from '../../components/recommend/freqBoughtTogether'
-import RelatedProducts from '../../components/recommend/relatedProducts'
-import LookingSimilar from '../../components/recommend/lookingSimilar'
+import FrequentlyBoughtTogether from '../../components/algolia/recommend/freqBoughtTogether'
+import RelatedProducts from '../../components/algolia/recommend/relatedProducts'
+import LookingSimilar from '../../components/algolia/recommend/lookingSimilar'
 
 const ProductDetail = () => {
     const {formatMessage} = useIntl()
