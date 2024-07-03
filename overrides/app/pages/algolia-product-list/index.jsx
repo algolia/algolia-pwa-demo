@@ -5,12 +5,12 @@
  * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import React, {useEffect, useState, useMemo} from 'react'
+import React, {useState, useMemo} from 'react'
 import PropTypes from 'prop-types'
 import {useHistory, useLocation, useParams} from 'react-router-dom'
 import {FormattedMessage, useIntl} from 'react-intl'
 import {Helmet} from 'react-helmet'
-import {useCategory, useProductSearch} from '@salesforce/commerce-sdk-react'
+import {useCategory} from '@salesforce/commerce-sdk-react'
 import {useServerContext} from '@salesforce/pwa-kit-react-sdk/ssr/universal/hooks'
 
 // Components
@@ -45,7 +45,6 @@ import {FilterIcon} from '@salesforce/retail-react-app/app/components/icons'
 
 // Hooks
 import {useSearchParams} from '@salesforce/retail-react-app/app/hooks'
-import useEinstein from '@salesforce/retail-react-app/app/hooks/use-einstein'
 
 // Others
 import {HTTPNotFound, HTTPError} from '@salesforce/pwa-kit-react-sdk/ssr/universal/errors'
@@ -57,7 +56,7 @@ import {useCurrency} from '@salesforce/retail-react-app/app/hooks'
 
 // Algolia
 import algoliasearch from 'algoliasearch/lite'
-import {Configure, InstantSearch, Index, Pagination} from 'react-instantsearch'
+import {Configure, InstantSearch, Index, Pagination, useInstantSearch} from 'react-instantsearch'
 import AlgoliaCurrentRefinements from './partials/algolia-current-refinements'
 import AlgoliaHierarchicalRefinements from './partials/algolia-hierarchical-refinements'
 import AlgoliaColorRefinements from './partials/algolia-color-refinements'
@@ -73,6 +72,7 @@ import AlgoliaHitsContent from './partials/algolia-hits-content'
 import AlgoliaHitsProducts from './partials/algolia-hits-products'
 import {useWishlistOperations} from '../../hooks/use-wishlist-operations'
 import '../../components/algolia/style.css'
+import { set } from 'ramda'
 
 // NOTE: You can ignore certain refinements on a template level by updating the below
 // list of ignored refinements.
@@ -92,7 +92,6 @@ const ProductList = (props) => {
     const {formatMessage} = useIntl()
     const params = useParams()
     const location = useLocation()
-    const einstein = useEinstein()
     const {res} = useServerContext()
     const [searchParams] = useSearchParams()
     const {currency: activeCurrency} = useCurrency()
@@ -155,17 +154,7 @@ const ProductList = (props) => {
     }
 
     /**************** Query Actions ****************/
-    const {isLoading, data: productSearchResult} = useProductSearch(
-        {
-            parameters: {
-                ...searchParams,
-                refine: searchParams._refine
-            }
-        },
-        {
-            keepPreviousData: true
-        }
-    )
+    const {isLoading, setIsLoading} = useState(false)
 
     const {error, data: category} = useCategory(
         {
@@ -177,13 +166,6 @@ const ProductList = (props) => {
             enabled: !isSearch && !!params.categoryId
         }
     )
-
-    // Apply disallow list to refinements.
-    if (productSearchResult?.refinements) {
-        productSearchResult.refinements = productSearchResult.refinements.filter(
-            ({attributeId}) => !REFINEMENT_DISALLOW_LIST.includes(attributeId)
-        )
-    }
 
     /**************** Error Handling ****************/
     const errorStatus = error?.response?.status
@@ -205,15 +187,6 @@ const ProductList = (props) => {
     // Reset scroll position when `isRefetching` becomes `true`.
     const query = searchQuery ?? ''
     const filters = !isLoading && category?.id ? `categories.id:${category.id}` : ''
-
-    /**************** Einstein ****************/
-    useEffect(() => {
-        if (productSearchResult) {
-            isSearch
-                ? einstein.sendViewSearch(searchQuery, productSearchResult)
-                : einstein.sendViewCategory(category, productSearchResult)
-        }
-    }, [productSearchResult])
 
     return (
         <Box
@@ -245,6 +218,11 @@ const ProductList = (props) => {
                 indexName={productIndexName}
                 routing
                 insights={true}
+                onStateChange={({uiState}) => {
+                    if (uiState) {
+                        setIsLoading(true)
+                    }
+                }}
             >
                 <Tabs defaultIndex={urlParams.get('tab') === 'articles' ? 1 : 0}>
                     {isSearch && (
@@ -369,7 +347,6 @@ const ProductList = (props) => {
                                                 <AlgoliaHitsProducts
                                                     isLoading={isLoading}
                                                     searchQuery={searchQuery}
-                                                    einstein={einstein}
                                                     category={category}
                                                     addItemToWishlist={addItemToWishlist}
                                                     removeItemFromWishlist={removeItemFromWishlist}

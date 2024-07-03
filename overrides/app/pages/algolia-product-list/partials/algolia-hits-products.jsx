@@ -10,7 +10,6 @@ const AlgoliaHitsProducts = (props) => {
         isLoading,
         searchQuery,
         category,
-        einstein,
         addItemToWishlist,
         removeItemFromWishlist,
         isInWishlist,
@@ -43,12 +42,6 @@ const AlgoliaHitsProducts = (props) => {
                     setSelectedColors={setSelectedColors}
                     onClick={() => {
                         sendEvent('click', hit, 'Product Clicked')
-
-                        if (searchQuery) {
-                            einstein.sendClickSearch(searchQuery, hit)
-                        } else if (category) {
-                            einstein.sendClickCategory(category, hit)
-                        }
                     }}
                     isFavourite={isInWishlist(hit)}
                     onFavouriteToggle={(isFavourite) => {
@@ -69,7 +62,6 @@ AlgoliaHitsProducts.propTypes = {
     isLoading: PropTypes.bool,
     searchQuery: PropTypes.string,
     category: PropTypes.string,
-    einstein: PropTypes.object,
     addItemToWishlist: PropTypes.func,
     removeItemFromWishlist: PropTypes.func,
     isInWishlist: PropTypes.func,
