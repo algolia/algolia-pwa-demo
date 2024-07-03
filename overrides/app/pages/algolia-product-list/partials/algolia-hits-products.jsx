@@ -6,7 +6,8 @@ import ProductTile, {
 } from '../../../components/algolia/algolia-product-tile/index'
 
 const AlgoliaHitsProducts = (props) => {
-    const {isLoading, addItemToWishlist, removeItemFromWishlist, isInWishlist, activeCurrency} = props
+    const {isLoading, addItemToWishlist, removeItemFromWishlist, isInWishlist, activeCurrency} =
+        props
     const {hits, sendEvent} = useHits()
     const {status} = useInstantSearch(props)
     const [selectedColors, setSelectedColors] = useState({})
