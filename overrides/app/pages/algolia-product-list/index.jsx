@@ -72,7 +72,6 @@ import AlgoliaHitsContent from './partials/algolia-hits-content'
 import AlgoliaHitsProducts from './partials/algolia-hits-products'
 import {useWishlistOperations} from '../../hooks/use-wishlist-operations'
 import '../../components/algolia/style.css'
-import { set } from 'ramda'
 
 // NOTE: You can ignore certain refinements on a template level by updating the below
 // list of ignored refinements.
