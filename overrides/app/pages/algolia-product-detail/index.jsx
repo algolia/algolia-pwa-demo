@@ -61,7 +61,6 @@ const ProductDetail = () => {
     const [productSetSelection, setProductSetSelection] = useState({})
     const childProductRefs = React.useRef({})
     const customerId = useCustomerId()
-    const [selectedColors, setSelectedColors] = useState({})
 
     /****************************** Basket *********************************/
     const {data: basket} = useCurrentBasket()
@@ -419,25 +418,11 @@ const ProductDetail = () => {
                 <Stack spacing={16}>
                     {!isProductASet && (
                         <>
-                            <FrequentlyBoughtTogether
-                                product={product}
-                                selectedColors={selectedColors}
-                                setSelectedColors={setSelectedColors}
-                                addItemToWishlist={handleAddToWishlist}
-                                removeItemFromWishlist={handleAddToWishlist}
-                            />
+                            <FrequentlyBoughtTogether product={product} />
 
-                            <RelatedProducts
-                                product={product}
-                                selectedColors={selectedColors}
-                                setSelectedColors={setSelectedColors}
-                            />
+                            <RelatedProducts product={product} />
 
-                            <LookingSimilar
-                                product={product}
-                                selectedColors={selectedColors}
-                                setSelectedColors={setSelectedColors}
-                            />
+                            <LookingSimilar product={product} />
                         </>
                     )}
                 </Stack>

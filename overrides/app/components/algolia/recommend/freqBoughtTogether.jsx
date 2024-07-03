@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react'
+import React, {useMemo, useState} from 'react'
 import PropTypes from 'prop-types'
 import ProductTile from '../algolia-product-tile'
 import {HorizontalSlider} from '@algolia/ui-components-horizontal-slider-react'
@@ -10,12 +10,14 @@ import {getConfig} from '@salesforce/pwa-kit-runtime/utils/ssr-config'
 import WidgetHeader from './utils/widgetheader'
 import {useWishlistOperations} from '../../../hooks/use-wishlist-operations'
 
-const FrequentlyBoughtTogether = ({product, selectedColors, setSelectedColors}) => {
+const FrequentlyBoughtTogether = ({product}) => {
     const {currency: activeCurrency} = useCurrency()
     let {app: algoliaConfig} = useMemo(() => getConfig(), [])
     algoliaConfig = {
         ...algoliaConfig.algolia
     }
+
+    const [selectedColors, setSelectedColors] = useState({})
 
     const indexName = algoliaConfig.indices.primary.value
 
@@ -77,9 +79,7 @@ const FrequentlyBoughtTogether = ({product, selectedColors, setSelectedColors}) 
 }
 
 FrequentlyBoughtTogether.propTypes = {
-    product: PropTypes.object.isRequired,
-    selectedColors: PropTypes.object.isRequired,
-    setSelectedColors: PropTypes.func.isRequired
+    product: PropTypes.object.isRequired
 }
 
 export default FrequentlyBoughtTogether

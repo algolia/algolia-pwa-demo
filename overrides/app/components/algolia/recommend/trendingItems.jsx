@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react'
+import React, {useMemo, useState} from 'react'
 import PropTypes from 'prop-types'
 import ProductTile from '../algolia-product-tile'
 import {HorizontalSlider} from '@algolia/ui-components-horizontal-slider-react'
@@ -10,7 +10,7 @@ import {getConfig} from '@salesforce/pwa-kit-runtime/utils/ssr-config'
 import WidgetHeader from './utils/widgetheader'
 import {useWishlistOperations} from '../../../hooks/use-wishlist-operations'
 
-const TrendingItems = ({facetName, facetValue, selectedColors, setSelectedColors}) => {
+const TrendingItems = ({facetName, facetValue}) => {
     const {currency: activeCurrency} = useCurrency()
     let {app: algoliaConfig} = useMemo(() => getConfig(), [])
     algoliaConfig = {
@@ -22,6 +22,8 @@ const TrendingItems = ({facetName, facetValue, selectedColors, setSelectedColors
     const recommendClient = useMemo(() => {
         return recommend(algoliaConfig.appId, algoliaConfig.apiKey)
     }, [])
+
+    const [selectedColors, setSelectedColors] = useState({})
 
     // Use the wishlist operations hook
     const {addItemToWishlist, removeItemFromWishlist, isInWishlist, isWishlistLoading} =
@@ -65,9 +67,7 @@ const TrendingItems = ({facetName, facetValue, selectedColors, setSelectedColors
 
 TrendingItems.propTypes = {
     facetName: PropTypes.string.isRequired,
-    facetValue: PropTypes.string.isRequired,
-    selectedColors: PropTypes.object.isRequired,
-    setSelectedColors: PropTypes.func.isRequired
+    facetValue: PropTypes.string.isRequired
 }
 
 export default TrendingItems
