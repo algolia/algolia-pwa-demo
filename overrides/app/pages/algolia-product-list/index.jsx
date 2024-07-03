@@ -113,6 +113,7 @@ const ProductList = (props) => {
         return algoliasearch(algoliaConfig.appId, algoliaConfig.apiKey)
     }, [])
 
+    // Algolia Refinements - You can adjust these to match your Algolia index.
     const hierarchicalCategoryAttributes = [
         `__primary_category.0`,
         `__primary_category.1`,
@@ -361,7 +362,7 @@ const ProductList = (props) => {
                                         </Stack>
                                         <Box>
                                             <SimpleGrid
-                                                columns={[2, 2, 3, 3]}
+                                                columns={[2, 2, 3, 4]}
                                                 spacingX={4}
                                                 spacingY={{base: 12, lg: 8}}
                                             >
