@@ -957,6 +957,20 @@ body {
   color: #7C7996;
 }
 
+.aa-SourceHeader--right {
+  display: flex;
+  justify-content: space-between;
+}
+
+.aa-SourceHeader--right .aa-SourceHeaderTitle{
+  color: #7C7996;
+}
+
+.aa-SourceHeader--right .aa-SourceHeaderButton{
+  color: #003DFF;
+  cursor: pointer;
+}
+
 .aa-PanelLayout{
   padding: 0;
   background-color: #ffffff;

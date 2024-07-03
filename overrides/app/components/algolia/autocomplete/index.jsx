@@ -26,7 +26,7 @@ import {createLocalStorageRecentSearchesPlugin} from '@algolia/autocomplete-plug
 import {CloseIcon} from '@salesforce/retail-react-app/app/components/icons'
 
 import '@algolia/autocomplete-theme-classic'
-import './style.css'
+import '../style.css'
 
 /**
  * Utility function to remove duplicates from search results.

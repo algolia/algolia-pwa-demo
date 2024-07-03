@@ -49,14 +49,19 @@ export const productsPluginFactory = (navigate, currency) => ({
                 },
                 renderer: {createElement, Fragment, render: () => {}},
                 templates: {
-                    header({state, Fragment}) {
+                    header({state}) {
                         return (
-                            <Fragment>
-                                <div className="aa-SourceHeaderTitle">
-                                    Products for {state.query}
-                                </div>
-                                <div className="aa-SourceHeaderLine" />
-                            </Fragment>
+                            <div className='aa-SourceHeader--right'>
+                                <span className="aa-SourceHeaderTitle">Products</span>
+                                <span className="aa-SourceHeaderButton">
+                                    <a 
+                                        onClick={() => navigate('/search?q=' + state.query)}
+                                        className="aa-SeeAllLink"
+                                    >
+                                        View All Products for "{state.query}" ({state.context.nbContent}) 
+                                    </a>
+                                </span>
+                            </div>
                         )
                     },
                     item({item, components}) {
@@ -67,20 +72,6 @@ export const productsPluginFactory = (navigate, currency) => ({
                                 navigate={navigate}
                                 currency={currency}
                             />
-                        )
-                    },
-                    footer({state}) {
-                        return (
-                            state.context.nbProducts > 4 && (
-                                <div style={{textAlign: 'center'}}>
-                                    <a
-                                        onClick={() => navigate('/search?q=' + state.query)}
-                                        className="aa-SeeAllBtn"
-                                    >
-                                        See All Products ({state.context.nbProducts})
-                                    </a>
-                                </div>
-                            )
                         )
                     }
                 }

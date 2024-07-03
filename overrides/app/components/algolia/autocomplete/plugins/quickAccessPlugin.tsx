@@ -105,8 +105,9 @@ export const quickAccessPluginFactory = (navigate) => ({
                     header({Fragment}) {
                         return (
                             <Fragment>
-                                <span className="aa-SourceHeaderTitle">Quick access</span>
-                                <div className="aa-SourceHeaderLine" />
+                                <div className="aa-SourceHeader">
+                                    <span className="aa-SourceHeaderTitle">Quick access</span>
+                                </div>
                             </Fragment>
                         )
                     },
