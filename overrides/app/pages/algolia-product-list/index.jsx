@@ -56,7 +56,7 @@ import {useCurrency} from '@salesforce/retail-react-app/app/hooks'
 
 // Algolia
 import algoliasearch from 'algoliasearch/lite'
-import {Configure, InstantSearch, Index, Pagination, useInstantSearch} from 'react-instantsearch'
+import {Configure, InstantSearch, Index, Pagination} from 'react-instantsearch'
 import AlgoliaCurrentRefinements from './partials/algolia-current-refinements'
 import AlgoliaHierarchicalRefinements from './partials/algolia-hierarchical-refinements'
 import AlgoliaColorRefinements from './partials/algolia-color-refinements'
@@ -72,10 +72,6 @@ import AlgoliaHitsContent from './partials/algolia-hits-content'
 import AlgoliaHitsProducts from './partials/algolia-hits-products'
 import {useWishlistOperations} from '../../hooks/use-wishlist-operations'
 import '../../components/algolia/style.css'
-
-// NOTE: You can ignore certain refinements on a template level by updating the below
-// list of ignored refinements.
-const REFINEMENT_DISALLOW_LIST = ['c_isNew']
 
 /*
  * This is a simple product listing page. It displays a paginated list
