@@ -64,7 +64,7 @@ export const popularPlugin = createQuerySuggestionsPlugin({
                 header({Fragment}) {
                     return (
                         <Fragment>
-                            <span className="aa-SourceHeaderTitle">Trending</span>
+                            <span className="aa-SourceHeaderTitle">TRENDING</span>
                             <div className="aa-SourceHeaderLine" />
                         </Fragment>
                     )

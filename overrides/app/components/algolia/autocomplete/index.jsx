@@ -258,13 +258,13 @@ function AutocompletePanel(props, search) {
                             (!props.state.query && recentSearches && (
                                 <Fragment>
                                     <div className="aa-SourceHeader">
-                                        <span className="aa-SourceHeaderTitle">Recent</span>
+                                        <span className="aa-SourceHeaderTitle">RECENT</span>
                                         <div className="aa-SourceHeaderLine" />
                                     </div>
                                     {recentSearches}
 
                                     <div className="aa-SourceHeader">
-                                        <span className="aa-SourceHeaderTitle">Popular Brands</span>
+                                        <span className="aa-SourceHeaderTitle">BRANDS</span>
                                         <div className="aa-SourceHeaderLine" />
                                     </div>
                                     <div className="aa-PanelSectionSources">{brands}</div>
@@ -276,7 +276,7 @@ function AutocompletePanel(props, search) {
                                         <Fragment>
                                             <div className="aa-SourceHeader">
                                                 <span className="aa-SourceHeaderTitle">
-                                                    Suggestions
+                                                    SUGGESTIONS
                                                 </span>
                                                 <div className="aa-SourceHeaderLine" />
                                             </div>
