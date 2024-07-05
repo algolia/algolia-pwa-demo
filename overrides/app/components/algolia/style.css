@@ -1164,3 +1164,29 @@ body {
 [data-autocomplete-source-id="querySuggestionsPlugin"] .aa-List {
   display: block !important;
 }
+
+.ais-CurrentRefinements-label {
+  display: none;
+}
+
+.ais-CurrentRefinements-item {
+  display: inline-grid;
+  grid-auto-flow: column;
+  gap: 0.1rem;
+  background-color: white;
+  border: none;
+}
+
+.ais-CurrentRefinements-category {
+    background-color: #f5f5fa;
+    border: 1px solid #b6b7d5;
+    padding: 0 5px;
+}
+
+.ais-CurrentRefinements-list {
+    gap: 0rem;
+}
+
+.ais-CurrentRefinements-delete {
+  padding-top: 2px;
+}

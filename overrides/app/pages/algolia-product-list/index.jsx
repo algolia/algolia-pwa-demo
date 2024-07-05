@@ -149,7 +149,7 @@ const ProductList = (props) => {
     }
 
     /**************** Query Actions ****************/
-    const {isLoading, setIsLoading} = useState(false)
+    const {isLoading} = useState(true)
 
     const {error, data: category} = useCategory(
         {
@@ -213,11 +213,6 @@ const ProductList = (props) => {
                 indexName={productIndexName}
                 routing
                 insights={true}
-                onStateChange={({uiState}) => {
-                    if (uiState) {
-                        setIsLoading(true)
-                    }
-                }}
             >
                 <Tabs defaultIndex={urlParams.get('tab') === 'articles' ? 1 : 0}>
                     {isSearch && (
