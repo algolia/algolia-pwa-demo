@@ -18,10 +18,10 @@ const baseUrl = 'https://res.cloudinary.com/hilnmyskv/image/upload/v1646067858'
  * @type {Object.<string, string>}
  */
 const images = {
-    Womens: `${baseUrl}/women_category_vwzkln.jpg`,
+    'Womens': `${baseUrl}/women_category_vwzkln.jpg`,
     'Womens > Jewelry': `${baseUrl}/bags_category_qd7ssj.jpg`,
     'Mens > Clothing': `${baseUrl}/clothing_category_xhiz1s.jpg`,
-    Mens: `${baseUrl}/men_category_wfcley.jpg`,
+    'Mens': `${baseUrl}/men_category_wfcley.jpg`,
     'Womens > Clothing': `${baseUrl}/t-shirts_category_gzqcvd.jpg`,
     'Womens > Accessories': `${baseUrl}/shoes_category_u4fi0q.jpg`,
     '2 button pocket': `${baseUrl}/men_category_wfcley.jpg`
@@ -59,8 +59,9 @@ export const popularCategoriesPlugin = (navigate) => ({
                     header({Fragment}) {
                         return (
                             <Fragment>
-                                <span className="aa-SourceHeaderTitle">Check out popular products for inspiration</span>
-                                <div className="aa-SourceHeaderLine" />
+                                <div className='aa-SourceHeader--right'>
+                                    <span className="aa-SourceHeaderTitle">POPULAR CATEGORIES</span>
+                                </div>
                             </Fragment>
                         )
                     },
@@ -90,6 +91,8 @@ type PopularCategoryItemProps = {
  */
 function PopularCategoryItem({hit, navigate}: PopularCategoryItemProps) {
     var category = hit.label.replace(' > ', '/').toLowerCase()
+    var image = images[hit.label] ? images[hit.label] : images['2 button pocket']
+
     return (
         <div
             key={hit.objectID}
@@ -98,7 +101,7 @@ function PopularCategoryItem({hit, navigate}: PopularCategoryItemProps) {
         >
             <div className="aa-ItemContent">
                 <div className="aa-ItemPicture">
-                    <img className="popularCategoryImage" src={images[hit.label]} alt={hit.label} />
+                    <img className="popularCategoryImage" src={image} alt={hit.label} />
                 </div>
                 <div className="aa-ItemContentBody">
                     <div className="aa-ItemContentTitle">

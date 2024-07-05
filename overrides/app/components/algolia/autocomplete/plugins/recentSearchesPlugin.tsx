@@ -9,7 +9,6 @@ const RecentSearchesPlugin = ({ navigate }) => {
       return {
         ...source,
         onSelect(params) {
-          console.log('Recent search selected params:', params);
           const { state, setIsOpen } = params;
           setIsOpen(true);
           navigate(`/search?q=${encodeURIComponent(state.query)}`);

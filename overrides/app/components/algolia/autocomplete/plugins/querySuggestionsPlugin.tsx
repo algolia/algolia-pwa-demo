@@ -22,7 +22,6 @@ export const querySuggestionsPlugin = createQuerySuggestionsPlugin({
       templates: {
         ...source.templates,
         item({ item }) {
-            console.log('Query suggestion item:', item);
             return (
               <div className="aa-search-suggestions">
                 <span>{item.objectID}</span>
