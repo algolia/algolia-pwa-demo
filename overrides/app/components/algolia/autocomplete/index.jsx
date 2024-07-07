@@ -75,7 +75,7 @@ export function Autocomplete({navigate, currency}) {
     const searchRef = useRef(null) // Ref for autocomplete search instance
     const panelAnimationRef = useRef(null)
 
-    /** Demo purposed. Feel free to remove this part for your implementation */
+    /** Recent Searches showcase. Demo purposed. Feel free to remove this part for your implementation */
     /*********************************************************************** */
     const defaultSearches = [
         {id: 't-shirt', label: 't-shirt'},

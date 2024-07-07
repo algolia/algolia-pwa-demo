@@ -1,12 +1,13 @@
 /** @jsxRuntime classic */
 /** @jsx React.createElement */
 
-import {AutocompletePlugin, getAlgoliaFacets} from '@algolia/autocomplete-js'
+import {getAlgoliaFacets} from '@algolia/autocomplete-js'
 import React, {createElement, Fragment} from 'react'
 import {ALGOLIA_PRODUCTS_INDEX_NAME} from '../constants'
 import {searchClient} from '../searchClient'
 import {PopularCategoryHit} from '../types'
 
+/////// DEMO PURPESED IMPLEMENTATION. FEEL FREE TO ADJUST TO YOUR NEEDS.   ////////
 /**
  * Base URL for the category images. You can adjust this to fit your needs.
  * @type {string}
@@ -27,6 +28,7 @@ const images = {
     '2 button pocket': `${baseUrl}/men_category_wfcley.jpg`
 }
 
+////////////////////////////////////////////////////////////////////////////////////
 /**
  * An Autocomplete Plugin that provides popular categories results from Algolia.
  * Check the [Algolia documentation](https://www.algolia.com/doc/ui-libraries/autocomplete/core-concepts/plugins/#building-your-own-plugin) for more information.
