@@ -1190,3 +1190,7 @@ body {
 .ais-CurrentRefinements-delete {
   padding-top: 2px;
 }
+
+.SourceHeaderTitle {
+  text-transform: capitalize;
+}
