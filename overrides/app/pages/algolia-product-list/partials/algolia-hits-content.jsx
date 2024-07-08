@@ -1,7 +1,7 @@
 import React, {Fragment, useEffect} from 'react'
 import PropTypes from 'prop-types'
 import {useHits, useInstantSearch} from 'react-instantsearch'
-import {Skeleton as ProductTileSkeleton} from '../../../components/algolia-product-tile/index'
+import {Skeleton as ProductTileSkeleton} from '../../../components/algolia/algolia-product-tile/index'
 import {Box, Collapse, Divider, Text, VStack} from '@chakra-ui/react'
 
 const AlgoliaHitsContent = (props) => {

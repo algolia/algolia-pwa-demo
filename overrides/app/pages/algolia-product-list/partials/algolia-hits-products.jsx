@@ -3,19 +3,11 @@ import PropTypes from 'prop-types'
 import {useHits, useInstantSearch} from 'react-instantsearch'
 import ProductTile, {
     Skeleton as ProductTileSkeleton
-} from '../../../components/algolia-product-tile/index'
+} from '../../../components/algolia/algolia-product-tile/index'
 
 const AlgoliaHitsProducts = (props) => {
-    const {
-        isLoading,
-        searchQuery,
-        category,
-        einstein,
-        addItemToWishlist,
-        removeItemFromWishlist,
-        isInWishlist,
-        activeCurrency
-    } = props
+    const {isLoading, addItemToWishlist, removeItemFromWishlist, isInWishlist, activeCurrency} =
+        props
     const {hits, sendEvent} = useHits()
     const {status} = useInstantSearch(props)
     const [selectedColors, setSelectedColors] = useState({})
@@ -43,12 +35,6 @@ const AlgoliaHitsProducts = (props) => {
                     setSelectedColors={setSelectedColors}
                     onClick={() => {
                         sendEvent('click', hit, 'Product Clicked')
-
-                        if (searchQuery) {
-                            einstein.sendClickSearch(searchQuery, hit)
-                        } else if (category) {
-                            einstein.sendClickCategory(category, hit)
-                        }
                     }}
                     isFavourite={isInWishlist(hit)}
                     onFavouriteToggle={(isFavourite) => {
@@ -69,7 +55,6 @@ AlgoliaHitsProducts.propTypes = {
     isLoading: PropTypes.bool,
     searchQuery: PropTypes.string,
     category: PropTypes.string,
-    einstein: PropTypes.object,
     addItemToWishlist: PropTypes.func,
     removeItemFromWishlist: PropTypes.func,
     isInWishlist: PropTypes.func,

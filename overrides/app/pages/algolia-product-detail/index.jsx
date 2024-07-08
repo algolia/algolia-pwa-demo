@@ -46,9 +46,9 @@ import {rebuildPathWithParams} from '@salesforce/retail-react-app/app/utils/url'
 import {useHistory, useLocation, useParams} from 'react-router-dom'
 import {useToast} from '@salesforce/retail-react-app/app/hooks/use-toast'
 import {useWishList} from '@salesforce/retail-react-app/app/hooks/use-wish-list'
-import FrequentlyBoughtTogether from '../../components/recommend/freqBoughtTogether'
-import RelatedProducts from '../../components/recommend/relatedProducts'
-import LookingSimilar from '../../components/recommend/lookingSimilar'
+import FrequentlyBoughtTogether from '../../components/algolia/recommend/freqBoughtTogether'
+import RelatedProducts from '../../components/algolia/recommend/relatedProducts'
+import LookingSimilar from '../../components/algolia/recommend/lookingSimilar'
 
 const ProductDetail = () => {
     const {formatMessage} = useIntl()
@@ -61,7 +61,6 @@ const ProductDetail = () => {
     const [productSetSelection, setProductSetSelection] = useState({})
     const childProductRefs = React.useRef({})
     const customerId = useCustomerId()
-    const [selectedColors, setSelectedColors] = useState({})
 
     /****************************** Basket *********************************/
     const {data: basket} = useCurrentBasket()
@@ -419,25 +418,11 @@ const ProductDetail = () => {
                 <Stack spacing={16}>
                     {!isProductASet && (
                         <>
-                            <FrequentlyBoughtTogether
-                                product={product}
-                                selectedColors={selectedColors}
-                                setSelectedColors={setSelectedColors}
-                                addItemToWishlist={handleAddToWishlist}
-                                removeItemFromWishlist={handleAddToWishlist}
-                            />
+                            <FrequentlyBoughtTogether product={product} />
 
-                            <RelatedProducts
-                                product={product}
-                                selectedColors={selectedColors}
-                                setSelectedColors={setSelectedColors}
-                            />
+                            <RelatedProducts product={product} />
 
-                            <LookingSimilar
-                                product={product}
-                                selectedColors={selectedColors}
-                                setSelectedColors={setSelectedColors}
-                            />
+                            <LookingSimilar product={product} />
                         </>
                     )}
                 </Stack>

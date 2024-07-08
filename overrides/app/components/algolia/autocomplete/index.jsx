@@ -18,15 +18,15 @@ import {popularCategoriesPlugin} from './plugins/popularCategoriesPlugin'
 import {popularPlugin} from './plugins/popularPlugin'
 import {productsPluginFactory} from './plugins/productsPlugin'
 import {querySuggestionsPlugin} from './plugins/querySuggestionsPlugin'
+import recentSearchesPlugin from './plugins/recentSearchesPlugin'
 import {quickAccessPluginFactory} from './plugins/quickAccessPlugin'
 import {contentPlugin} from './plugins/contentPlugin'
 import {brandsPlugin} from './plugins/brandsPlugin'
 import {cx, hasSourceActiveItem, isDetached} from './utils'
-import {createLocalStorageRecentSearchesPlugin} from '@algolia/autocomplete-plugin-recent-searches'
 import {CloseIcon} from '@salesforce/retail-react-app/app/components/icons'
 
 import '@algolia/autocomplete-theme-classic'
-import './style.css'
+import '../style.css'
 
 /**
  * Utility function to remove duplicates from search results.
@@ -75,7 +75,7 @@ export function Autocomplete({navigate, currency}) {
     const searchRef = useRef(null) // Ref for autocomplete search instance
     const panelAnimationRef = useRef(null)
 
-    /** Demo purposed. Feel free to remove this part for your implementation */
+    /** Recent Searches showcase. Demo purposed. Feel free to remove this part for your implementation */
     /*********************************************************************** */
     const defaultSearches = [
         {id: 't-shirt', label: 't-shirt'},
@@ -104,25 +104,12 @@ export function Autocomplete({navigate, currency}) {
 
         let rootRef
 
-        const recentSearchesPlugin = createLocalStorageRecentSearchesPlugin({
-            key: 'pwa-recent-searches',
-            limit: 5,
-            transformSource({source}) {
-                return {
-                    ...source,
-                    onSelect({item}) {
-                        navigate(`/search?q=${item.label}`)
-                    }
-                }
-            }
-        })
-
         searchRef.current = autocomplete({
             container: containerRef.current,
             placeholder: 'Search for products...',
             openOnFocus: true,
             plugins: [
-                recentSearchesPlugin,
+                recentSearchesPlugin(navigate),
                 querySuggestionsPlugin,
                 categoriesPlugin,
                 brandsPlugin,
@@ -184,8 +171,12 @@ export function Autocomplete({navigate, currency}) {
                     document.querySelector('.aa-Form').classList.add('search-hidden')
                     clearTimeout(panelAnimationRef.current)
                     panelAnimationRef.current = setTimeout(() => {
-                        document.querySelector('.aa-PanelLayout').classList.add('panel-animation')
-                        document.querySelector('.aa-Form').classList.add('search-animation')
+                        let panelLayout = document.querySelector('.aa-PanelLayout')
+                        let form = document.querySelector('.aa-Form')
+                        if (panelLayout && form) {
+                            panelLayout.classList.add('panel-animation')
+                            form.classList.add('search-animation')
+                        }
                     }, 200)
                 } else {
                     document.querySelector('.css-1bcprh').classList.remove('wt-navbar')
@@ -206,7 +197,8 @@ export function Autocomplete({navigate, currency}) {
         }
 
         const handleClicks = (e) => {
-            if (e.target.className.indexOf('aa-SeeAllBtn') > -1) {
+            let className = e.target.className
+            if (className.indexOf('aa-SeeAllBtn') > -1) {
                 searchRef.current.setIsOpen(false)
             }
         }
@@ -266,13 +258,13 @@ function AutocompletePanel(props, search) {
                             (!props.state.query && recentSearches && (
                                 <Fragment>
                                     <div className="aa-SourceHeader">
-                                        <span className="aa-SourceHeaderTitle">Recent</span>
+                                        <span className="aa-SourceHeaderTitle">RECENT</span>
                                         <div className="aa-SourceHeaderLine" />
                                     </div>
                                     {recentSearches}
 
                                     <div className="aa-SourceHeader">
-                                        <span className="aa-SourceHeaderTitle">Popular Brands</span>
+                                        <span className="aa-SourceHeaderTitle">BRANDS</span>
                                         <div className="aa-SourceHeaderLine" />
                                     </div>
                                     <div className="aa-PanelSectionSources">{brands}</div>
@@ -284,7 +276,7 @@ function AutocompletePanel(props, search) {
                                         <Fragment>
                                             <div className="aa-SourceHeader">
                                                 <span className="aa-SourceHeaderTitle">
-                                                    Suggestions
+                                                    SUGGESTIONS
                                                 </span>
                                                 <div className="aa-SourceHeaderLine" />
                                             </div>

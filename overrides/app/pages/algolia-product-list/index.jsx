@@ -5,12 +5,12 @@
  * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import React, {useEffect, useState, useMemo} from 'react'
+import React, {useState, useMemo} from 'react'
 import PropTypes from 'prop-types'
 import {useHistory, useLocation, useParams} from 'react-router-dom'
 import {FormattedMessage, useIntl} from 'react-intl'
 import {Helmet} from 'react-helmet'
-import {useCategory, useProductSearch} from '@salesforce/commerce-sdk-react'
+import {useCategory} from '@salesforce/commerce-sdk-react'
 import {useServerContext} from '@salesforce/pwa-kit-react-sdk/ssr/universal/hooks'
 
 // Components
@@ -45,7 +45,6 @@ import {FilterIcon} from '@salesforce/retail-react-app/app/components/icons'
 
 // Hooks
 import {useSearchParams} from '@salesforce/retail-react-app/app/hooks'
-import useEinstein from '@salesforce/retail-react-app/app/hooks/use-einstein'
 
 // Others
 import {HTTPNotFound, HTTPError} from '@salesforce/pwa-kit-react-sdk/ssr/universal/errors'
@@ -74,10 +73,6 @@ import AlgoliaHitsProducts from './partials/algolia-hits-products'
 import {useWishlistOperations} from '../../hooks/use-wishlist-operations'
 import '../../components/algolia/style.css'
 
-// NOTE: You can ignore certain refinements on a template level by updating the below
-// list of ignored refinements.
-const REFINEMENT_DISALLOW_LIST = ['c_isNew']
-
 /*
  * This is a simple product listing page. It displays a paginated list
  * of product hit objects. Allowing for sorting and filtering based on the
@@ -92,7 +87,6 @@ const ProductList = (props) => {
     const {formatMessage} = useIntl()
     const params = useParams()
     const location = useLocation()
-    const einstein = useEinstein()
     const {res} = useServerContext()
     const [searchParams] = useSearchParams()
     const {currency: activeCurrency} = useCurrency()
@@ -155,17 +149,7 @@ const ProductList = (props) => {
     }
 
     /**************** Query Actions ****************/
-    const {isLoading, data: productSearchResult} = useProductSearch(
-        {
-            parameters: {
-                ...searchParams,
-                refine: searchParams._refine
-            }
-        },
-        {
-            keepPreviousData: true
-        }
-    )
+    const {isLoading} = useState(true)
 
     const {error, data: category} = useCategory(
         {
@@ -177,13 +161,6 @@ const ProductList = (props) => {
             enabled: !isSearch && !!params.categoryId
         }
     )
-
-    // Apply disallow list to refinements.
-    if (productSearchResult?.refinements) {
-        productSearchResult.refinements = productSearchResult.refinements.filter(
-            ({attributeId}) => !REFINEMENT_DISALLOW_LIST.includes(attributeId)
-        )
-    }
 
     /**************** Error Handling ****************/
     const errorStatus = error?.response?.status
@@ -205,15 +182,6 @@ const ProductList = (props) => {
     // Reset scroll position when `isRefetching` becomes `true`.
     const query = searchQuery ?? ''
     const filters = !isLoading && category?.id ? `categories.id:${category.id}` : ''
-
-    /**************** Einstein ****************/
-    useEffect(() => {
-        if (productSearchResult) {
-            isSearch
-                ? einstein.sendViewSearch(searchQuery, productSearchResult)
-                : einstein.sendViewCategory(category, productSearchResult)
-        }
-    }, [productSearchResult])
 
     return (
         <Box
@@ -369,7 +337,6 @@ const ProductList = (props) => {
                                                 <AlgoliaHitsProducts
                                                     isLoading={isLoading}
                                                     searchQuery={searchQuery}
-                                                    einstein={einstein}
                                                     category={category}
                                                     addItemToWishlist={addItemToWishlist}
                                                     removeItemFromWishlist={removeItemFromWishlist}

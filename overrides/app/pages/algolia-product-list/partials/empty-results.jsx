@@ -11,7 +11,7 @@ import PropTypes from 'prop-types'
 import {Link as RouteLink} from 'react-router-dom'
 import {defineMessage, useIntl} from 'react-intl'
 import {SearchIcon} from '@salesforce/retail-react-app/app/components/icons'
-import TrendingItems from '../../../components/recommend/trendingItems'
+import TrendingItems from '../../../components/algolia/recommend/trendingItems'
 
 const contactUsMessage = defineMessage({
     id: 'empty_search_results.link.contact_us',

@@ -45,32 +45,23 @@ export const contentPlugin: AutocompletePlugin<ContentHit, {}> = {
                 },
                 renderer: {createElement, Fragment, render: () => {}},
                 templates: {
-                    header() {
+                    header({state}) {
                         return (
-                            <div>
+                            <div className='aa-SourceHeader--right'>
                                 <span className="aa-SourceHeaderTitle">Content</span>
-                                <div className="aa-SourceHeaderLine" />
+                                <span className="aa-SourceHeaderButton">
+                                    <a
+                                        href={`/search?q=${state.query}&tab=articles`}
+                                        rel="noreferrer noopener"
+                                        className="aa-SeeAllLink"
+                                    >View All Content for "{state.query}" ({state.context.nbContent})
+                                    </a>
+                                </span>
                             </div>
                         )
                     },
                     item({item}) {
                         return <ContentItem hit={item} />
-                    },
-                    footer({state}) {
-                        return (
-                            // @TODO: Add a link to the content page when instantsearch is ready
-                            state.context.nbContent > 2 && (
-                                <div style={{textAlign: 'center'}}>
-                                    <a
-                                        href={`/search?q=${state.query}&tab=articles`}
-                                        rel="noreferrer noopener"
-                                        className="aa-SeeAllLink"
-                                    >
-                                        See All Content ({state.context.nbContent})
-                                    </a>
-                                </div>
-                            )
-                        )
                     }
                 }
             }

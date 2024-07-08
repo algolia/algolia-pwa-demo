@@ -13,7 +13,7 @@ import {
     IconButton
 } from '@chakra-ui/react'
 import DynamicImage from '../dynamic-image'
-import AlgoliaProductSwatch from '../../pages/algolia-product-list/partials/algolia-product-swatch'
+import AlgoliaProductSwatch from '../../../pages/algolia-product-list/partials/algolia-product-swatch'
 
 // Hooks
 import {useIntl} from 'react-intl'
