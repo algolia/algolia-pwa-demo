@@ -1,0 +1,49 @@
+.partner{
+    max-width: 90rem;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: calc(32px + min(32px, max(0px, (100vw - 500px) * 0.045714285714285714)));
+    padding-bottom: calc(56px + min(56px, max(0px, (100vw - 500px) * 0.08)));
+    padding-top: calc(56px + min(56px, max(0px, (100vw - 500px) * 0.08)));
+    padding-right: calc(16px + min(40px, max(0px, (100vw - 500px) * 0.05714285714285714)));
+    padding-left: calc(16px + min(40px, max(0px, (100vw - 500px) * 0.05714285714285714)));
+}
+
+.partner h2 {
+    font-size: calc(34px + min(8px,max(0px,(100vw - 500px) * .011428571428571429)));
+    color: #23263b;
+    line-height: 1.3;
+    font-weight: 700;
+    font-family: Sora, Arial, sans-serif;
+}
+
+.partner .images {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    align-items: center;
+}
+
+.partner .images .image-box{
+    margin: 0rem 2rem;
+    padding: 1rem;
+}
+
+.partner .images .image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+@media screen and (max-width: 960px){
+    .partner h2 {
+        text-align: center;
+    }
+
+    .partner .images {
+        grid-template-columns: 1fr 1fr;
+    }
+}
