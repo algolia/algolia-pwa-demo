@@ -7,25 +7,19 @@ import {
     SimpleGrid,
     useMultiStyleConfig,
     Select as ChakraSelect,
-    Heading,
-    Input,
-    InputGroup,
-    InputRightElement,
     createStylesContext,
-    Button,
     FormControl
 } from '@salesforce/retail-react-app/app/components/shared/ui'
 import {useIntl} from 'react-intl'
 
 import LinksList from '@salesforce/retail-react-app/app/components/links-list'
-import SocialIcons from '@salesforce/retail-react-app/app/components/social-icons'
 import {HideOnDesktop, HideOnMobile} from '@salesforce/retail-react-app/app/components/responsive'
 import {getPathWithLocale} from '@salesforce/retail-react-app/app/utils/url'
 import LocaleText from '@salesforce/retail-react-app/app/components/locale-text'
 import useMultiSite from '@salesforce/retail-react-app/app/hooks/use-multi-site'
 import styled from '@emotion/styled'
 
-const [StylesProvider, useStyles] = createStylesContext('Footer')
+const [StylesProvider] = createStylesContext('Footer')
 const Footer = ({...otherProps}) => {
     const styles = useMultiStyleConfig('Footer')
     const intl = useIntl()
@@ -50,7 +44,7 @@ const Footer = ({...otherProps}) => {
                     <HideOnMobile>
                         <SimpleGrid columns={3} spacing={3}>
                             <LinksList
-                                heading='Find out more'
+                                heading="Find out more"
                                 links={[
                                     {
                                         href: 'https://www.algolia.com/about/',
@@ -63,7 +57,7 @@ const Footer = ({...otherProps}) => {
                                 ]}
                             />
                             <LinksList
-                                heading='Try it out'
+                                heading="Try it out"
                                 links={[
                                     {
                                         href: 'https://www.algolia.com/doc/integration/salesforce-commerce-cloud-b2c/getting-started/introduction/',
@@ -79,7 +73,7 @@ const Footer = ({...otherProps}) => {
                                 ]}
                             />
                             <LinksList
-                                heading='Contact us'
+                                heading="Contact us"
                                 links={[
                                     {
                                         href: 'https://www.algolia.com/demorequest/',
@@ -130,7 +124,9 @@ const Footer = ({...otherProps}) => {
 
                     <Box {...styles.bottomHalf}>
                         <Text {...styles.copyright}>
-                            &copy; {new Date().getFullYear()}{' '  +  'Algolia. All rights reserved. This is a demo store only. Orders made WILL NOT be processed.' }
+                            &copy; {new Date().getFullYear()}
+                            {' ' +
+                                'Algolia. All rights reserved. This is a demo store only. Orders made WILL NOT be processed.'}
                         </Text>
 
                         <HideOnDesktop>
@@ -147,7 +143,6 @@ const Footer = ({...otherProps}) => {
 }
 
 export default Footer
-
 
 const LegalLinks = ({variant}) => {
     const intl = useIntl()

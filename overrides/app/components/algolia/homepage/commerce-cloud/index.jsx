@@ -54,6 +54,13 @@ export default function Commerce() {
                     <div
                         className={`questions ${activeAnsver === 0 ? 'passive' : ''}`}
                         onClick={() => activeAnsvered(0)}
+                        onKeyDown={(event) => {
+                            if (event.key === 'Enter') {
+                                activeAnsvered(0)
+                            }
+                        }}
+                        tabIndex={0}
+                        role="button"
                     >
                         <div className="question-box">
                             <div className="question">{commerces[0].question}</div>
@@ -71,6 +78,13 @@ export default function Commerce() {
                     <div
                         className={`questions ${activeAnsver === 1 ? 'passive' : ''}`}
                         onClick={() => activeAnsvered(1)}
+                        onKeyDown={(event) => {
+                            if (event.key === 'Enter') {
+                                activeAnsvered(1)
+                            }
+                        }}
+                        tabIndex={0}
+                        role="button"
                     >
                         <div className="question-box">
                             <div className="question">{commerces[1].question}</div>
@@ -88,6 +102,13 @@ export default function Commerce() {
                     <div
                         className={`questions ${activeAnsver === 2 ? 'passive' : ''}`}
                         onClick={() => activeAnsvered(2)}
+                        onKeyDown={(event) => {
+                            if (event.key === 'Enter') {
+                                activeAnsvered(2)
+                            }
+                        }}
+                        tabIndex={0}
+                        role="button"
                     >
                         <div className="question-box">
                             <div className="question">{commerces[2].question}</div>
@@ -110,6 +131,13 @@ export default function Commerce() {
                     <div
                         className={`questions ${activeAnsver === 3 ? 'passive' : ''}`}
                         onClick={() => activeAnsvered(3)}
+                        onKeyDown={(event) => {
+                            if (event.key === 'Enter') {
+                                activeAnsvered(3)
+                            }
+                        }}
+                        tabIndex={0}
+                        role="button"
                     >
                         <div className="question-box">
                             <div className="question">{commerces[3].question}</div>

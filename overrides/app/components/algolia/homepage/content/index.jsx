@@ -34,7 +34,12 @@ export default function Content() {
                                 <img src={content.src} alt={content.alt} />
                             </div>
                             <p className="text">{content.text}</p>
-                            <a target="_blank" href={content.url} className="contact">
+                            <a
+                                target="_blank"
+                                href={content.url}
+                                className="contact"
+                                rel="noreferrer noopener"
+                            >
                                 <p>Read the story</p>
                                 <div className="arrow-right-box">
                                     <ChevronRightIcon className="arrow-right" />

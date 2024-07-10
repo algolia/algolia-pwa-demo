@@ -46,12 +46,26 @@ export default function Sales() {
                 <div
                     className="left-arrow-box"
                     onClick={(e) => e.stopPropagation() || instanceRef.current?.prev()}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            e.stopPropagation() || instanceRef.current?.prev()
+                        }
+                    }}
+                    tabIndex={0}
+                    role="button"
                 >
                     <ChevronLeftIcon />
                 </div>
                 <div
                     className="right-arrow-box"
                     onClick={(e) => e.stopPropagation() || instanceRef.current?.next()}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            e.stopPropagation() || instanceRef.current?.prev()
+                        }
+                    }}
+                    tabIndex={0}
+                    role="button"
                 >
                     <ChevronRightIcon />
                 </div>
@@ -60,6 +74,13 @@ export default function Sales() {
                 <div
                     className="left-arrow-box"
                     onClick={(e) => e.stopPropagation() || instanceRef.current?.prev()}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            e.stopPropagation() || instanceRef.current?.prev()
+                        }
+                    }}
+                    tabIndex={0}
+                    role="button"
                 >
                     <ChevronLeftIcon />
                 </div>
@@ -89,6 +110,13 @@ export default function Sales() {
                 <div
                     className="right-arrow-box"
                     onClick={(e) => e.stopPropagation() || instanceRef.current?.next()}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            e.stopPropagation() || instanceRef.current?.prev()
+                        }
+                    }}
+                    tabIndex={0}
+                    role="button"
                 >
                     <ChevronRightIcon />
                 </div>

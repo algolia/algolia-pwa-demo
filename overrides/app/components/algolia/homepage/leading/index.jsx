@@ -70,12 +70,26 @@ export default function Leading() {
                 <div
                     className="left-arrow-box"
                     onClick={(e) => e.stopPropagation() || instanceRef.current?.prev()}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            e.stopPropagation() || instanceRef.current?.prev()
+                        }
+                    }}
+                    tabIndex={0}
+                    role="button"
                 >
                     <ChevronLeftIcon />
                 </div>
                 <div
                     className="right-arrow-box"
                     onClick={(e) => e.stopPropagation() || instanceRef.current?.next()}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            e.stopPropagation() || instanceRef.current?.prev()
+                        }
+                    }}
+                    tabIndex={0}
+                    role="button"
                 >
                     <ChevronRightIcon />
                 </div>
@@ -84,6 +98,13 @@ export default function Leading() {
                 <div
                     className="left-arrow-box"
                     onClick={(e) => e.stopPropagation() || instanceRef.current?.prev()}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            e.stopPropagation() || instanceRef.current?.prev()
+                        }
+                    }}
+                    tabIndex={0}
+                    role="button"
                 >
                     <ChevronLeftIcon />
                 </div>
@@ -101,7 +122,7 @@ export default function Leading() {
                                 <p className="brand-name">{brand.name}</p>
                                 <p className="brand-job">{brand.job}</p>
                             </div>
-                            <a target="_blank" href={brand.href}>
+                            <a target="_blank" href={brand.href} rel="noreferrer noopener">
                                 Read their story
                             </a>
                         </div>
@@ -110,6 +131,13 @@ export default function Leading() {
                 <div
                     className="right-arrow-box"
                     onClick={(e) => e.stopPropagation() || instanceRef.current?.next()}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            e.stopPropagation() || instanceRef.current?.prev()
+                        }
+                    }}
+                    tabIndex={0}
+                    role="button"
                 >
                     <ChevronRightIcon />
                 </div>
