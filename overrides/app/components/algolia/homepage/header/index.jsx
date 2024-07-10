@@ -16,10 +16,18 @@ export default function Header() {
                     <h1>Supercharge Salesforce Commerce Cloud with AI search</h1>
                     <p>Power growth at scale with lightning-fast and flexible search.</p>
                     <div className="button-container">
-                        <a href="https://www.algolia.com/demorequest/" target='_blank' className="demo">
+                        <a
+                            href="https://www.algolia.com/demorequest/"
+                            target="_blank"
+                            className="demo"
+                        >
                             Get a demo
                         </a>
-                        <a href="https://www.algolia.com/doc/integration/salesforce-commerce-cloud-b2c/getting-started/set-up-the-algolia-cartridge/?client=javascript" target='_blank' className="download">
+                        <a
+                            href="https://www.algolia.com/doc/integration/salesforce-commerce-cloud-b2c/getting-started/set-up-the-algolia-cartridge/?client=javascript"
+                            target="_blank"
+                            className="download"
+                        >
                             Download the cartridge
                         </a>
                     </div>

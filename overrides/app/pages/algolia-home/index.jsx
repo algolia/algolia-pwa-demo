@@ -2,7 +2,6 @@ import React, {useEffect} from 'react'
 import {useIntl} from 'react-intl'
 import {useLocation} from 'react-router-dom'
 
-
 // Project Components
 import Seo from '@salesforce/retail-react-app/app/components/seo'
 
@@ -10,7 +9,7 @@ import Seo from '@salesforce/retail-react-app/app/components/seo'
 import {
     MAX_CACHE_AGE,
     HOME_SHOP_PRODUCTS_CATEGORY_ID,
-    HOME_SHOP_PRODUCTS_LIMIT,
+    HOME_SHOP_PRODUCTS_LIMIT
 } from '../../constants'
 
 import {useServerContext} from '@salesforce/pwa-kit-react-sdk/ssr/universal/hooks'

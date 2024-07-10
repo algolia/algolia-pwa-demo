@@ -50,7 +50,7 @@ const Footer = ({...otherProps}) => {
                     <HideOnMobile>
                         <SimpleGrid columns={3} spacing={3}>
                             <LinksList
-                                heading='Find out more'
+                                heading="Find out more"
                                 links={[
                                     {
                                         href: 'https://www.algolia.com/about/',
@@ -63,7 +63,7 @@ const Footer = ({...otherProps}) => {
                                 ]}
                             />
                             <LinksList
-                                heading='Try it out'
+                                heading="Try it out"
                                 links={[
                                     {
                                         href: 'https://www.algolia.com/doc/integration/salesforce-commerce-cloud-b2c/getting-started/introduction/',
@@ -79,7 +79,7 @@ const Footer = ({...otherProps}) => {
                                 ]}
                             />
                             <LinksList
-                                heading='Contact us'
+                                heading="Contact us"
                                 links={[
                                     {
                                         href: 'https://www.algolia.com/demorequest/',
@@ -130,7 +130,9 @@ const Footer = ({...otherProps}) => {
 
                     <Box {...styles.bottomHalf}>
                         <Text {...styles.copyright}>
-                            &copy; {new Date().getFullYear()}{' '  +  'Algolia. All rights reserved. This is a demo store only. Orders made WILL NOT be processed.' }
+                            &copy; {new Date().getFullYear()}
+                            {' ' +
+                                'Algolia. All rights reserved. This is a demo store only. Orders made WILL NOT be processed.'}
                         </Text>
 
                         <HideOnDesktop>
@@ -147,7 +149,6 @@ const Footer = ({...otherProps}) => {
 }
 
 export default Footer
-
 
 const LegalLinks = ({variant}) => {
     const intl = useIntl()
