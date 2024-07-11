@@ -1,56 +1,57 @@
-# PWA Kit Generated App
+# Algolia for Salesforce B2C Commerce - PWA Kit Starter Reference Code
 
-Welcome to the PWA Kit!
+This repository provides a starter code for integrating Algolia into your Salesforce Commerce Cloud PWA Kit project. It demonstrates how to incorporate advanced capabilities such as Autocomplete, InstantSearch, and Recommend into your PWA storefronts.
 
-## Getting Started
+## Overview
 
-### Requirements
+The Algolia PWA starter code is based on the [Salesforce Commerce Cloud PWA Kit](https://developer.salesforce.com/docs/commerce/pwa-kit-managed-runtime/guide/pwa-kit-overview.html) and leverages Algolia's powerful search and discovery features. It serves as a reference implementation and can be used as a starting point for your own PWA Kit projects.
 
--   Node 18 or later
--   npm 9 or later
+## Prerequisites
 
-### Run the Project Locally
+Before getting started, ensure you have the following:
 
-```bash
-npm start
-```
+- Node.js 18 or later
+- npm 9 or later
+- Algolia account
 
-This will open a browser and your storefront will be running on http://localhost:3000
+Please note that this starter code is created based on the retail-react-app version 2.3.1. If you are using a different version, some configurations may vary.
 
-### Deploy to Managed Runtime
+## Setup and Installation
 
-```
-npm run push -- -m "Message to help you recognize this bundle"
-```
+1. Clone this repository:
+   ```sh
+   git clone https://github.com/algolia/algolia-pwa-demo
+   ```
 
-**Note**: This command will push to the MRT project that matches the name field in `package.json`. To push to a different project, include the `-s` argument.
+2. Follow the setup and installation steps provided in the [documentation](link-to-your-documentation).
 
-**Important**: Access to the [Runtime Admin](https://runtime.commercecloud.com/) application is required to deploy bundles. To learn more, read our guide to [Push and Deploy Bundles](https://developer.salesforce.com/docs/commerce/pwa-kit-managed-runtime/guide/pushing-and-deploying-bundles.html).
+## Integration with Salesforce Commerce Cloud PWA Kit 
 
-## Customizing the application
+This starter code uses the template extensibility feature of the official Salesforce PWA Kit. It utilizes the `@salesforce/retail-react-app` repository as a base template and includes only the overridden or customized files necessary for Algolia integration.
 
-This version of the application uses [Template Extensibility](https://developer.salesforce.com/docs/commerce/pwa-kit-managed-runtime/guide/template-extensibility.html) to empower you to more easily customize base templates. Please refer to our documentation for more information.
+For more information about template extensibility in the Salesforce PWA Kit, refer to the official [documentation](https://developer.salesforce.com/docs/commerce/pwa-kit-managed-runtime/guide/template-extensibility.html).
 
-## 🌍 Localization
+## Documentation
 
-See the [Localization README.md](./packages/template-retail-react-app/translations/README.md) for important setup instructions for localization.
+For detailed information on how to use and customize this starter code, please refer to our [public documentation](https://www.algolia.com//doc/integration/salesforce-commerce-cloud-b2c/guides/pwa-kit-boilerplate/?client=javascript).
 
-## 📖 Documentation
+## Algolia SFCC Cartridge
 
-The full documentation for PWA Kit and Managed Runtime is hosted on the [Salesforce Developers](https://developer.salesforce.com/docs/commerce/pwa-kit-managed-runtime/overview) portal.
+In addition to this PWA Kit starter code, we also provide an Algolia SFCC cartridge that enables integration with Salesforce Commerce Cloud. You can find the cartridge repository [here](https://github.com/algolia/algoliasearch-sfcc-b2c).
 
-## Further documentation
+## Live Demo
 
-For more information on working with the PWA Kit, refer to:
+You can explore a live demo showcasing the capabilities of Algolia integration with PWA Kit at [here](https://algolia-pwa-demo-production.mobify-storefront.com).
 
--   [Get Started](https://developer.salesforce.com/docs/commerce/pwa-kit-managed-runtime/guide/getting-started.html)
--   [Skills for Success](https://developer.salesforce.com/docs/commerce/pwa-kit-managed-runtime/guide/skills-for-success.html)
--   [Set Up API Access](https://developer.salesforce.com/docs/commerce/pwa-kit-managed-runtime/guide/setting-up-api-access.html)
--   [Configuration Options](https://developer.salesforce.com/docs/commerce/pwa-kit-managed-runtime/guide/configuration-options.html)
--   [Proxy Requests](https://developer.salesforce.com/docs/commerce/pwa-kit-managed-runtime/guide/proxying-requests.html)
--   [Push and Deploy Bundles](https://developer.salesforce.com/docs/commerce/pwa-kit-managed-runtime/guide/pushing-and-deploying-bundles.html)
--   [The Retail React App](https://developer.salesforce.com/docs/commerce/pwa-kit-managed-runtime/guide/retail-react-app.html)
--   [Rendering](https://developer.salesforce.com/docs/commerce/pwa-kit-managed-runtime/guide/rendering.html)
--   [Routing](https://developer.salesforce.com/docs/commerce/pwa-kit-managed-runtime/guide/routing.html)
--   [Phased Headless Rollouts](https://developer.salesforce.com/docs/commerce/pwa-kit-managed-runtime/guide/phased-headless-rollouts.html)
--   [Launch Your Storefront](https://developer.salesforce.com/docs/commerce/pwa-kit-managed-runtime/guide/launching-your-storefront.html)
+## Troubleshooting
+
+If you encounter any issues or have questions, please refer to the Troubleshoot and common issues section in the [documentation](https://algolia.com/doc/integration/salesforce-commerce-cloud-b2c/guides/pwa-kit-boilerplate/?client=javascript#troubleshoot-and-common-issues).
+
+## Contributions
+
+We welcome contributions to enhance this starter code. Please refer to the [contribution guidelines](link-to-contribution-guidelines) for more information.
+
+## Resources
+
+- [Algolia Documentation](https://www.algolia.com//doc/integration/salesforce-commerce-cloud-b2c/guides/pwa-kit-boilerplate/?client=javascript)
+- [Salesforce Commerce Cloud PWA Kit Documentation](https://developer.salesforce.com/docs/commerce/pwa-kit-managed-runtime/overview)
