@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 
 // Project Components
 import Seo from '@salesforce/retail-react-app/app/components/seo'
@@ -7,16 +7,19 @@ import Seo from '@salesforce/retail-react-app/app/components/seo'
 import {MAX_CACHE_AGE} from '../../constants'
 
 import {useServerContext} from '@salesforce/pwa-kit-react-sdk/ssr/universal/hooks'
-import Header from '../../components/algolia/homepage/header'
-import Sales from '../../components/algolia/homepage/salesforce'
-import Performance from '../../components/algolia/homepage/ai-performance'
-import Commerce from '../../components/algolia/homepage/commerce-cloud'
-import Leading from '../../components/algolia/homepage/leading'
-import Journey from '../../components/algolia/homepage/journey'
-import Partner from '../../components/algolia/homepage/partners'
-import Content from '../../components/algolia/homepage/content'
-import Try from '../../components/algolia/homepage/try'
-import Shop from '../../components/algolia/homepage/ai-shop'
+import Loader from '../../components/algolia/homepage/loader'
+const Header = React.lazy(() => import('../../components/algolia/homepage/header'))
+const Sales = React.lazy(() => import('../../components/algolia/homepage/salesforce'))
+const Performance = React.lazy(() => import('../../components/algolia/homepage/ai-performance'))
+const Commerce = React.lazy(() => import('../../components/algolia/homepage/commerce-cloud'))
+const Leading = React.lazy(() => import('../../components/algolia/homepage/leading'))
+const Journey = React.lazy(() => import('../../components/algolia/homepage/journey'))
+const Partner = React.lazy(() => import('../../components/algolia/homepage/partners'))
+const Content = React.lazy(() => import('../../components/algolia/homepage/content'))
+const Try = React.lazy(() => import('../../components/algolia/homepage/try'))
+const Shop = React.lazy(() => import('../../components/algolia/homepage/ai-shop'))
+
+import './style.css'
 
 /**
  * This is the home page for Retail React App.
@@ -41,16 +44,18 @@ const Home = () => {
                 description="Commerce Cloud Retail React App"
                 keywords="Commerce Cloud, Retail React App, React Storefront"
             />
-            <Header />
-            <Sales />
-            <Performance />
-            <Commerce />
-            <Shop />
-            <Leading />
-            <Journey />
-            <Partner />
-            <Content />
-            <Try />
+            <Suspense fallback={<Loader />}>
+                <Header />
+                <Sales />
+                <Performance />
+                <Commerce />
+                <Shop />
+                <Leading />
+                <Journey />
+                <Partner />
+                <Content />
+                <Try />
+            </Suspense>
         </>
     )
 }
