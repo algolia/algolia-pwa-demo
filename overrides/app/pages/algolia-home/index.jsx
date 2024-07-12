@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React, {Suspense} from 'react'
 
 // Project Components
 import Seo from '@salesforce/retail-react-app/app/components/seo'
@@ -18,8 +18,6 @@ const Partner = React.lazy(() => import('../../components/algolia/homepage/partn
 const Content = React.lazy(() => import('../../components/algolia/homepage/content'))
 const Try = React.lazy(() => import('../../components/algolia/homepage/try'))
 const Shop = React.lazy(() => import('../../components/algolia/homepage/ai-shop'))
-
-import './style.css'
 
 /**
  * This is the home page for Retail React App.
