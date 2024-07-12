@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React, {Suspense} from 'react'
 
 // Project Components
 import Seo from '@salesforce/retail-react-app/app/components/seo'
