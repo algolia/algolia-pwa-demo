@@ -1,7 +1,7 @@
 import React from 'react';
 import { createLocalStorageRecentSearchesPlugin } from '@algolia/autocomplete-plugin-recent-searches';
 
-const RecentSearchesPlugin = ({ navigate }) => {
+const RecentSearchesPlugin = (navigate) => {
   const recentSearchesPlugin = createLocalStorageRecentSearchesPlugin({
     key: 'pwa-recent-searches',
     limit: 5,
@@ -9,6 +9,7 @@ const RecentSearchesPlugin = ({ navigate }) => {
       return {
         ...source,
         onSelect(params) {
+          console.log('onSelect', params);
           const { state, setIsOpen } = params;
           setIsOpen(true);
           navigate(`/search?q=${encodeURIComponent(state.query)}`);
@@ -19,6 +20,7 @@ const RecentSearchesPlugin = ({ navigate }) => {
             const { item, components } = params;
 
             const handleItemClick = (event) => {
+              console.log('handleItemClick', item);
               if (event.target.className === 'aa-recent-searches-close-button') {
                 event.preventDefault();
                 event.stopPropagation();
@@ -27,7 +29,7 @@ const RecentSearchesPlugin = ({ navigate }) => {
             };
             return (
               <div className="aa-recent-searches-tag" onClick={handleItemClick}>
-                <span class="aa-recent-searches-tag-text">
+                <span className="aa-recent-searches-tag-text">
                     <components.ReverseHighlight hit={item} attribute="label" />
                 </span>
                 <button className="aa-recent-searches-close-button">×</button>

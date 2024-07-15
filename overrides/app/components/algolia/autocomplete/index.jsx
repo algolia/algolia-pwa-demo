@@ -9,7 +9,7 @@ import React, {createElement, Fragment, useEffect, useRef} from 'react'
 import {createRoot} from 'react-dom/client'
 import {autocomplete} from '@algolia/autocomplete-js'
 import PropTypes from 'prop-types'
-import {pipe} from 'ramda'
+import {pipe, set} from 'ramda'
 
 import {createFillWith, uniqBy} from './functions'
 import {categoriesPlugin} from './plugins/categoriesPlugin'
@@ -165,28 +165,32 @@ export function Autocomplete({navigate, currency}) {
                     console.error('Error during autocomplete rendering:', renderError)
                 }
             },
-            onStateChange({state}) {
+            onStateChange: ({state}) => {
+                //wait 10ms to allow the panel to render before applying the animation
+                setTimeout(() => {
+                    const navbar = document.querySelector('.css-1bcprh')
+                const form = document.querySelector('.aa-Form')
+                const panelLayout = document.querySelector('.aa-PanelLayout')
+
                 if (state.isOpen) {
-                    document.querySelector('.css-1bcprh').classList.add('wt-navbar')
-                    document.querySelector('.aa-Form').classList.add('search-hidden')
-                    clearTimeout(panelAnimationRef.current)
-                    panelAnimationRef.current = setTimeout(() => {
-                        let panelLayout = document.querySelector('.aa-PanelLayout')
-                        let form = document.querySelector('.aa-Form')
-                        if (panelLayout && form) {
-                            panelLayout.classList.add('panel-animation')
-                            form.classList.add('search-animation')
-                        }
-                    }, 200)
+                    navbar?.classList?.add('wt-navbar')
+                    form?.classList?.add('search-hidden')
+
+                    if (panelLayout && form) {
+                        panelLayout?.classList?.add('panel-animation')
+                        form?.classList?.add('search-animation')
+                    }
                 } else {
-                    document.querySelector('.css-1bcprh').classList.remove('wt-navbar')
-                    document.querySelector('.aa-Form').classList.remove('search-hidden')
-                    var panelAnimationElement = document.querySelector('.panel-animation')
-                    if (panelAnimationElement) {
-                        panelAnimationElement.classList.remove('panel-animation')
-                        document.querySelector('.aa-Form').classList.remove('search-animation')
+                    navbar?.classList?.remove('wt-navbar')
+                    form?.classList?.remove('search-hidden', 'search-animation')
+
+                    if (panelLayout) {
+                        panelLayout.classList.remove('panel-animation')
                     }
                 }
+            }, 100)
+
+                
             }
         })
 
@@ -270,7 +274,7 @@ function AutocompletePanel(props, search) {
                                     <div className="aa-PanelSectionSources">{brands}</div>
                                 </Fragment>
                             )) ||
-                            (props.state.query && querySuggestions ? (
+                            ((props.state.query && querySuggestions) && (
                                 <>
                                     {querySuggestions && (
                                         <Fragment>
@@ -287,10 +291,6 @@ function AutocompletePanel(props, search) {
                                         </Fragment>
                                     )}
                                 </>
-                            ) : (
-                                <div className="aa-NoResultsAdvices">
-                                    There is no suggestions for your search
-                                </div>
                             ))
                         ) : (
                             <div className="aa-NoResultsAdvices aa-mt-5">

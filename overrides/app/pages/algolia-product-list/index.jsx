@@ -132,7 +132,8 @@ const ProductList = (props) => {
                 <AlgoliaColorRefinements attribute="color" title="Color" />
                 <AlgoliaCheckboxRefinements attribute="size" title="Size" />
                 <AlgoliaRangeRefinements attribute="price.USD" title="Price" />
-                <AlgoliaCheckboxRefinements attribute="brand" title="Brand" />
+                <AlgoliaCheckboxRefinements attribute="brand" title="Brand" sortBy={['count:desc']} />
+
             </Accordion>
         </>
     )
@@ -308,12 +309,7 @@ const ProductList = (props) => {
                                             marginBottom={4}
                                             alignItems="center"
                                             gap="3"
-                                        >
-                                            <AlgoliaCurrentRefinements
-                                                includedAttributes={currentRefinementAttributes}
-                                            />
-                                            <AlgoliaClearRefinements />
-                                        </Flex>
+                                        ></Flex>
                                     </HideOnDesktop>
 
                                     {/* Body  */}
