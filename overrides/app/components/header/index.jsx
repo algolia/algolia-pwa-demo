@@ -144,7 +144,7 @@ const Header = ({
                         onClick={onLogoClick}
                     />
                     <Box {...styles.bodyContainer}>{children}</Box>
-                    <Box {...styles.searchContainer} width='24rem'>
+                    <Box {...styles.searchContainer} width="24rem">
                         <Autocomplete navigate={navigate} currency={currency} />
                     </Box>
                     <IconButtonWithRegistration

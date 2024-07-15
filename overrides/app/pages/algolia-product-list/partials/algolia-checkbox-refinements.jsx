@@ -22,9 +22,9 @@ const AlgoliaCheckboxRefinements = (props) => {
 
     const {items, refine} = useRefinementList(props)
 
-    const sortedItems = props.sortBy ? items : items.sort((a, b) =>
-        a.label.localeCompare(b.label, undefined, {numeric: true})
-    )
+    const sortedItems = props.sortBy
+        ? items
+        : items.sort((a, b) => a.label.localeCompare(b.label, undefined, {numeric: true}))
 
     return (
         <>
@@ -56,7 +56,10 @@ const AlgoliaCheckboxRefinements = (props) => {
                                             }}
                                         >
                                             <Center isTruncated {...styles.swatchButton}>
-                                                {item.label} {item.count > 0 && props.sortBy ? `(${item.count})` : ''}
+                                                {item.label}{' '}
+                                                {item.count > 0 && props.sortBy
+                                                    ? `(${item.count})`
+                                                    : ''}
                                             </Center>
                                         </Checkbox>
                                     )

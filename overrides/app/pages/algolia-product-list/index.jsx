@@ -132,8 +132,11 @@ const ProductList = (props) => {
                 <AlgoliaColorRefinements attribute="color" title="Color" />
                 <AlgoliaCheckboxRefinements attribute="size" title="Size" />
                 <AlgoliaRangeRefinements attribute="price.USD" title="Price" />
-                <AlgoliaCheckboxRefinements attribute="brand" title="Brand" sortBy={['count:desc']} />
-
+                <AlgoliaCheckboxRefinements
+                    attribute="brand"
+                    title="Brand"
+                    sortBy={['count:desc']}
+                />
             </Accordion>
         </>
     )

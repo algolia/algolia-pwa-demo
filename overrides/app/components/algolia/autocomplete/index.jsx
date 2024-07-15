@@ -166,31 +166,28 @@ export function Autocomplete({navigate, currency}) {
                 }
             },
             onStateChange: ({state}) => {
-                //wait 10ms to allow the panel to render before applying the animation
                 setTimeout(() => {
                     const navbar = document.querySelector('.css-1bcprh')
-                const form = document.querySelector('.aa-Form')
-                const panelLayout = document.querySelector('.aa-PanelLayout')
+                    const form = document.querySelector('.aa-Form')
+                    const panelLayout = document.querySelector('.aa-PanelLayout')
 
-                if (state.isOpen) {
-                    navbar?.classList?.add('wt-navbar')
-                    form?.classList?.add('search-hidden')
+                    if (state.isOpen) {
+                        navbar?.classList?.add('wt-navbar')
+                        form?.classList?.add('search-hidden')
 
-                    if (panelLayout && form) {
-                        panelLayout?.classList?.add('panel-animation')
-                        form?.classList?.add('search-animation')
+                        if (panelLayout && form) {
+                            panelLayout?.classList?.add('panel-animation')
+                            form?.classList?.add('search-animation')
+                        }
+                    } else {
+                        navbar?.classList?.remove('wt-navbar')
+                        form?.classList?.remove('search-hidden', 'search-animation')
+
+                        if (panelLayout) {
+                            panelLayout.classList.remove('panel-animation')
+                        }
                     }
-                } else {
-                    navbar?.classList?.remove('wt-navbar')
-                    form?.classList?.remove('search-hidden', 'search-animation')
-
-                    if (panelLayout) {
-                        panelLayout.classList.remove('panel-animation')
-                    }
-                }
-            }, 100)
-
-                
+                }, 100)
             }
         })
 
@@ -274,7 +271,7 @@ function AutocompletePanel(props, search) {
                                     <div className="aa-PanelSectionSources">{brands}</div>
                                 </Fragment>
                             )) ||
-                            ((props.state.query && querySuggestions) && (
+                            (props.state.query && querySuggestions && (
                                 <>
                                     {querySuggestions && (
                                         <Fragment>

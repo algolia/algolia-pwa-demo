@@ -9,7 +9,6 @@ const RecentSearchesPlugin = (navigate) => {
       return {
         ...source,
         onSelect(params) {
-          console.log('onSelect', params);
           const { state, setIsOpen } = params;
           setIsOpen(true);
           navigate(`/search?q=${encodeURIComponent(state.query)}`);
@@ -20,7 +19,6 @@ const RecentSearchesPlugin = (navigate) => {
             const { item, components } = params;
 
             const handleItemClick = (event) => {
-              console.log('handleItemClick', item);
               if (event.target.className === 'aa-recent-searches-close-button') {
                 event.preventDefault();
                 event.stopPropagation();

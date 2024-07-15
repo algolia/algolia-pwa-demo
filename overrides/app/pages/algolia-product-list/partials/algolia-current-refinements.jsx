@@ -34,7 +34,6 @@ const AlgoliaCurrentRefinements = (props) => {
     const customTransformItems = (items) => {
         return items.map((item) => {
             if (item.attribute.includes('price')) {
-                console.log(item.refinements)
                 var refinements = item.refinements.map((refinement) => {
                     return {
                         ...refinement,
