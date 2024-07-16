@@ -114,14 +114,6 @@ const ProductList = (props) => {
         `__primary_category.2`
     ]
 
-    const currentRefinementAttributes = [
-        'size',
-        'color',
-        'price.USD',
-        '__primary_category.0',
-        'brand'
-    ]
-
     const filterEls = (
         <>
             <Accordion allowMultiple>
@@ -263,7 +255,7 @@ const ProductList = (props) => {
                                             alignItems="center"
                                             gap="3"
                                         >
-                                            <AlgoliaCurrentRefinements/>
+                                            <AlgoliaCurrentRefinements />
                                             <AlgoliaClearRefinements />
                                         </Flex>
                                         <Box paddingTop={'45px'}>

@@ -3,7 +3,7 @@ import {Box, useMultiStyleConfig} from '@chakra-ui/react'
 import {CurrentRefinements} from 'react-instantsearch'
 import PropTypes from 'prop-types'
 
-const AlgoliaCurrentRefinements = (props) => {
+const AlgoliaCurrentRefinements = () => {
     const styles = useMultiStyleConfig('AlgoliaCurrentRefinements')
 
     var currency_symbols = {
