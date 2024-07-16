@@ -11,7 +11,7 @@
     "overridesDir": "overrides"
   },
   "devDependencies": {
-    "@salesforce/retail-react-app": "2.3.1",
+    "@salesforce/retail-react-app": "3.0.1",
     "autoprefixer": "^10.4.19",
     "css-loader": "^7.1.1",
     "postcss-loader": "^8.1.1",
@@ -64,7 +64,6 @@
     "algoliasearch": "4.23.3",
     "prop-types": "^15.8.1",
     "ramda": "0.29.1",
-    "react-instantsearch": "^7.10.0",
-    "react-instantsearch-core": "^7.10.0"
+    "react-instantsearch": "^7.10.0"
   }
 }

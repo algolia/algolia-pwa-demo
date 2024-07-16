@@ -220,7 +220,7 @@ body {
 }
 
 .aa-ProductItem .aa-ItemContent mark {
-  color: rgb(var(--aa-primary-color-rgb));
+  color:#003DFF;
 }
 
 .aa-ProductItem .aa-ItemPicture {
@@ -348,7 +348,7 @@ body {
 }
 
 .aa-ProductItem .aa-FavoriteIcon {
-  color: rgb(var(--aa-primary-color-rgb));
+  color: #003DFF;
   stroke-width: 2;
   stroke: currentColor;
   margin: 1px;
@@ -369,7 +369,7 @@ body {
 }
 
 .aa-SeeAllBtn {
-  background-color: rgba(var(--aa-primary-color-rgb), 0.8);
+  background-color: #003DFF;
   transition: background 0.2s ease-out;
   color: #fff;
   padding: calc(var(--aa-spacing-half) * 1.5) var(--aa-spacing);
@@ -377,7 +377,7 @@ body {
 }
 
 .aa-SeeAllLink {
-  color: rgb(var(--aa-primary-color-rgb));
+  color: #003DFF;
   transition: opacity 0.2s ease-out;
   margin-bottom: var(--aa-spacing-half);
 }
@@ -684,6 +684,7 @@ body {
   display: flex;
   flex-direction: column;
   row-gap: calc(var(--aa-spacing-half) * 0.5);
+  text-align: left;
 }
 
 /* Media queries */
@@ -707,7 +708,7 @@ body {
 
   /* See all */
   .aa-SeeAllBtn:hover {
-    background-color: rgba(var(--aa-primary-color-rgb), 1);
+    background-color: #003DFF;
     cursor: pointer;
   }
 
@@ -768,9 +769,6 @@ body {
 
 @media screen and (max-width: 680px) {
   /* Source */
-  .aa-SourceHeader {
-    display: none;
-  }
 
   .aa-PanelSection--quickAccess .aa-SourceHeader,
   .aa-PanelSection--popular .aa-SourceHeader {
@@ -953,17 +951,14 @@ body {
   display: none;
 }
 
-.aa-PanelSection--left .aa-SourceHeaderTitle{
-  color: #7C7996;
-}
-
 .aa-SourceHeader--right {
   display: flex;
   justify-content: space-between;
 }
 
-.aa-SourceHeader--right .aa-SourceHeaderTitle{
+.aa-SourceHeaderTitle{
   color: #7C7996;
+  text-transform: uppercase;
 }
 
 .aa-SourceHeader--right .aa-SourceHeaderButton{
@@ -1025,7 +1020,7 @@ body {
   right: 0;
   margin: auto;
   max-width: 100%;
-  width: 320px;
+  width: 40rem;
   padding: 0 10px;
 }
 
@@ -1173,8 +1168,8 @@ body {
   display: inline-grid;
   grid-auto-flow: column;
   gap: 0.1rem;
-  background-color: white;
-  border: none;
+  background-color: white !important;
+  border: none !important;
 }
 
 .ais-CurrentRefinements-category {
@@ -1193,4 +1188,24 @@ body {
 
 .SourceHeaderTitle {
   text-transform: capitalize;
+}
+
+.selected-color-swatch {
+  border: 1px solid var(--Border-subtle, #144871) !important;
+  padding: 2px !important;
+}
+
+@media (max-width: 681px) {
+
+  .blur {
+    display: none;
+  }
+
+  .aa-PanelLayout .aa-PanelSection--top {
+    display: none;
+  }
+
+  .aa-DetachedContainer .aa-Panel {
+    width: 100% !important;
+  }
 }

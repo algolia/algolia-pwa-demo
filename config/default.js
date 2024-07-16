@@ -6,7 +6,7 @@
  */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const sites = require('./sites.js')
-const algoliaConfig = require('../algolia-config.json')
+const algoliaConfig = require('./algolia-config.json')
 module.exports = {
     app: {
         // Customize how your 'site' and 'locale' are displayed in the url.

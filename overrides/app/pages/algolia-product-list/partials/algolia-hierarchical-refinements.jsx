@@ -20,12 +20,14 @@ const AlgoliaHierarchicalRefinements = (props) => {
             <AccordionPanel pb={4}>
                 <AlgoliaRefinementsContainer attributes={attributes}>
                     <HierarchicalMenu
+                        sortBy={['count:desc']}
                         attributes={attributes}
                         rootPath={rootPath}
                         classNames={{
                             root: 'root',
                             count: 'category-count'
                         }}
+                        limit={3}
                     />
                 </AlgoliaRefinementsContainer>
             </AccordionPanel>
