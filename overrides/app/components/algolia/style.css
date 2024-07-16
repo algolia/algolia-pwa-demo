@@ -958,6 +958,7 @@ body {
 
 .aa-SourceHeaderTitle{
   color: #7C7996;
+  text-transform: uppercase;
 }
 
 .aa-SourceHeader--right .aa-SourceHeaderButton{
