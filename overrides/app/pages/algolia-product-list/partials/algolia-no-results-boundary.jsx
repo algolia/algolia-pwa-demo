@@ -1,5 +1,5 @@
 import React from 'react'
-import {useInstantSearch} from 'react-instantsearch-core'
+import {useInstantSearch} from 'react-instantsearch'
 import PropTypes from 'prop-types'
 
 const AlgoliaNoResultsBoundary = ({children, fallback}) => {

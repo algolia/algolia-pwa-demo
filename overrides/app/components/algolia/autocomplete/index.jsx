@@ -73,7 +73,6 @@ const combine = pipe(removeDuplicates, fillWith)
 export function Autocomplete({navigate, currency}) {
     const containerRef = useRef(null)
     const searchRef = useRef(null) // Ref for autocomplete search instance
-    const panelAnimationRef = useRef(null)
 
     /** Recent Searches showcase. Demo purposed. Feel free to remove this part for your implementation */
     /*********************************************************************** */
@@ -165,28 +164,29 @@ export function Autocomplete({navigate, currency}) {
                     console.error('Error during autocomplete rendering:', renderError)
                 }
             },
-            onStateChange({state}) {
-                if (state.isOpen) {
-                    document.querySelector('.css-1bcprh').classList.add('wt-navbar')
-                    document.querySelector('.aa-Form').classList.add('search-hidden')
-                    clearTimeout(panelAnimationRef.current)
-                    panelAnimationRef.current = setTimeout(() => {
-                        let panelLayout = document.querySelector('.aa-PanelLayout')
-                        let form = document.querySelector('.aa-Form')
+            onStateChange: ({state}) => {
+                setTimeout(() => {
+                    const navbar = document.querySelector('.css-1bcprh')
+                    const form = document.querySelector('.aa-Form')
+                    const panelLayout = document.querySelector('.aa-PanelLayout')
+
+                    if (state.isOpen) {
+                        navbar?.classList?.add('wt-navbar')
+                        form?.classList?.add('search-hidden')
+
                         if (panelLayout && form) {
-                            panelLayout.classList.add('panel-animation')
-                            form.classList.add('search-animation')
+                            panelLayout?.classList?.add('panel-animation')
+                            form?.classList?.add('search-animation')
                         }
-                    }, 200)
-                } else {
-                    document.querySelector('.css-1bcprh').classList.remove('wt-navbar')
-                    document.querySelector('.aa-Form').classList.remove('search-hidden')
-                    var panelAnimationElement = document.querySelector('.panel-animation')
-                    if (panelAnimationElement) {
-                        panelAnimationElement.classList.remove('panel-animation')
-                        document.querySelector('.aa-Form').classList.remove('search-animation')
+                    } else {
+                        navbar?.classList?.remove('wt-navbar')
+                        form?.classList?.remove('search-hidden', 'search-animation')
+
+                        if (panelLayout) {
+                            panelLayout.classList.remove('panel-animation')
+                        }
                     }
-                }
+                }, 100)
             }
         })
 
@@ -270,7 +270,7 @@ function AutocompletePanel(props, search) {
                                     <div className="aa-PanelSectionSources">{brands}</div>
                                 </Fragment>
                             )) ||
-                            (props.state.query && querySuggestions ? (
+                            (props.state.query && querySuggestions && (
                                 <>
                                     {querySuggestions && (
                                         <Fragment>
@@ -287,10 +287,6 @@ function AutocompletePanel(props, search) {
                                         </Fragment>
                                     )}
                                 </>
-                            ) : (
-                                <div className="aa-NoResultsAdvices">
-                                    There is no suggestions for your search
-                                </div>
                             ))
                         ) : (
                             <div className="aa-NoResultsAdvices aa-mt-5">

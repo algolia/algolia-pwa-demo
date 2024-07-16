@@ -1,0 +1,53 @@
+name: Draft release
+run-name: Draft release ${{ inputs.next_version }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      next_version:
+        required: true
+        type: string
+        description: 'Version name'
+
+permissions:
+  contents: write
+
+jobs:
+  draft_release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Branch change and package version update
+        run: |
+          git config --local user.email "github-actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git checkout develop
+          npm version --no-git-tag-version --no-commit-hooks ${{ inputs.next_version }}
+
+      - name: Modify algoliaconfig file
+        run: |
+          sed -i 's/"version": ".*"/"version": "${{ inputs.next_version }}"/' version.json
+
+      - name: Commit changes
+        run: |
+          git add .
+          git commit -m "Update version to ${{ inputs.next_version }}"
+          git push
+
+      - name: Merge develop into master
+        run: |
+          git checkout master
+          git pull
+          git merge origin/develop
+          git push
+
+      - name: Draft release
+        run: gh release create $VERSION --generate-notes --draft
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ inputs.next_version }}

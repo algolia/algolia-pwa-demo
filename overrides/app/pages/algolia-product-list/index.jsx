@@ -114,14 +114,6 @@ const ProductList = (props) => {
         `__primary_category.2`
     ]
 
-    const currentRefinementAttributes = [
-        'size',
-        'color',
-        'price.USD',
-        '__primary_category.0',
-        'brand'
-    ]
-
     const filterEls = (
         <>
             <Accordion allowMultiple>
@@ -132,7 +124,11 @@ const ProductList = (props) => {
                 <AlgoliaColorRefinements attribute="color" title="Color" />
                 <AlgoliaCheckboxRefinements attribute="size" title="Size" />
                 <AlgoliaRangeRefinements attribute="price.USD" title="Price" />
-                <AlgoliaCheckboxRefinements attribute="brand" title="Brand" />
+                <AlgoliaCheckboxRefinements
+                    attribute="brand"
+                    title="Brand"
+                    sortBy={['count:desc']}
+                />
             </Accordion>
         </>
     )
@@ -211,8 +207,12 @@ const ProductList = (props) => {
             <InstantSearch
                 searchClient={searchClient}
                 indexName={productIndexName}
-                routing
+                routing={true}
                 insights={true}
+                future={{
+                    preserveSharedStateOnUnmount: true,
+                    persistHierarchicalRootCount: true
+                }}
             >
                 <Tabs defaultIndex={urlParams.get('tab') === 'articles' ? 1 : 0}>
                     {isSearch && (
@@ -255,9 +255,7 @@ const ProductList = (props) => {
                                             alignItems="center"
                                             gap="3"
                                         >
-                                            <AlgoliaCurrentRefinements
-                                                includedAttributes={currentRefinementAttributes}
-                                            />
+                                            <AlgoliaCurrentRefinements />
                                             <AlgoliaClearRefinements />
                                         </Flex>
                                         <Box paddingTop={'45px'}>
@@ -308,12 +306,7 @@ const ProductList = (props) => {
                                             marginBottom={4}
                                             alignItems="center"
                                             gap="3"
-                                        >
-                                            <AlgoliaCurrentRefinements
-                                                includedAttributes={currentRefinementAttributes}
-                                            />
-                                            <AlgoliaClearRefinements />
-                                        </Flex>
+                                        ></Flex>
                                     </HideOnDesktop>
 
                                     {/* Body  */}
@@ -376,6 +369,8 @@ const ProductList = (props) => {
                                 <AlgoliaUiStateProvider
                                     searchClient={searchClient}
                                     indexName={productIndexName}
+                                    filters={filters}
+                                    query={query}
                                 >
                                     <ModalOverlay />
                                     <ModalContent top={0} marginTop={0}>

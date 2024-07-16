@@ -74,6 +74,9 @@ const AlgoliaColorRefinements = (props) => {
                                                     minWidth="auto"
                                                     border={'1px solid #e9e9e9'}
                                                     padding="0"
+                                                    className={
+                                                        item.isRefined && 'selected-color-swatch'
+                                                    }
                                                 >
                                                     <Center width="100%" height="100%">
                                                         <Box
