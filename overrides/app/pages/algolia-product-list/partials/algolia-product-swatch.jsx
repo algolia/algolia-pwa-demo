@@ -1,5 +1,5 @@
 import React from 'react'
-import {Box, HStack, Button, Center, useMultiStyleConfig} from '@chakra-ui/react'
+import {Box, HStack, Button, Center, Wrap, useMultiStyleConfig} from '@chakra-ui/react'
 import {productUrlBuilder, rebuildPathWithParams} from '@salesforce/retail-react-app/app/utils/url'
 import Link from '@salesforce/retail-react-app/app/components/link'
 import {useIntl} from 'react-intl'
@@ -61,7 +61,7 @@ const AlgoliaProductSwatch = (props) => {
     return (
         <>
             {colorVariations && colorVariations.length && (
-                <HStack spacing="5px" mt={1} style={{border: '4px red !important'}}>
+                <Wrap mt={1} style={{border: '4px red !important'}} column={colorVariations.length}>
                     {sortedColorVariations.map((variant, idx) => {
                         return (
                             <Box key={idx} onMouseOver={() => handleSetSelectedColors(variant)}>
@@ -111,7 +111,7 @@ const AlgoliaProductSwatch = (props) => {
                             </Box>
                         )
                     })}
-                </HStack>
+                </Wrap>
             )}
         </>
     )

@@ -1,7 +1,7 @@
 import React from 'react';
 import { createLocalStorageRecentSearchesPlugin } from '@algolia/autocomplete-plugin-recent-searches';
 
-const RecentSearchesPlugin = ({ navigate }) => {
+const RecentSearchesPlugin = (navigate) => {
   const recentSearchesPlugin = createLocalStorageRecentSearchesPlugin({
     key: 'pwa-recent-searches',
     limit: 5,
@@ -27,7 +27,7 @@ const RecentSearchesPlugin = ({ navigate }) => {
             };
             return (
               <div className="aa-recent-searches-tag" onClick={handleItemClick}>
-                <span class="aa-recent-searches-tag-text">
+                <span className="aa-recent-searches-tag-text">
                     <components.ReverseHighlight hit={item} attribute="label" />
                 </span>
                 <button className="aa-recent-searches-close-button">×</button>
