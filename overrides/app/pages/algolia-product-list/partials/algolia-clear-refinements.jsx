@@ -36,8 +36,6 @@ const AlgoliaClearRefinements = (props) => {
 }
 
 AlgoliaClearRefinements.propTypes = {
-    includedAttributes: PropTypes.arrayOf(PropTypes.string),
-    excludedAttributes: PropTypes.arrayOf(PropTypes.string),
     variant: PropTypes.oneOf(['link', 'button'])
 }
 

@@ -4,7 +4,6 @@ import {CurrentRefinements} from 'react-instantsearch'
 import PropTypes from 'prop-types'
 
 const AlgoliaCurrentRefinements = (props) => {
-    const {includedAttributes} = props
     const styles = useMultiStyleConfig('AlgoliaCurrentRefinements')
 
     var currency_symbols = {
@@ -59,7 +58,6 @@ const AlgoliaCurrentRefinements = (props) => {
     return (
         <Box sx={styles}>
             <CurrentRefinements
-                includedAttributes={includedAttributes}
                 transformItems={customTransformItems}
                 classNames={{
                     label: 'label',
@@ -73,7 +71,6 @@ const AlgoliaCurrentRefinements = (props) => {
 }
 
 AlgoliaCurrentRefinements.propTypes = {
-    includedAttributes: PropTypes.arrayOf(PropTypes.string),
     transformItems: PropTypes.func
 }
 
