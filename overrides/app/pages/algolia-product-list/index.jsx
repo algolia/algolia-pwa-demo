@@ -263,7 +263,7 @@ const ProductList = (props) => {
                                             alignItems="center"
                                             gap="3"
                                         >
-                                            <AlgoliaCurrentRefinements/>
+                                            <AlgoliaCurrentRefinements />
                                             <AlgoliaClearRefinements />
                                         </Flex>
                                         <Box paddingTop={'45px'}>
