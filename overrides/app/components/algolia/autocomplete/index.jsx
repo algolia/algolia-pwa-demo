@@ -9,7 +9,7 @@ import React, {createElement, Fragment, useEffect, useRef} from 'react'
 import {createRoot} from 'react-dom/client'
 import {autocomplete} from '@algolia/autocomplete-js'
 import PropTypes from 'prop-types'
-import {pipe, set} from 'ramda'
+import {pipe} from 'ramda'
 
 import {createFillWith, uniqBy} from './functions'
 import {categoriesPlugin} from './plugins/categoriesPlugin'
@@ -73,7 +73,6 @@ const combine = pipe(removeDuplicates, fillWith)
 export function Autocomplete({navigate, currency}) {
     const containerRef = useRef(null)
     const searchRef = useRef(null) // Ref for autocomplete search instance
-    const panelAnimationRef = useRef(null)
 
     /** Recent Searches showcase. Demo purposed. Feel free to remove this part for your implementation */
     /*********************************************************************** */

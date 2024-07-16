@@ -215,8 +215,12 @@ const ProductList = (props) => {
             <InstantSearch
                 searchClient={searchClient}
                 indexName={productIndexName}
-                routing
+                routing={true}
                 insights={true}
+                future={{
+                    preserveSharedStateOnUnmount: true,
+                    persistHierarchicalRootCount: true
+                }}
             >
                 <Tabs defaultIndex={urlParams.get('tab') === 'articles' ? 1 : 0}>
                     {isSearch && (
@@ -375,6 +379,8 @@ const ProductList = (props) => {
                                 <AlgoliaUiStateProvider
                                     searchClient={searchClient}
                                     indexName={productIndexName}
+                                    filters={filters}
+                                    query={query}
                                 >
                                     <ModalOverlay />
                                     <ModalContent top={0} marginTop={0}>

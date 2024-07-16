@@ -75,7 +75,8 @@ const AlgoliaCheckboxRefinements = (props) => {
 
 AlgoliaCheckboxRefinements.propTypes = {
     attribute: PropTypes.string,
-    title: PropTypes.string
+    title: PropTypes.string,
+    sortBy: PropTypes.arrayOf(PropTypes.string)
 }
 
 export default AlgoliaCheckboxRefinements
