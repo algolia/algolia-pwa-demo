@@ -1,0 +1,110 @@
+.journey {
+    width: 100%;
+    background-color: #f5f5fa;
+    display: flex;
+}
+
+.journey .journey-container {
+    max-width: 90rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: calc(56px + min(56px, max(0px, (100vw - 500px) * 0.08)));
+    padding-bottom: calc(56px + min(56px, max(0px, (100vw - 500px) * 0.08)));
+    padding-right: calc(16px + min(40px, max(0px, (100vw - 500px) * 0.05714285714285714)));
+    padding-left: calc(16px + min(40px, max(0px, (100vw - 500px) * 0.05714285714285714)));
+    gap: 4rem;
+    margin: 0 auto;
+}
+
+.journey .journey-container h2 {
+    font-size: calc(34px + min(8px, max(0px, (100vw - 500px) * 0.011428571428571429)));
+    color: #23263b;
+    line-height: 1.3;
+    font-weight: 700;
+    font-family: Sora, Arial, sans-serif;
+}
+
+.journey .journey-container .journey-bottom {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.journey .journey-container .journey-bottom .journey-bottom-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.journey .journey-container .journey-bottom .journey-bottom-content h3 {
+    line-height: 1.4;
+    font-size: calc(18px + min(6px, max(0px, (100vw - 500px) * 0.008571428571428572)));
+    color: #23263b;
+    font-weight: 700;
+    font-family: Sora, Arial, sans-serif;
+}
+
+.journey .journey-container .journey-bottom .journey-bottom-content > p{
+    color: #484C7A;
+    font-size: calc(16px + min(2px,max(0px,(100vw - 500px) * .002857142857142857)));
+    line-height: 1.5;
+    font-weight: 400;
+    font-family: Inter, sans-serif;
+}
+
+.journey .journey-container .journey-bottom .journey-bottom-content .contact {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.75rem;    
+}
+
+.journey .journey-container .journey-bottom .journey-bottom-content .contact > p {
+    letter-spacing: .32px;
+    color: #23263b;
+    line-height: 1.5;
+    font-weight: 600;
+    font-family: Sora, Arial, sans-serif;
+}
+
+.journey .journey-container .journey-bottom .journey-bottom-content .contact .arrow-right-box {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #003dff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.5s ease, border 0.5s ease;
+}
+
+.journey .journey-container .journey-bottom .journey-bottom-content .contact:hover .arrow-right-box {
+    border-color:  #f5f5fa;
+    background-color: #003dff;
+}
+
+.journey .journey-container .journey-bottom .journey-bottom-content .contact .arrow-right-box .arrow-right{
+    color: #003dff;
+    transition: color 0.1s ease;
+}
+
+.journey .journey-container .journey-bottom .journey-bottom-content .contact:hover .arrow-right-box .arrow-right {
+    color: #FFFFFF;
+}
+
+@media screen and (max-width: 960px) {
+    .journey .journey-container h2 {
+        text-align: center;
+    }
+
+    .journey .journey-container .journey-bottom{
+        flex-direction: column;
+    }
+}
