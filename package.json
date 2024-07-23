@@ -58,13 +58,13 @@
     "@algolia/autocomplete-plugin-query-suggestions": "1.17.0",
     "@algolia/autocomplete-plugin-recent-searches": "1.17.0",
     "@algolia/autocomplete-theme-classic": "1.17.0",
-    "@algolia/recommend-react": "^1.15.0",
+    "@algolia/recommend-react": "1.15.0",
     "@algolia/ui-components-horizontal-slider-react": "1.2.3",
     "@algolia/ui-components-horizontal-slider-theme": "1.2.3",
     "algoliasearch": "4.23.3",
     "keen-slider": "^6.8.6",
     "prop-types": "^15.8.1",
     "ramda": "0.29.1",
-    "react-instantsearch": "^7.10.0"
+    "react-instantsearch": "7.12.2"
   }
 }
