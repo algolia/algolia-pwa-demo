@@ -22,10 +22,6 @@ const AlgoliaCheckboxRefinements = (props) => {
 
     const {items, refine} = useRefinementList(props)
 
-    const sortedItems = props.sortBy
-        ? items
-        : items.sort((a, b) => a.label.localeCompare(b.label, undefined, {numeric: true}))
-
     return (
         <>
             {items.length > 0 && (
@@ -41,7 +37,7 @@ const AlgoliaCheckboxRefinements = (props) => {
                     <AccordionPanel pb={4}>
                         <AlgoliaRefinementsContainer attributes={[props.attribute]}>
                             <VStack spacing={1} mt={1} align="start">
-                                {sortedItems.map((item, idx) => {
+                                {items.map((item, idx) => {
                                     return (
                                         <Checkbox
                                             key={idx}
