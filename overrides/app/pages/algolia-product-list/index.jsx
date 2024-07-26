@@ -123,7 +123,7 @@ const ProductList = (props) => {
                 />
                 <AlgoliaColorRefinements attribute="color" title="Color" />
                 <AlgoliaCheckboxRefinements attribute="size" title="Size" />
-                <AlgoliaRangeRefinements attribute="price.USD" title="Price" />
+                <AlgoliaRangeRefinements attribute="price.USD" title="Price ($)" />
                 <AlgoliaCheckboxRefinements
                     attribute="brand"
                     title="Brand"
