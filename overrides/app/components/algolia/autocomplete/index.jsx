@@ -198,7 +198,7 @@ export function Autocomplete({navigate, currency}) {
 
         const handleClicks = (e) => {
             let className = e.target.className
-            if (className.indexOf('aa-SeeAllBtn') > -1) {
+            if (className.indexOf('aa-SeeAllLink') > -1) {
                 searchRef.current.setIsOpen(false)
             }
         }

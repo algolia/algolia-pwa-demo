@@ -9,8 +9,7 @@ const RecentSearchesPlugin = (navigate) => {
       return {
         ...source,
         onSelect(params) {
-          const { state, setIsOpen } = params;
-          setIsOpen(true);
+          const { state } = params;
           navigate(`/search?q=${encodeURIComponent(state.query)}`);
         },
         templates: {
