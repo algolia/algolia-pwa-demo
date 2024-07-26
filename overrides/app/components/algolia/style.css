@@ -1209,3 +1209,19 @@ body {
     width: 100% !important;
   }
 }
+
+.ais-HierarchicalMenu-link--selected {
+  color: #5468ff;
+}
+
+.ais-HierarchicalMenu-link:before {
+  transform: rotate(180deg);
+}
+
+.ais-HierarchicalMenu-link--selected::before {
+  transform: rotate(180deg);
+}
+
+.ais-HierarchicalMenu-list .ais-HierarchicalMenu-list .ais-HierarchicalMenu-list .ais-HierarchicalMenu-link::before {
+  display: none;
+}
