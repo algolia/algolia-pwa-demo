@@ -22,15 +22,14 @@ export default function Header() {
                             className="demo"
                             rel="noreferrer noopener"
                         >
-                            Get a demo
+                            Request a custom demo
                         </a>
                         <a
-                            href="https://www.algolia.com/doc/integration/salesforce-commerce-cloud-b2c/getting-started/set-up-the-algolia-cartridge/?client=javascript"
-                            target="_blank"
+                            href="/category/womens"
                             className="download"
                             rel="noreferrer noopener"
                         >
-                            Download the cartridge
+                            Explore the storefront
                         </a>
                     </div>
                 </div>

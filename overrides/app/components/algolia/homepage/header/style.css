@@ -153,6 +153,15 @@
         max-width: 47.5rem;
         max-width: 47.5rem;
     }
+
+    .header .container .left .button-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .header .container .left .button-container .download {
+        text-align: center;
+    }
 }
 
 @media screen and (max-width: 400px){
