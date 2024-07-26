@@ -358,6 +358,12 @@ body {
   fill: none;
 }
 
+@media (max-width: 681px) {
+  .aa-SeeAllLink {
+    margin: 0 auto 0 auto !important;
+  }
+}
+
 /* See all */
 .aa-SeeAllBtn,
 .aa-SeeAllLink {
@@ -907,8 +913,14 @@ body {
   max-width: 100%;
 }
 
-.aa-PanelSection--left{
+.aa-PanelSection--left {
   gap: 15px;
+}
+
+@media (max-width: 681px) {
+  .aa-PanelSection--left {
+    gap: 0;
+  }
 }
 
 .aa-PanelSection--popular section{
@@ -921,6 +933,12 @@ body {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+}
+
+@media (min-width: 681px) {
+  .aa-PanelSection--left .aa-List{
+    margin-top: -1rem;
+  }
 }
 
 .aa-PanelSection--left .aa-Item {
