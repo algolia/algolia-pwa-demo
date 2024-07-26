@@ -148,7 +148,7 @@ body {
 .aa-ItemPicture img {
   object-fit: cover;
   width: 100%;
-  height: auto;
+  min-height: 400px;
   transition: transform 1.8s ease-out, opacity 0.2s ease-out;
   transform-origin: center;
   position: relative;
@@ -1028,6 +1028,9 @@ body {
   display: none;
 }
 
+.aa-ClearButton {
+  display: block !important;
+}
 
 .custom-pagination-item:hover {
   position: relative !important;
