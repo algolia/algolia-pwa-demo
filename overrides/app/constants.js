@@ -21,7 +21,8 @@ import {
 DEFAULT_LIMIT_VALUES[0] = 3
 DEFAULT_SEARCH_PARAMS.limit = 3
 
-export const CUSTOM_HOME_TITLE = '🎉 Hello Extensible React Template!'
+export const DEFAULT_SITE_TITLE = 'Algolia Composable Storefront (PWA Kit) Demo'
+export const CUSTOM_HOME_TITLE = 'Algolia Home Page'
 
 export {DEFAULT_LIMIT_VALUES, DEFAULT_SEARCH_PARAMS}
 

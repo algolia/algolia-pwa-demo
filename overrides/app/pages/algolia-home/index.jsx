@@ -38,9 +38,8 @@ const Home = () => {
     return (
         <>
             <Seo
-                title="Home Page"
-                description="Commerce Cloud Retail React App"
-                keywords="Commerce Cloud, Retail React App, React Storefront"
+                description="Algolia Composable Storefront (PWA Kit) Demo for Salesforce Commerce Cloud"
+                keywords="Commerce Cloud, Retail React App, React Storefront, Algolia"
             />
             <Suspense fallback={<Loader />}>
                 <Header />

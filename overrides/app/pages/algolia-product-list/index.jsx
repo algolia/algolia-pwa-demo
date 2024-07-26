@@ -188,8 +188,8 @@ const ProductList = (props) => {
             {...rest}
         >
             <Helmet>
-                <title>{category?.pageTitle}</title>
-                <meta name="description" content={category?.pageDescription} />
+                <title>{"Algolia | " + (category?.pageTitle || (searchQuery + ' Search Results'))}</title>
+                <meta name="description" content={category?.pageDescription || ('Search Results for ' + searchQuery)} />
                 <meta name="keywords" content={category?.pageKeywords} />
                 <link
                     rel="stylesheet"

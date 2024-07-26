@@ -68,12 +68,6 @@ const Home = () => {
 
     return (
         <Box data-testid="home-page" layerStyle="page">
-            <Seo
-                title="Algolia Composable Storefront (PWA Kit) Demo"
-                description="Algolia Composable Storefront (PWA Kit) Demo for Salesforce Commerce Cloud"
-                keywords="Commerce Cloud, Retail React App, React Storefront, Algolia"
-            />
-
             <Hero
                 title={CUSTOM_HOME_TITLE}
                 img={{
