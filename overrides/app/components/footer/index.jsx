@@ -12,7 +12,6 @@ import {
 } from '@salesforce/retail-react-app/app/components/shared/ui'
 import {useIntl} from 'react-intl'
 
-import LinksList from '@salesforce/retail-react-app/app/components/links-list'
 import {HideOnDesktop, HideOnMobile} from '@salesforce/retail-react-app/app/components/responsive'
 import {getPathWithLocale} from '@salesforce/retail-react-app/app/utils/url'
 import LocaleText from '@salesforce/retail-react-app/app/components/locale-text'
@@ -20,6 +19,23 @@ import useMultiSite from '@salesforce/retail-react-app/app/hooks/use-multi-site'
 import styled from '@emotion/styled'
 
 const [StylesProvider] = createStylesContext('Footer')
+
+const FooterHeading = styled(Text)`
+    font-weight: bold;
+    margin-bottom: 16px;
+`
+
+const FooterLink = styled.a`
+    display: block;
+    margin-bottom: 8px;
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+`
+
 const Footer = ({...otherProps}) => {
     const styles = useMultiStyleConfig('Footer')
     const intl = useIntl()
@@ -29,11 +45,7 @@ const Footer = ({...otherProps}) => {
     const supportedLocaleIds = l10n?.supportedLocales.map((locale) => locale.id)
     const showLocaleSelector = supportedLocaleIds?.length > 1
 
-    // NOTE: this is a workaround to fix hydration error, by making sure that the `option.selected` property is set.
-    // For some reason, adding some styles prop (to the option element) prevented `selected` from being set.
-    // So now we add the styling to the parent element instead.
     const Select = styled(ChakraSelect)({
-        // Targeting the child element
         option: styles.localeDropdownOption
     })
 
@@ -43,48 +55,36 @@ const Footer = ({...otherProps}) => {
                 <StylesProvider value={styles}>
                     <HideOnMobile>
                         <SimpleGrid columns={3} spacing={3}>
-                            <LinksList
-                                heading="Find out more"
-                                links={[
-                                    {
-                                        href: 'https://www.algolia.com/about/',
-                                        text: 'About Algolia'
-                                    },
-                                    {
-                                        href: 'https://algolia.com/',
-                                        text: 'Algolia Website'
-                                    }
-                                ]}
-                            />
-                            <LinksList
-                                heading="Try it out"
-                                links={[
-                                    {
-                                        href: 'https://www.algolia.com/doc/integration/salesforce-commerce-cloud-b2c/getting-started/introduction/',
-                                        text: 'Explore the cartridge'
-                                    },
-                                    {
-                                        href: '/',
-                                        text: intl.formatMessage({
-                                            id: 'footer.link.signin_create_account',
-                                            defaultMessage: 'Sign in or create account'
-                                        })
-                                    }
-                                ]}
-                            />
-                            <LinksList
-                                heading="Contact us"
-                                links={[
-                                    {
-                                        href: 'https://www.algolia.com/demorequest/',
-                                        text: 'Request custom demo'
-                                    },
-                                    {
-                                        href: 'https://support.algolia.com/hc/en-us',
-                                        text: 'Get support'
-                                    }
-                                ]}
-                            />
+                            <Box>
+                                <FooterHeading>Find out more</FooterHeading>
+                                <FooterLink href="https://www.algolia.com/about/" target="_blank" rel="noopener noreferrer">
+                                    About Algolia
+                                </FooterLink>
+                                <FooterLink href="https://algolia.com/" target="_blank" rel="noopener noreferrer">
+                                    Algolia Website
+                                </FooterLink>
+                            </Box>
+                            <Box>
+                                <FooterHeading>Try it out</FooterHeading>
+                                <FooterLink href="https://www.algolia.com/doc/integration/salesforce-commerce-cloud-b2c/getting-started/introduction/" target="_blank" rel="noopener noreferrer">
+                                    Explore the cartridge
+                                </FooterLink>
+                                <FooterLink href="/">
+                                    {intl.formatMessage({
+                                        id: 'footer.link.signin_create_account',
+                                        defaultMessage: 'Sign in or create account'
+                                    })}
+                                </FooterLink>
+                            </Box>
+                            <Box>
+                                <FooterHeading>Contact us</FooterHeading>
+                                <FooterLink href="https://www.algolia.com/demorequest/" target="_blank" rel="noopener noreferrer">
+                                    Request custom demo
+                                </FooterLink>
+                                <FooterLink href="https://support.algolia.com/hc/en-us" target="_blank" rel="noopener noreferrer">
+                                    Get support
+                                </FooterLink>
+                            </Box>
                         </SimpleGrid>
                     </HideOnMobile>
                     {showLocaleSelector && (
@@ -99,12 +99,9 @@ const Footer = ({...otherProps}) => {
                                     defaultValue={locale}
                                     onChange={({target}) => {
                                         setLocale(target.value)
-
-                                        // Update the `locale` in the URL.
                                         const newUrl = getPathWithLocale(target.value, buildUrl, {
                                             disallowParams: ['refine']
                                         })
-
                                         window.location = newUrl
                                     }}
                                     variant="filled"
@@ -146,36 +143,31 @@ export default Footer
 
 const LegalLinks = ({variant}) => {
     const intl = useIntl()
+    const styles = useMultiStyleConfig('Footer')
     return (
-        <LinksList
-            links={[
-                {
-                    href: '/',
-                    text: intl.formatMessage({
-                        id: 'footer.link.terms_conditions',
-                        defaultMessage: 'Terms & Conditions'
-                    })
-                },
-                {
-                    href: '/',
-                    text: intl.formatMessage({
-                        id: 'footer.link.privacy_policy',
-                        defaultMessage: 'Privacy Policy'
-                    })
-                },
-                {
-                    href: '/',
-                    text: intl.formatMessage({
-                        id: 'footer.link.site_map',
-                        defaultMessage: 'Site Map'
-                    })
-                }
-            ]}
-            color="gray.200"
-            variant={variant}
-        />
+        <Box {...(variant === 'vertical' ? styles.legalLinksVertical : styles.legalLinksHorizontal)}>
+            <FooterLink href="/" {...styles.legalLink}>
+                {intl.formatMessage({
+                    id: 'footer.link.terms_conditions',
+                    defaultMessage: 'Terms & Conditions'
+                })}
+            </FooterLink>
+            <FooterLink href="/" {...styles.legalLink}>
+                {intl.formatMessage({
+                    id: 'footer.link.privacy_policy',
+                    defaultMessage: 'Privacy Policy'
+                })}
+            </FooterLink>
+            <FooterLink href="/" {...styles.legalLink}>
+                {intl.formatMessage({
+                    id: 'footer.link.site_map',
+                    defaultMessage: 'Site Map'
+                })}
+            </FooterLink>
+        </Box>
     )
 }
+
 LegalLinks.propTypes = {
     variant: PropTypes.oneOf(['vertical', 'horizontal'])
 }
