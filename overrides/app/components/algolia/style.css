@@ -143,15 +143,18 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 24px;
+  min-height: 300px;
+  position: relative;
 }
 
 .aa-ItemPicture img {
   object-fit: cover;
   width: 100%;
-  min-height: 400px;
+  height: 100%;
   transition: transform 1.8s ease-out, opacity 0.2s ease-out;
   transform-origin: center;
-  position: relative;
+  position: absolute;
+  object-position: center;
 }
 
 /* Category and FAQ */
