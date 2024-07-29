@@ -10,12 +10,12 @@ const AlgoliaClearRefinements = React.forwardRef((props, ref) => {
 
     function clearRefinements() {
         console.log('refined')
-        refine();
+        refine()
     }
 
     React.useImperativeHandle(ref, () => ({
         triggerClick: clearRefinements
-      }));
+    }))
 
     if (variant === 'button') {
         return (
@@ -42,7 +42,7 @@ const AlgoliaClearRefinements = React.forwardRef((props, ref) => {
             )}
         </>
     )
-});
+})
 
 AlgoliaClearRefinements.propTypes = {
     variant: PropTypes.oneOf(['link', 'button'])
