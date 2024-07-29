@@ -18,8 +18,14 @@ import {CategoryHit} from '../types'
  * @returns {JSX.Element} The CategoryItem component.
  */
 function CategoryItem({hit, components, navigate}: CategoryItemProps) {
+
+    const clickHandler = () => {
+        let slug = hit.objectID.split('/')[1]
+        navigate(`/category/${slug}`)
+    }
+
     return (
-        <div key={hit.objectID} className="aa-ItemWrapper aa-CategoryItem">
+        <div key={hit.objectID} className="aa-ItemWrapper aa-CategoryItem" onClick={clickHandler}>
             <div className="aa-ItemContent">
                 <div className="aa-ItemIcon aa-ItemIcon--noBorder">
                     <GridIcon />
@@ -40,10 +46,6 @@ function CategoryItem({hit, components, navigate}: CategoryItemProps) {
  */
 export const categoriesPlugin = (navigate) => ({
     getSources({query}) {
-        if (!query) {
-            return ['test']
-        }
-
         return [
             {
                 sourceId: 'categoriesPlugin',
