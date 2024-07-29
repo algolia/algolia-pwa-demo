@@ -9,7 +9,6 @@ const AlgoliaClearRefinements = React.forwardRef((props, ref) => {
     const {canRefine, refine} = useClearRefinements(otherProps)
 
     function clearRefinements() {
-        console.log('refined')
         refine()
     }
 
@@ -43,6 +42,8 @@ const AlgoliaClearRefinements = React.forwardRef((props, ref) => {
         </>
     )
 })
+
+AlgoliaClearRefinements.displayName = 'AlgoliaClearRefinements'
 
 AlgoliaClearRefinements.propTypes = {
     variant: PropTypes.oneOf(['link', 'button'])
