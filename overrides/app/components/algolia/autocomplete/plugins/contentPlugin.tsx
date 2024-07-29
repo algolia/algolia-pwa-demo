@@ -91,8 +91,8 @@ function ContentItem({hit}: ContentItemProps) {
     return (
         <a key={hit.objectID} href="https://support.algolia.com/hc/en-us" target="_blank" className="aa-ItemLink aa-ContentItem">
             <div className="aa-ItemContent">
-                <div className="aa-ItemPicture">
-                    {hit.image ? <img src={hit.image} alt={hit.name} /> : <InfoIcon />}
+                <div>
+                    <InfoIcon />
                 </div>
 
                 <div className="aa-ItemContentBody">
