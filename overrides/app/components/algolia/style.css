@@ -1163,7 +1163,7 @@ body {
 }
 
 .aa-ItemContentTitle {
-  padding: 0.2rem 0.4rem;
+  padding: 0.2rem O;
 }
 
 [data-autocomplete-source-id="querySuggestionsPlugin"] .aa-Item {
