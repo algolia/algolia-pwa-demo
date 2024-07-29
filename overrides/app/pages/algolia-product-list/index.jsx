@@ -6,7 +6,7 @@
  */
 
 import React, {useState, useMemo} from 'react'
-import PropTypes from 'prop-types'
+import PropTypes, { func } from 'prop-types'
 import {useHistory, useLocation, useParams} from 'react-router-dom'
 import {FormattedMessage, useIntl} from 'react-intl'
 import {Helmet} from 'react-helmet'
@@ -174,6 +174,15 @@ const ProductList = (props) => {
     if (res) {
         res.set('Cache-Control', `max-age=${MAX_CACHE_AGE}`)
     }
+    const refinementButton = React.useRef();
+
+    React.useEffect(() => {
+        if (refinementButton) {
+            if (refinementButton.current) {
+                refinementButton.current.triggerClick();
+            }
+        }
+    }, [location.search])
 
     // Reset scroll position when `isRefetching` becomes `true`.
     const query = searchQuery ?? ''
@@ -256,7 +265,7 @@ const ProductList = (props) => {
                                             gap="3"
                                         >
                                             <AlgoliaCurrentRefinements />
-                                            <AlgoliaClearRefinements />
+                                            <AlgoliaClearRefinements ref={refinementButton}/>
                                         </Flex>
                                         <Box paddingTop={'45px'}>
                                             <AlgoliaSortBy items={allIndices} />
