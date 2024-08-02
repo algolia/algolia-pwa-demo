@@ -48,6 +48,7 @@ import useNavigation from '@salesforce/retail-react-app/app/hooks/use-navigation
 import LoadingSpinner from '@salesforce/retail-react-app/app/components/loading-spinner'
 import {isHydrated, noop} from '@salesforce/retail-react-app/app/utils/utils'
 import {useCurrency} from '@salesforce/retail-react-app/app/hooks'
+import {useLocation} from 'react-router-dom'
 
 import {Autocomplete} from '../algolia/autocomplete'
 
@@ -79,6 +80,15 @@ const Header = ({
     ...props
 }) => {
     const intl = useIntl()
+    const location = useLocation()
+
+    React.useEffect(() => {
+        console.log('Page view')
+        if (window && window.analytics) {
+            window.analytics.page()
+        }
+    }, [location])
+
     const {
         derivedData: {totalItems},
         data: basket

@@ -17,6 +17,7 @@ import {getPathWithLocale} from '@salesforce/retail-react-app/app/utils/url'
 import LocaleText from '@salesforce/retail-react-app/app/components/locale-text'
 import useMultiSite from '@salesforce/retail-react-app/app/hooks/use-multi-site'
 import styled from '@emotion/styled'
+import {trackEvent} from '../algolia/homepage/segmentTracker'
 
 const [StylesProvider] = createStylesContext('Footer')
 
@@ -37,6 +38,9 @@ const FooterLink = styled.a`
 `
 
 const Footer = ({...otherProps}) => {
+    const handleClick = (eventTitle) => {
+        trackEvent('Footer: ' + eventTitle)
+    }
     const styles = useMultiStyleConfig('Footer')
     const intl = useIntl()
     const [locale, setLocale] = useState(intl.locale)
@@ -57,19 +61,39 @@ const Footer = ({...otherProps}) => {
                         <SimpleGrid columns={3} spacing={3}>
                             <Box>
                                 <FooterHeading>Find out more</FooterHeading>
-                                <FooterLink href="https://www.algolia.com/about/" target="_blank" rel="noopener noreferrer">
+                                <FooterLink
+                                    href="https://www.algolia.com/about/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={() => handleClick('About Algolia')}
+                                >
                                     About Algolia
                                 </FooterLink>
-                                <FooterLink href="https://algolia.com/" target="_blank" rel="noopener noreferrer">
+                                <FooterLink
+                                    href="https://algolia.com/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={() => handleClick('Algolia Website')}
+                                >
                                     Algolia Website
                                 </FooterLink>
                             </Box>
                             <Box>
                                 <FooterHeading>Try it out</FooterHeading>
-                                <FooterLink href="https://www.algolia.com/doc/integration/salesforce-commerce-cloud-b2c/getting-started/introduction/" target="_blank" rel="noopener noreferrer">
+                                <FooterLink
+                                    href="https://www.algolia.com/doc/integration/salesforce-commerce-cloud-b2c/getting-started/introduction/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={() => handleClick('Explore the cartridge')}
+                                >
                                     Explore the cartridge
                                 </FooterLink>
-                                <FooterLink href="/">
+                                <FooterLink
+                                    href="https://dashboard.algolia.com/users/sign_up"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={() => handleClick('Sign up')}
+                                >
                                     {intl.formatMessage({
                                         id: 'footer.link.signin_create_account',
                                         defaultMessage: 'Sign in or create account'
@@ -78,10 +102,20 @@ const Footer = ({...otherProps}) => {
                             </Box>
                             <Box>
                                 <FooterHeading>Contact us</FooterHeading>
-                                <FooterLink href="https://www.algolia.com/demorequest/" target="_blank" rel="noopener noreferrer">
+                                <FooterLink
+                                    href="https://www.algolia.com/demorequest/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={() => handleClick('Demo Request')}
+                                >
                                     Request custom demo
                                 </FooterLink>
-                                <FooterLink href="https://support.algolia.com/hc/en-us" target="_blank" rel="noopener noreferrer">
+                                <FooterLink
+                                    href="https://support.algolia.com/hc/en-us"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={() => handleClick('Get support')}
+                                >
                                     Get support
                                 </FooterLink>
                             </Box>
@@ -145,7 +179,12 @@ const LegalLinks = ({variant}) => {
     const intl = useIntl()
     const styles = useMultiStyleConfig('Footer')
     return (
-        <Box {...(variant === 'vertical' ? styles.legalLinksVertical : styles.legalLinksHorizontal)}>
+        <Box
+            {...(variant === 'vertical' ? styles.legalLinksVertical : styles.legalLinksHorizontal)}
+        >
+            <button id="ot-sdk-btn" className="ot-sdk-show-settings">
+                Cookie Settings
+            </button>
             <FooterLink href="/" {...styles.legalLink}>
                 {intl.formatMessage({
                     id: 'footer.link.terms_conditions',

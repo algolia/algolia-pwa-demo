@@ -44,22 +44,45 @@ const {handler} = runtime.createHandler(options, (app) => {
                 useDefaults: true,
                 directives: {
                     'img-src': [
-                        //@TODO: Default source for product images - replace with your CDN
+                        "'self'",
                         '*.commercecloud.salesforce.com',
                         '*.cloudinary.com',
-                        '*.istockphoto.com'
+                        '*.istockphoto.com',
+                        '*.cookielaw.org',
+                        '*.invibes.com',
+                        '*.b26net.com',
+                        '*.ads.linkedin.com'
                     ],
                     'script-src': [
-                        // Used by the service worker in /worker/main.js
-                        'storage.googleapis.com'
+                        "'self'",
+                        "'unsafe-inline'",
+                        "'unsafe-eval'",
+                        'storage.googleapis.com',
+                        '*.cookielaw.org',
+                        '*.segment.io',
+                        '*.segment.com',
+                        '*.hotjar.com',
+                        '*.googletagmanager.com',
+                        '*.amplitude.com',
+                        '*.madkudu.com',
+                        '*.google-analytics.com',
+                        'localhost:*'
                     ],
                     'connect-src': [
-                        // Connect to Einstein APIs
+                        "'self'",
                         'api.cquotient.com',
                         '*.algolianet.com',
                         '*.algolia.net',
                         'insights.algolia.io',
-                        'cdn.jsdelivr.net'
+                        'cdn.jsdelivr.net',
+                        '*.cookielaw.org',
+                        '*.segment.io',
+                        '*.segment.com',
+                        '*.hotjar.com',
+                        '*.googletagmanager.com',
+                        '*.amplitude.com',
+                        '*.madkudu.com',
+                        '*.google-analytics.com'
                     ]
                 }
             }
