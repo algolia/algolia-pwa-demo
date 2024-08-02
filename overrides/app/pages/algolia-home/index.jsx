@@ -35,12 +35,6 @@ const Home = () => {
         res.set('Cache-Control', `s-maxage=${MAX_CACHE_AGE}`)
     }
 
-    //define a generic function for segment tracking
-    const track = (eventObj) => {
-        if (window && window.analytics) {
-            window.analytics.track(event)
-        }
-
     return (
         <>
             <Seo

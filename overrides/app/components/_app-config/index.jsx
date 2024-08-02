@@ -26,7 +26,7 @@ const SegmentAndOneTrustWrapper = (props) => {
                 <script
                     src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"
                     type="text/javascript"
-                    charset="UTF-8"  // eslint-disable-line
+                    charset="UTF-8" // eslint-disable-line
                     data-domain-script="5e9f5149-bde8-4a13-b973-b7a9385e8ebb-test"
                 ></script>
                 <script type="text/javascript">
