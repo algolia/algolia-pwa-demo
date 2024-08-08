@@ -123,7 +123,7 @@ const ProductList = (props) => {
                 />
                 <AlgoliaColorRefinements attribute="color" title="Color" />
                 <AlgoliaCheckboxRefinements attribute="size" title="Size" />
-                <AlgoliaRangeRefinements attribute="price.USD" title="Price" />
+                <AlgoliaRangeRefinements attribute="price.USD" title="Price ($)" />
                 <AlgoliaCheckboxRefinements
                     attribute="brand"
                     title="Brand"
@@ -174,6 +174,15 @@ const ProductList = (props) => {
     if (res) {
         res.set('Cache-Control', `max-age=${MAX_CACHE_AGE}`)
     }
+    const refinementButton = React.useRef()
+
+    React.useEffect(() => {
+        if (refinementButton) {
+            if (refinementButton.current) {
+                refinementButton.current.triggerClick()
+            }
+        }
+    }, [location.search])
 
     // Reset scroll position when `isRefetching` becomes `true`.
     const query = searchQuery ?? ''
@@ -256,7 +265,7 @@ const ProductList = (props) => {
                                             gap="3"
                                         >
                                             <AlgoliaCurrentRefinements />
-                                            <AlgoliaClearRefinements />
+                                            <AlgoliaClearRefinements ref={refinementButton} />
                                         </Flex>
                                         <Box paddingTop={'45px'}>
                                             <AlgoliaSortBy items={allIndices} />

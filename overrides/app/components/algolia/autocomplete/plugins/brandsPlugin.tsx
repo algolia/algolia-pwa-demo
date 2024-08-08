@@ -3,7 +3,6 @@
 import {AutocompletePlugin, getAlgoliaFacets} from '@algolia/autocomplete-js'
 import React, {createElement, Fragment} from 'react'
 import {ALGOLIA_PRODUCTS_INDEX_NAME} from '../constants'
-import {searchClient} from '../searchClient'
 import {BrandHit} from './../types'
 import {BrandItem} from './../components/BrandItem'
 import {getConfig} from '@salesforce/pwa-kit-runtime/utils/ssr-config'
@@ -30,7 +29,6 @@ export const brandsPlugin: AutocompletePlugin<BrandHit, {}> = {
                     var response = await recommendClient.getTrendingFacets([
                         {
                           indexName: ALGOLIA_PRODUCTS_INDEX_NAME,
-                          threshold: 10,
                           facetName: 'brand'
                         },
                     ])
