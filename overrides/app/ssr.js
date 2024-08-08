@@ -16,6 +16,8 @@ import helmet from 'helmet'
 const options = {
     // The build directory (an absolute path)
     buildDir: path.resolve(process.cwd(), 'build'),
+    // The directory containing the client-side code (an absolute path)
+    useSLASPrivateClient: true,
 
     // The cache time for SSR'd pages (defaults to 600 seconds)
     defaultCacheTimeSeconds: 600,

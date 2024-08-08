@@ -110,7 +110,7 @@ export function Autocomplete({navigate, currency}) {
             plugins: [
                 recentSearchesPlugin(navigate),
                 querySuggestionsPlugin,
-                categoriesPlugin,
+                categoriesPlugin(navigate),
                 brandsPlugin,
                 faqPlugin,
                 productsPluginFactory(navigate, currency),
@@ -198,7 +198,7 @@ export function Autocomplete({navigate, currency}) {
 
         const handleClicks = (e) => {
             let className = e.target.className
-            if (className.indexOf('aa-SeeAllBtn') > -1) {
+            if (className.indexOf('aa-SeeAllLink') > -1) {
                 searchRef.current.setIsOpen(false)
             }
         }
@@ -231,7 +231,8 @@ function AutocompletePanel(props, search) {
         contentPlugin: content,
         popularPlugin: popular,
         quickAccessPlugin: quickAccess,
-        popularCategoriesPlugin: popularCategories
+        popularCategoriesPlugin: popularCategories,
+        categoriesPlugin: categories
     } = props.elements
 
     const sourceIdsToExclude = ['popularPlugin', 'popularCategoriesPlugin']
@@ -262,6 +263,10 @@ function AutocompletePanel(props, search) {
                                         <div className="aa-SourceHeaderLine" />
                                     </div>
                                     {recentSearches}
+
+                                    <div className="aa-PanelSection--popular">{popular}</div>
+
+                                    <div className="aa-PanelSection--popular">{categories}</div>
 
                                     <div className="aa-SourceHeader">
                                         <span className="aa-SourceHeaderTitle">BRANDS</span>
@@ -297,10 +302,6 @@ function AutocompletePanel(props, search) {
                                     <li>Check out popular categories for inspiration</li>
                                 </ul>
                             </div>
-                        )}
-
-                        {!props.state.query && (
-                            <div className="aa-PanelSection--popular">{popular}</div>
                         )}
                     </div>
                     <div className="aa-PanelSection--right">
