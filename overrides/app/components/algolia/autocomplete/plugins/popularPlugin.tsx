@@ -56,9 +56,6 @@ export const popularPlugin = createQuerySuggestionsPlugin({
         return {
             ...source,
             sourceId: 'popularPlugin',
-            onSelect({setIsOpen}) {
-                setIsOpen(true)
-            },
             renderer: {createElement, Fragment, render: () => {}},
             templates: {
                 header({Fragment}) {

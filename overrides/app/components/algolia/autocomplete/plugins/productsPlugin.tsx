@@ -58,7 +58,7 @@ export const productsPluginFactory = (navigate, currency) => ({
                                         onClick={() => navigate('/search?q=' + state.query)}
                                         className="aa-SeeAllLink"
                                     >
-                                        View All Products for "{state.query}" ({state.context.nbContent}) 
+                                        View All Products for "{state.query}" ({state.context.nbProducts})
                                     </a>
                                 </span>
                             </div>

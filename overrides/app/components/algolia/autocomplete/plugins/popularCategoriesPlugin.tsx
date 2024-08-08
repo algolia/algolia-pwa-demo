@@ -12,20 +12,20 @@ import {PopularCategoryHit} from '../types'
  * Base URL for the category images. You can adjust this to fit your needs.
  * @type {string}
  */
-const baseUrl = 'https://res.cloudinary.com/hilnmyskv/image/upload/v1646067858'
+const baseUrl = 'https://res.cloudinary.com/ddbdkp0az/image/upload/v1721993334'
 
-/**
- * Object containing the URLs for each category image can beadjusted to fit your needs.
+
+/* Object containing the URLs for each category image can beadjusted to fit your needs.
  * @type {Object.<string, string>}
  */
 const images = {
-    'Womens': `${baseUrl}/women_category_vwzkln.jpg`,
-    'Womens > Jewelry': `${baseUrl}/bags_category_qd7ssj.jpg`,
-    'Mens > Clothing': `${baseUrl}/clothing_category_xhiz1s.jpg`,
-    'Mens': `${baseUrl}/men_category_wfcley.jpg`,
-    'Womens > Clothing': `${baseUrl}/t-shirts_category_gzqcvd.jpg`,
-    'Womens > Accessories': `${baseUrl}/shoes_category_u4fi0q.jpg`,
-    '2 button pocket': `${baseUrl}/men_category_wfcley.jpg`
+    'Womens': `${baseUrl}/womens_ushqqq.jpg`,
+    'Womens > Jewelry': `${baseUrl}/Womens_Jewelry_f2g8oa.jpg`,
+    'Mens > Clothing': `${baseUrl}/Mens_Clothing_yfpxao.jpg`,
+    'Mens': `${baseUrl}/Mens_mozl2c.jpg`,
+    'Womens > Clothing': `${baseUrl}/womens-top_jtnf6s.png`,
+    'Womens > Accessories': `${baseUrl}/Womens_Accessories_lf2zdz.jpg`,
+    '2 button pocket': `${baseUrl}/2_button_pocket_r5n3qw.jpg`
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
