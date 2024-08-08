@@ -4,8 +4,13 @@ import {getAssetUrl} from '@salesforce/pwa-kit-react-sdk/ssr/universal/utils'
 import {useKeenSlider} from 'keen-slider/react'
 import 'keen-slider/keen-slider.min.css'
 import {ChevronLeftIcon, ChevronRightIcon} from '@chakra-ui/icons'
+import {trackEvent} from '../segmentTracker'
 
 export default function Leading() {
+    const handleClick = (eventTitle) => {
+        trackEvent(eventTitle)
+    }
+
     const images = [
         {
             src: getAssetUrl('static/img/dior.svg'),
@@ -122,7 +127,12 @@ export default function Leading() {
                                 <p className="brand-name">{brand.name}</p>
                                 <p className="brand-job">{brand.job}</p>
                             </div>
-                            <a target="_blank" href={brand.href} rel="noreferrer noopener">
+                            <a
+                                target="_blank"
+                                href={brand.href}
+                                rel="noreferrer noopener"
+                                onClick={() => handleClick('Read their story')}
+                            >
                                 Read their story
                             </a>
                         </div>

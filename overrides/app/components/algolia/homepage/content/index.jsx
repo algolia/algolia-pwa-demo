@@ -2,7 +2,13 @@ import React from 'react'
 import './style.css'
 import {ChevronRightIcon} from '@chakra-ui/icons'
 import {getAssetUrl} from '@salesforce/pwa-kit-react-sdk/ssr/universal/utils'
+import {trackEvent} from '../segmentTracker'
+
 export default function Content() {
+    const handleClick = (eventTitle) => {
+        trackEvent(eventTitle)
+    }
+
     const contents = [
         {
             src: getAssetUrl('static/img/shoecarnival.jpg'),
@@ -39,6 +45,7 @@ export default function Content() {
                                 href={content.url}
                                 className="contact"
                                 rel="noreferrer noopener"
+                                onClick={() => handleClick('Read the story: ' + content.alt)}
                             >
                                 <p>Read the story</p>
                                 <div className="arrow-right-box">

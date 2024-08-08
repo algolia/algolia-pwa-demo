@@ -1,11 +1,16 @@
 import React from 'react'
 import './style.css'
 import {getAssetUrl} from '@salesforce/pwa-kit-react-sdk/ssr/universal/utils'
+import {trackEvent} from '../segmentTracker'
 
 export default function Header() {
     const img = {
         src: getAssetUrl('static/img/homepagecloud.svg'),
         alt: 'Homepage Bulut'
+    }
+
+    const handleClick = (eventTitle) => {
+        trackEvent(eventTitle)
     }
 
     return (
@@ -21,6 +26,7 @@ export default function Header() {
                             target="_blank"
                             className="demo"
                             rel="noreferrer noopener"
+                            onClick={() => handleClick('Demo Request')}
                         >
                             Request a custom demo
                         </a>
@@ -28,6 +34,7 @@ export default function Header() {
                             href="/category/womens"
                             className="download"
                             rel="noreferrer noopener"
+                            onClick={() => handleClick('Explore the storefront')}
                         >
                             Explore the storefront
                         </a>
