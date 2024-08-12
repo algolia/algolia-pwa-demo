@@ -1,7 +1,12 @@
 import React from 'react'
 import './style.css'
 import {ChevronRightIcon} from '@chakra-ui/icons'
+import {trackEvent} from '../segmentTracker'
+
 export default function Journey() {
+    const handleClick = (eventTitle) => {
+        trackEvent(eventTitle)
+    }
     return (
         <div className="journey">
             <div className="journey-container">
@@ -16,7 +21,11 @@ export default function Journey() {
                             development of connectors for some of the most popular solutions in the
                             market.
                         </p>
-                        <a href="mailto:partners@algolia.com" className="contact">
+                        <a
+                            href="mailto:partners@algolia.com"
+                            className="contact"
+                            onClick={() => handleClick('Contact Us')}
+                        >
                             <p>Contact us for more information</p>
                             <div className="arrow-right-box">
                                 <ChevronRightIcon className="arrow-right" />

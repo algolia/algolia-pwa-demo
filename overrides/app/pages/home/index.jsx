@@ -13,7 +13,6 @@ import {Box, Button, Stack, Link} from '@salesforce/retail-react-app/app/compone
 
 // Project Components
 import Hero from '@salesforce/retail-react-app/app/components/hero'
-import Seo from '@salesforce/retail-react-app/app/components/seo'
 import Section from '@salesforce/retail-react-app/app/components/section'
 import ProductScroller from '@salesforce/retail-react-app/app/components/product-scroller'
 

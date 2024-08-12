@@ -1,7 +1,12 @@
 import React from 'react'
 import './style.css'
+import {trackEvent} from '../segmentTracker'
 
 export default function Try() {
+    const handleClick = (eventTitle) => {
+        trackEvent(eventTitle)
+    }
+
     return (
         <div className="try">
             <div className="container">
@@ -14,6 +19,7 @@ export default function Try() {
                         target="_blank"
                         className="demo"
                         rel="noreferrer noopener"
+                        onClick={() => handleClick('Demo Request AI search')}
                     >
                         Get a demo
                     </a>
@@ -22,6 +28,7 @@ export default function Try() {
                         target="_blank"
                         className="free"
                         rel="noreferrer noopener"
+                        onClick={() => handleClick('Start free AI search')}
                     >
                         Start free
                     </a>

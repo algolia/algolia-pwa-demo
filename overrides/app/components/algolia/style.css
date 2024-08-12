@@ -1234,6 +1234,26 @@ body {
   }
 }
 
+#ot-sdk-btn.ot-sdk-show-settings, #ot-sdk-btn.optanon-show-settings {
+  color: inherit !important;
+  border: none !important;
+  height: inherit !important;
+  white-space: inherit !important;
+  word-wrap: inherit !important;
+  padding: inherit !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+  cursor: inherit !important;
+  display: block !important;
+  margin-bottom: 8px;
+  text-decoration: none;
+}
+
+#ot-sdk-btn.ot-sdk-show-settings:hover, #ot-sdk-btn.optanon-show-settings:hover {
+  color: inherit !important;
+  background-color: transparent !important;
+}
+
 .ais-HierarchicalMenu-link--selected {
   color: #5468ff;
 }
