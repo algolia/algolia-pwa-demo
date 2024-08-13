@@ -5,9 +5,7 @@ import React, {createElement, Fragment} from 'react'
 import {ALGOLIA_PRODUCTS_INDEX_NAME} from '../constants'
 import {BrandHit} from './../types'
 import {BrandItem} from './../components/BrandItem'
-import {getConfig} from '@salesforce/pwa-kit-runtime/utils/ssr-config'
-import recommend from '@algolia/recommend'
-
+import {recommendClient} from '../recommendClient'
 
 /**
  * An Autocomplete Plugin that provides brand results from Algolia.
@@ -18,10 +16,6 @@ export const brandsPlugin: AutocompletePlugin<BrandHit, {}> = {
         if (query) {
             return []
         }
-
-        let algoliaConfig = getConfig().app.algolia
-
-        const recommendClient = recommend(algoliaConfig.appId, algoliaConfig.apiKey)
         return [
             {
                 sourceId: 'brandsPlugin',

@@ -12,6 +12,7 @@ import {FormattedMessage, useIntl} from 'react-intl'
 import {Helmet} from 'react-helmet'
 import {useCategory} from '@salesforce/commerce-sdk-react'
 import {useServerContext} from '@salesforce/pwa-kit-react-sdk/ssr/universal/hooks'
+import {searchClient} from '../../components/algolia/autocomplete/searchClient'
 
 // Components
 import {
@@ -102,10 +103,6 @@ const ProductList = (props) => {
     const allIndices = [algoliaConfig.indices.primary, ...algoliaConfig.indices.replicas]
     const productIndexName = algoliaConfig.indices.primary.value
     const contentIndexName = algoliaConfig.indices.contents
-
-    const searchClient = useMemo(() => {
-        return algoliasearch(algoliaConfig.appId, algoliaConfig.apiKey)
-    }, [])
 
     // Algolia Refinements - You can adjust these to match your Algolia index.
     const hierarchicalCategoryAttributes = [

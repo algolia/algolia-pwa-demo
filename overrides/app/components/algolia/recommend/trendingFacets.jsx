@@ -2,10 +2,10 @@ import React, {useMemo} from 'react'
 import PropTypes from 'prop-types'
 import '@algolia/ui-components-horizontal-slider-theme'
 import {TrendingFacets as AlgoliaTrendingFacets} from '@algolia/recommend-react'
-import recommend from '@algolia/recommend'
 import {getConfig} from '@salesforce/pwa-kit-runtime/utils/ssr-config'
 import WidgetHeader from './utils/widgetheader'
 import {BrandItem} from '../algolia/autocomplete/components/BrandItem'
+import {recommendClient} from '../../algolia/autocomplete/recommendClient'
 
 const TrendingFacets = ({facetName, title}) => {
     let {app: algoliaConfig} = useMemo(() => getConfig(), [])
@@ -14,10 +14,6 @@ const TrendingFacets = ({facetName, title}) => {
     }
 
     const indexName = algoliaConfig.indices.primary.value
-
-    const recommendClient = useMemo(() => {
-        return recommend(algoliaConfig.appId, algoliaConfig.apiKey)
-    }, [])
 
     return (
         <AlgoliaTrendingFacets
