@@ -430,7 +430,7 @@ const ProductDetail = () => {
 
                 {/* Product Recommendations */}
                 <Stack spacing={16}>
-                    {!isProductASet && (
+                    {!isProductASet && product && (
                         <>
                             <FrequentlyBoughtTogether product={product} />
 
