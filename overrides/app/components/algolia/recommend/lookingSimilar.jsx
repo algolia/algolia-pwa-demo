@@ -9,6 +9,7 @@ import {useCurrency} from '@salesforce/retail-react-app/app/hooks'
 import {getConfig} from '@salesforce/pwa-kit-runtime/utils/ssr-config'
 import WidgetHeader from './utils/widgetheader'
 import {useWishlistOperations} from '../../../hooks/use-wishlist-operations'
+import {recommendClient} from '../../algolia/autocomplete/recommendClient'
 
 const LookingSimilar = ({product}) => {
     const {currency: activeCurrency} = useCurrency()
@@ -20,10 +21,6 @@ const LookingSimilar = ({product}) => {
     const [selectedColors, setSelectedColors] = useState({})
 
     const indexName = algoliaConfig.indices.primary.value
-
-    const recommendClient = useMemo(() => {
-        return recommend(algoliaConfig.appId, algoliaConfig.apiKey)
-    }, [])
 
     // Use the wishlist operations hook
     const {addItemToWishlist, removeItemFromWishlist, isInWishlist, isWishlistLoading} =
