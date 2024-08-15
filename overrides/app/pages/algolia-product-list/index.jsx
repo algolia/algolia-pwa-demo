@@ -56,7 +56,6 @@ import {getConfig} from '@salesforce/pwa-kit-runtime/utils/ssr-config'
 import {useCurrency} from '@salesforce/retail-react-app/app/hooks'
 
 // Algolia
-import algoliasearch from 'algoliasearch/lite'
 import {Configure, InstantSearch, Index, Pagination} from 'react-instantsearch'
 import AlgoliaCurrentRefinements from './partials/algolia-current-refinements'
 import AlgoliaHierarchicalRefinements from './partials/algolia-hierarchical-refinements'
