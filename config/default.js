@@ -34,7 +34,6 @@ module.exports = {
         commerceAPI: {
             proxyPath: '/mobify/proxy/api',
             parameters: commerceAPIConfig
-
         },
         // Einstein api config
         einsteinAPI: {
