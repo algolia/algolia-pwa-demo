@@ -7,6 +7,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const sites = require('./sites.js')
 const algoliaConfig = require('./algolia-config.json')
+const commerceAPIConfig = require('./commerce-api-config.json')
+
 module.exports = {
     app: {
         // Customize how your 'site' and 'locale' are displayed in the url.
@@ -31,12 +33,8 @@ module.exports = {
         // Commerce api config
         commerceAPI: {
             proxyPath: '/mobify/proxy/api',
-            parameters: {
-                clientId: 'acc2eb09-fa07-40a0-909f-61bad31000e3',
-                organizationId: 'f_ecom_zzgk_004',
-                shortCode: 'kv7kzm78',
-                siteId: 'RefArch'
-            }
+            parameters: commerceAPIConfig
+
         },
         // Einstein api config
         einsteinAPI: {
