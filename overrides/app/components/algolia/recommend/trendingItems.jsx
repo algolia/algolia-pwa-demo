@@ -4,11 +4,11 @@ import ProductTile from '../algolia-product-tile'
 import {HorizontalSlider} from '@algolia/ui-components-horizontal-slider-react'
 import '@algolia/ui-components-horizontal-slider-theme'
 import {TrendingItems as AlgoliaTrendingItems} from '@algolia/recommend-react'
-import recommend from '@algolia/recommend'
 import {useCurrency} from '@salesforce/retail-react-app/app/hooks'
 import {getConfig} from '@salesforce/pwa-kit-runtime/utils/ssr-config'
 import WidgetHeader from './utils/widgetheader'
 import {useWishlistOperations} from '../../../hooks/use-wishlist-operations'
+import {recommendClient} from '../../algolia/autocomplete/recommendClient'
 
 const TrendingItems = ({facetName, facetValue}) => {
     const {currency: activeCurrency} = useCurrency()
@@ -18,10 +18,6 @@ const TrendingItems = ({facetName, facetValue}) => {
     }
 
     const indexName = algoliaConfig.indices.primary.value
-
-    const recommendClient = useMemo(() => {
-        return recommend(algoliaConfig.appId, algoliaConfig.apiKey)
-    }, [])
 
     const [selectedColors, setSelectedColors] = useState({})
 

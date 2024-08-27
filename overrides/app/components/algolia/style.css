@@ -143,15 +143,18 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 24px;
+  min-height: 300px;
+  position: relative;
 }
 
 .aa-ItemPicture img {
   object-fit: cover;
   width: 100%;
-  height: auto;
+  height: 100%;
   transition: transform 1.8s ease-out, opacity 0.2s ease-out;
   transform-origin: center;
-  position: relative;
+  position: absolute;
+  object-position: center;
 }
 
 /* Category and FAQ */
@@ -220,7 +223,7 @@ body {
 }
 
 .aa-ProductItem .aa-ItemContent mark {
-  color: rgb(var(--aa-primary-color-rgb));
+  color:#003DFF;
 }
 
 .aa-ProductItem .aa-ItemPicture {
@@ -348,7 +351,7 @@ body {
 }
 
 .aa-ProductItem .aa-FavoriteIcon {
-  color: rgb(var(--aa-primary-color-rgb));
+  color: #003DFF;
   stroke-width: 2;
   stroke: currentColor;
   margin: 1px;
@@ -356,6 +359,12 @@ body {
 
 .aa-ProductItem .aa-FavoriteIcon--outlined {
   fill: none;
+}
+
+@media (max-width: 681px) {
+  .aa-SeeAllLink {
+    margin: 0 auto 0 auto !important;
+  }
 }
 
 /* See all */
@@ -369,7 +378,7 @@ body {
 }
 
 .aa-SeeAllBtn {
-  background-color: rgba(var(--aa-primary-color-rgb), 0.8);
+  background-color: #003DFF;
   transition: background 0.2s ease-out;
   color: #fff;
   padding: calc(var(--aa-spacing-half) * 1.5) var(--aa-spacing);
@@ -377,7 +386,7 @@ body {
 }
 
 .aa-SeeAllLink {
-  color: rgb(var(--aa-primary-color-rgb));
+  color: #003DFF;
   transition: opacity 0.2s ease-out;
   margin-bottom: var(--aa-spacing-half);
 }
@@ -684,6 +693,7 @@ body {
   display: flex;
   flex-direction: column;
   row-gap: calc(var(--aa-spacing-half) * 0.5);
+  text-align: left;
 }
 
 /* Media queries */
@@ -707,7 +717,7 @@ body {
 
   /* See all */
   .aa-SeeAllBtn:hover {
-    background-color: rgba(var(--aa-primary-color-rgb), 1);
+    background-color: #003DFF;
     cursor: pointer;
   }
 
@@ -768,9 +778,6 @@ body {
 
 @media screen and (max-width: 680px) {
   /* Source */
-  .aa-SourceHeader {
-    display: none;
-  }
 
   .aa-PanelSection--quickAccess .aa-SourceHeader,
   .aa-PanelSection--popular .aa-SourceHeader {
@@ -909,8 +916,14 @@ body {
   max-width: 100%;
 }
 
-.aa-PanelSection--left{
+.aa-PanelSection--left {
   gap: 15px;
+}
+
+@media (max-width: 681px) {
+  .aa-PanelSection--left {
+    gap: 0;
+  }
 }
 
 .aa-PanelSection--popular section{
@@ -923,6 +936,12 @@ body {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+}
+
+@media (min-width: 681px) {
+  .aa-PanelSection--left .aa-List{
+    margin-top: -1rem;
+  }
 }
 
 .aa-PanelSection--left .aa-Item {
@@ -953,17 +972,14 @@ body {
   display: none;
 }
 
-.aa-PanelSection--left .aa-SourceHeaderTitle{
-  color: #7C7996;
-}
-
 .aa-SourceHeader--right {
   display: flex;
   justify-content: space-between;
 }
 
-.aa-SourceHeader--right .aa-SourceHeaderTitle{
+.aa-SourceHeaderTitle{
   color: #7C7996;
+  text-transform: uppercase;
 }
 
 .aa-SourceHeader--right .aa-SourceHeaderButton{
@@ -1025,7 +1041,7 @@ body {
   right: 0;
   margin: auto;
   max-width: 100%;
-  width: 320px;
+  width: 40rem;
   padding: 0 10px;
 }
 
@@ -1033,6 +1049,9 @@ body {
   display: none;
 }
 
+.aa-ClearButton {
+  display: block !important;
+}
 
 .custom-pagination-item:hover {
   position: relative !important;
@@ -1147,7 +1166,7 @@ body {
 }
 
 .aa-ItemContentTitle {
-  padding: 0.2rem 0.4rem;
+  padding: 0.2rem O;
 }
 
 [data-autocomplete-source-id="querySuggestionsPlugin"] .aa-Item {
@@ -1173,8 +1192,8 @@ body {
   display: inline-grid;
   grid-auto-flow: column;
   gap: 0.1rem;
-  background-color: white;
-  border: none;
+  background-color: white !important;
+  border: none !important;
 }
 
 .ais-CurrentRefinements-category {
@@ -1193,4 +1212,40 @@ body {
 
 .SourceHeaderTitle {
   text-transform: capitalize;
+}
+
+.selected-color-swatch {
+  border: 1px solid var(--Border-subtle, #144871) !important;
+  padding: 2px !important;
+}
+
+@media (max-width: 681px) {
+
+  .blur {
+    display: none;
+  }
+
+  .aa-PanelLayout .aa-PanelSection--top {
+    display: none;
+  }
+
+  .aa-DetachedContainer .aa-Panel {
+    width: 100% !important;
+  }
+}
+
+.ais-HierarchicalMenu-link--selected {
+  color: #5468ff;
+}
+
+.ais-HierarchicalMenu-link:before {
+  transform: rotate(180deg);
+}
+
+.ais-HierarchicalMenu-link--selected::before {
+  transform: rotate(180deg);
+}
+
+.ais-HierarchicalMenu-list .ais-HierarchicalMenu-list .ais-HierarchicalMenu-list .ais-HierarchicalMenu-link::before {
+  display: none;
 }

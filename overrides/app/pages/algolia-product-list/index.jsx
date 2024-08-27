@@ -12,6 +12,7 @@ import {FormattedMessage, useIntl} from 'react-intl'
 import {Helmet} from 'react-helmet'
 import {useCategory} from '@salesforce/commerce-sdk-react'
 import {useServerContext} from '@salesforce/pwa-kit-react-sdk/ssr/universal/hooks'
+import {searchClient} from '../../components/algolia/autocomplete/searchClient'
 
 // Components
 import {
@@ -55,7 +56,6 @@ import {getConfig} from '@salesforce/pwa-kit-runtime/utils/ssr-config'
 import {useCurrency} from '@salesforce/retail-react-app/app/hooks'
 
 // Algolia
-import algoliasearch from 'algoliasearch/lite'
 import {Configure, InstantSearch, Index, Pagination} from 'react-instantsearch'
 import AlgoliaCurrentRefinements from './partials/algolia-current-refinements'
 import AlgoliaHierarchicalRefinements from './partials/algolia-hierarchical-refinements'
@@ -103,23 +103,11 @@ const ProductList = (props) => {
     const productIndexName = algoliaConfig.indices.primary.value
     const contentIndexName = algoliaConfig.indices.contents
 
-    const searchClient = useMemo(() => {
-        return algoliasearch(algoliaConfig.appId, algoliaConfig.apiKey)
-    }, [])
-
     // Algolia Refinements - You can adjust these to match your Algolia index.
     const hierarchicalCategoryAttributes = [
         `__primary_category.0`,
         `__primary_category.1`,
         `__primary_category.2`
-    ]
-
-    const currentRefinementAttributes = [
-        'size',
-        'color',
-        'price.USD',
-        '__primary_category.0',
-        'brand'
     ]
 
     const filterEls = (
@@ -131,8 +119,12 @@ const ProductList = (props) => {
                 />
                 <AlgoliaColorRefinements attribute="color" title="Color" />
                 <AlgoliaCheckboxRefinements attribute="size" title="Size" />
-                <AlgoliaRangeRefinements attribute="price.USD" title="Price" />
-                <AlgoliaCheckboxRefinements attribute="brand" title="Brand" />
+                <AlgoliaRangeRefinements attribute="price.USD" title="Price ($)" />
+                <AlgoliaCheckboxRefinements
+                    attribute="brand"
+                    title="Brand"
+                    sortBy={['count:desc']}
+                />
             </Accordion>
         </>
     )
@@ -178,6 +170,15 @@ const ProductList = (props) => {
     if (res) {
         res.set('Cache-Control', `max-age=${MAX_CACHE_AGE}`)
     }
+    const refinementButton = React.useRef()
+
+    React.useEffect(() => {
+        if (refinementButton) {
+            if (refinementButton.current) {
+                refinementButton.current.triggerClick()
+            }
+        }
+    }, [location.search])
 
     // Reset scroll position when `isRefetching` becomes `true`.
     const query = searchQuery ?? ''
@@ -211,8 +212,12 @@ const ProductList = (props) => {
             <InstantSearch
                 searchClient={searchClient}
                 indexName={productIndexName}
-                routing
+                routing={true}
                 insights={true}
+                future={{
+                    preserveSharedStateOnUnmount: true,
+                    persistHierarchicalRootCount: true
+                }}
             >
                 <Tabs defaultIndex={urlParams.get('tab') === 'articles' ? 1 : 0}>
                     {isSearch && (
@@ -255,10 +260,8 @@ const ProductList = (props) => {
                                             alignItems="center"
                                             gap="3"
                                         >
-                                            <AlgoliaCurrentRefinements
-                                                includedAttributes={currentRefinementAttributes}
-                                            />
-                                            <AlgoliaClearRefinements />
+                                            <AlgoliaCurrentRefinements />
+                                            <AlgoliaClearRefinements ref={refinementButton} />
                                         </Flex>
                                         <Box paddingTop={'45px'}>
                                             <AlgoliaSortBy items={allIndices} />
@@ -308,12 +311,7 @@ const ProductList = (props) => {
                                             marginBottom={4}
                                             alignItems="center"
                                             gap="3"
-                                        >
-                                            <AlgoliaCurrentRefinements
-                                                includedAttributes={currentRefinementAttributes}
-                                            />
-                                            <AlgoliaClearRefinements />
-                                        </Flex>
+                                        ></Flex>
                                     </HideOnDesktop>
 
                                     {/* Body  */}
@@ -376,6 +374,8 @@ const ProductList = (props) => {
                                 <AlgoliaUiStateProvider
                                     searchClient={searchClient}
                                     indexName={productIndexName}
+                                    filters={filters}
+                                    query={query}
                                 >
                                     <ModalOverlay />
                                     <ModalContent top={0} marginTop={0}>

@@ -14,17 +14,13 @@ import {useRefinementList} from 'react-instantsearch'
 import AlgoliaRefinementsContainer from './algolia-refinements-container'
 import PropTypes from 'prop-types'
 
-const AlgoliaSizeRefinements = (props) => {
+const AlgoliaCheckboxRefinements = (props) => {
     const styles = useMultiStyleConfig('SwatchGroup', {
         variant: 'square',
         disabled: false
     })
 
     const {items, refine} = useRefinementList(props)
-
-    const sortedItems = items.sort((a, b) =>
-        a.label.localeCompare(b.label, undefined, {numeric: true})
-    )
 
     return (
         <>
@@ -41,7 +37,7 @@ const AlgoliaSizeRefinements = (props) => {
                     <AccordionPanel pb={4}>
                         <AlgoliaRefinementsContainer attributes={[props.attribute]}>
                             <VStack spacing={1} mt={1} align="start">
-                                {sortedItems.map((item, idx) => {
+                                {items.map((item, idx) => {
                                     return (
                                         <Checkbox
                                             key={idx}
@@ -56,7 +52,10 @@ const AlgoliaSizeRefinements = (props) => {
                                             }}
                                         >
                                             <Center isTruncated {...styles.swatchButton}>
-                                                {item.label}
+                                                {item.label}{' '}
+                                                {item.count > 0 && props.sortBy
+                                                    ? `(${item.count})`
+                                                    : ''}
                                             </Center>
                                         </Checkbox>
                                     )
@@ -70,9 +69,10 @@ const AlgoliaSizeRefinements = (props) => {
     )
 }
 
-AlgoliaSizeRefinements.propTypes = {
+AlgoliaCheckboxRefinements.propTypes = {
     attribute: PropTypes.string,
-    title: PropTypes.string
+    title: PropTypes.string,
+    sortBy: PropTypes.arrayOf(PropTypes.string)
 }
 
-export default AlgoliaSizeRefinements
+export default AlgoliaCheckboxRefinements

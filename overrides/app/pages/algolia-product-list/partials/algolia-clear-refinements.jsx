@@ -1,16 +1,24 @@
 import React from 'react'
 import {Box, Button, Link} from '@chakra-ui/react'
 import {FormattedMessage} from 'react-intl'
-import {useClearRefinements} from 'react-instantsearch-core'
+import {useClearRefinements} from 'react-instantsearch'
 import PropTypes from 'prop-types'
 
-const AlgoliaClearRefinements = (props) => {
+const AlgoliaClearRefinements = React.forwardRef((props, ref) => {
     const {variant, ...otherProps} = props
     const {canRefine, refine} = useClearRefinements(otherProps)
 
+    function clearRefinements() {
+        refine()
+    }
+
+    React.useImperativeHandle(ref, () => ({
+        triggerClick: clearRefinements
+    }))
+
     if (variant === 'button') {
         return (
-            <Button width="full" variant="outline" onClick={refine}>
+            <Button width="full" variant="outline" onClick={clearRefinements}>
                 <FormattedMessage
                     defaultMessage="Clear Filters"
                     id="product_list.modal.button.clear_filters"
@@ -23,7 +31,7 @@ const AlgoliaClearRefinements = (props) => {
         <>
             {canRefine && (
                 <Box>
-                    <Link fontSize="14px" color="blue.600" onClick={refine}>
+                    <Link fontSize="14px" color="blue.600" onClick={clearRefinements}>
                         <FormattedMessage
                             defaultMessage="Clear Filters"
                             id="selected_refinements.action.clear_all"
@@ -33,11 +41,11 @@ const AlgoliaClearRefinements = (props) => {
             )}
         </>
     )
-}
+})
+
+AlgoliaClearRefinements.displayName = 'AlgoliaClearRefinements'
 
 AlgoliaClearRefinements.propTypes = {
-    includedAttributes: PropTypes.arrayOf(PropTypes.string),
-    excludedAttributes: PropTypes.arrayOf(PropTypes.string),
     variant: PropTypes.oneOf(['link', 'button'])
 }
 
