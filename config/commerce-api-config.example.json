@@ -1,0 +1,7 @@
+{
+    "clientId": "xxxxx-xxxx-xxxx-xxxx-xxxx",
+    "organizationId": "xxxx",
+    "shortCode": "xxxx",
+    "siteId": "xxx",
+    "enablePWAKitPrivateClient": true
+}
