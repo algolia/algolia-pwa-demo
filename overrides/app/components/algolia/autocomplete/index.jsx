@@ -264,9 +264,9 @@ function AutocompletePanel(props, search) {
                                     </div>
                                     {recentSearches}
 
-                                    <div className="aa-PanelSection--popular">{popular}</div>
+                                    <div className="aa-SourceHeader">{popular}</div>
 
-                                    <div className="aa-PanelSection--popular">{categories}</div>
+                                    <div className="aa-SourceHeader">{categories}</div>
 
                                     <div className="aa-SourceHeader">
                                         <span className="aa-SourceHeaderTitle">BRANDS</span>
