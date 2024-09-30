@@ -1,0 +1,26 @@
+name: Deploy demo
+
+on: workflow_dispatch
+#on:
+#  push:
+#    branches: [ "develop" ]
+
+jobs:
+  deploy_demo:
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate algolia-config.json
+        run: |
+          jq '.appId = env.ALGOLIA_APP_ID | .apiKey = env.ALGOLIA_API_KEY' config/algolia-config.example.json > config/algolia-config.json
+      - name: Generate commerce-api-config.json
+        env: # Copy the secret in an environment variable
+          SFCC_SLAS_CLIENT_ID: ${{ secrets.SFCC_SLAS_CLIENT_ID }}
+        run: |
+          jq '.clientId = env.SFCC_SLAS_CLIENT_ID
+          | .organizationId = env.SFCC_ORGANIZATION_ID
+          | .shortCode = env.SFCC_SHORT_CODE
+          | .siteId = env.SFCC_SITE_ID' config/commerce-api-config.example.json > config/commerce-api-config.json
+      - name: Apply algolia-demo.patch
+        run: git apply algolia-demo.patch
+      - name: Push demo
+        run: npm run push
