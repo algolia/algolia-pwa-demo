@@ -1,4 +1,7 @@
-node_modules
-build
+.idea/
+
+node_modules/
+build/
+
 algolia-config.json
 commerce-api-config.json
