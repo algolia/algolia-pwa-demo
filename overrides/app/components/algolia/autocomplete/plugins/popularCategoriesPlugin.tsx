@@ -1,7 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx React.createElement */
 
-import {getAlgoliaFacets} from '@algolia/autocomplete-js'
+import {getAlgoliaResults} from '@algolia/autocomplete-js'
 import React, {createElement, Fragment} from 'react'
 import {ALGOLIA_PRODUCTS_INDEX_NAME} from '../constants'
 import {searchClient} from '../searchClient'
@@ -39,18 +39,33 @@ export const popularCategoriesPlugin = (navigate) => ({
             {
                 sourceId: 'popularCategoriesPlugin',
                 getItems() {
-                    return getAlgoliaFacets({
+                    return getAlgoliaResults({
                         searchClient,
                         queries: [
                             {
                                 indexName: ALGOLIA_PRODUCTS_INDEX_NAME,
-                                facet: '__primary_category.1',
+                                query: '',
                                 params: {
-                                    facetQuery: '',
-                                    maxFacetHits: 4
+                                    facets: ['__primary_category.1'],
+                                    hitsPerPage: 1,
                                 }
                             }
-                        ]
+                        ],
+                        transformResponse({ results }) {
+                            const categoryFacets = results[0].facets['__primary_category.1'];
+                            if (!categoryFacets) {
+                                return [];
+                            }
+                            const res = [];
+                            for (let [key, value] of Object.entries(categoryFacets)) {
+                                res.push({ label: key, count: value });
+                            }
+                            // Sort category facets by their count and return only the first 4
+                            res.sort((a, b) => {
+                               return b.count - a.count;
+                            });
+                            return [res.slice(0, 4)];
+                        },
                     })
                 },
                 onSelect({setIsOpen}) {
