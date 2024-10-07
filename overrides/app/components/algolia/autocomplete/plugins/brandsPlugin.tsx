@@ -49,8 +49,8 @@ export const brandsPlugin: AutocompletePlugin<BrandHit, {}> = {
                             return [res.slice(0, 4)];
                         },
                     })
-                    // Once you have Recommend setup, you may want to use it to display the
-                    // trending brands. This can be achieved like that:
+                    // Once you have Recommend setup, you may want to use it instead of `getAlgoliaResults`
+                    // to display the trending brands. This can be achieved like that:
                     // var response = await recommendClient.getTrendingFacets([
                     //     {
                     //       indexName: ALGOLIA_PRODUCTS_INDEX_NAME,
