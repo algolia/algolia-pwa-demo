@@ -33,7 +33,6 @@ export const brandsPlugin: AutocompletePlugin<BrandHit, {}> = {
                             }
                         ],
                         transformResponse({ results }) {
-                            console.log(results)
                             const brandFacets = results[0].facets['brand'];
                             if (!brandFacets) {
                                 return [];
@@ -42,7 +41,7 @@ export const brandsPlugin: AutocompletePlugin<BrandHit, {}> = {
                             for (let [key, value] of Object.entries(brandFacets)) {
                                 res.push({ facetValue: key, count: value });
                             }
-                            // Sort category facets by their count and return only the first 4
+                            // Sort brand facets by their count and return only the first 4
                             res.sort((a, b) => {
                                 return b.count - a.count;
                             });
