@@ -54,7 +54,7 @@ export const productsPluginFactory = (navigate, currency) => ({
                             <div className='aa-SourceHeader--right'>
                                 <span className="aa-SourceHeaderTitle">Products</span>
                                 <span className="aa-SourceHeaderButton">
-                                    <a 
+                                    <a
                                         onClick={() => navigate('/search?q=' + state.query)}
                                         className="aa-SeeAllLink"
                                     >
@@ -81,35 +81,46 @@ export const productsPluginFactory = (navigate, currency) => ({
 })
 
 /**
- * Determines if a product is on sale based on its pricebooks and currency.
+ * Compute the salePriceObj for a product in the given currency.
  *
- * @param {Object} data - The product's pricebooks data.
+ * @param {Object} hit - The product.
  * @param {string} currency - The currency to check for sale prices.
  * @returns {Object} An object containing the highest, lowest, and isSale flag.
- * @throws {Error} If no prices are available for the specified currency.
  */
-function isSale(data, currency) {
-    if (!data[currency]) {
+function getSalePriceObj(hit, currency) {
+    if (hit.pricebooks && hit.pricebooks[currency]) {
+        const prices = hit.pricebooks[currency]
+        let high = -Infinity,
+            low = Infinity
+
+        prices.forEach((priceObj) => {
+            high = Math.max(high, priceObj.price)
+            low = Math.min(low, priceObj.price)
+        })
+
         return {
-            high: 0,
-            low: 0,
+            high,
+            low,
+            isSale: high !== low
+        }
+    } else if (hit.promotionalPrice && hit.promotionalPrice[currency]) {
+        return {
+            high: hit.price[currency],
+            low: hit.promotionalPrice[currency],
+            isSale: hit.promotionalPrice[currency] < hit.price[currency],
+        }
+    } else if (hit.price && hit.price[currency]) {
+        return {
+            high: hit.price[currency],
+            low: hit.price[currency],
             isSale: false
         }
     }
 
-    const prices = data[currency]
-    let high = -Infinity,
-        low = Infinity
-
-    prices.forEach((priceObj) => {
-        high = Math.max(high, priceObj.price)
-        low = Math.min(low, priceObj.price)
-    })
-
     return {
-        high,
-        low,
-        isSale: high !== low
+        high: 0,
+        low: 0,
+        isSale: false
     }
 }
 
@@ -149,7 +160,7 @@ type ProductItemProps = {
  */
 function ProductItem({hit, components, navigate, currency}: ProductItemProps) {
     const currentCurrency = currency.currency
-    const salePriceObj = isSale(hit.pricebooks, currentCurrency)
+    const salePriceObj = getSalePriceObj(hit, currentCurrency)
 
     return (
         <div
