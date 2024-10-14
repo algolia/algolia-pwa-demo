@@ -1,6 +1,6 @@
 {
   "name": "algolia-pwa-demo",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "license": "See license in LICENSE",
   "engines": {
     "node": "^18.0.0 || ^20.0.0",
