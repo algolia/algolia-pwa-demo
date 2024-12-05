@@ -47,7 +47,7 @@ jobs:
         run: |
           git checkout master
           git pull
-          git merge origin/develop
+          git merge origin/develop --strategy-option theirs
           git push
 
       - name: Draft release
