@@ -1,4 +1,4 @@
-import algoliasearch from 'algoliasearch/lite'
+import { liteClient as algoliasearch } from "algoliasearch/lite";
 
 import {APP_ID, SEARCH_API_KEY} from './constants'
 const packageJson = require('./../../../../../package.json')
